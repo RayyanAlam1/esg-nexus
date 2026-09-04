@@ -1,0 +1,35 @@
+[project]
+name = "esg-nexus-backend"
+version = "1.0.0"
+description = "ESG Nexus — Enterprise ESG Intelligence, Governance & Reporting Platform (API)"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 180
+target-version = "py311"
+extend-exclude = ["alembic/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+ignore = [
+  "E501",   # line length is enforced by the formatter
+  "B008",   # FastAPI dependency injection uses call expressions in defaults
+  "RUF012", # SQLAlchemy/pydantic class attributes are not mutable-default bugs
+  "SIM108", # explicit if/else is often clearer than a ternary in engine code
+  "UP035",  # keep typing imports as written until Python 3.11 is dropped
+  "RUF001", "RUF002", "RUF003",  # typographic dashes and quotes in user-facing text are intentional
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]
+
+[tool.ruff.format]
+quote-style = "double"
