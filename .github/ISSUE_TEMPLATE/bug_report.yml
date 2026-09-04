@@ -1,0 +1,30 @@
+name: Bug report
+description: Something is not working as documented
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include the endpoint or page, the role you were signed in with, and the response/error envelope if any.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Sign in as manager@ecorp.local
+        2. Open Metrics → ENV.GHG.SCOPE1 → Lineage
+        3. …
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [Backend API, Engines (calculation/quality/rules), AI layer, Frontend, Reports, Seed data / frameworks, Deployment]

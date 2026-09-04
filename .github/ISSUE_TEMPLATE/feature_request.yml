@@ -1,0 +1,22 @@
+name: Feature request
+description: Propose a new metric, framework, agent, connector or capability
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: For metrics and frameworks, include the source standard and the evidence that would support the values.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options: [New metric, New framework / requirement, New AI agent or expert, New data connector, New report section / template, Governance rule, Other]
