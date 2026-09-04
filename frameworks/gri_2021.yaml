@@ -1,0 +1,55 @@
+# GRI Standards 2021 — subset of universal and topic disclosures relevant to the reference dataset.
+# Extend by adding requirements; the engine treats this file as configuration.
+framework:
+  code: GRI
+  name: GRI Standards
+  publisher: Global Reporting Initiative
+  description: Universal Standards (GRI 2, GRI 3) and selected Topic Standards. Not claimed by the 2023 report; used for gap analysis.
+  jurisdiction: Global
+version:
+  version: "2021"
+  effective_date: 2023-01-01
+  status: current
+  source_url: https://www.globalreporting.org/standards/
+requirements:
+  - {code: GRI.2-1, title: "Organizational details", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, evidence_required: false, metrics: [GOV.ORG.LEGAL_FORM]}
+  - {code: GRI.2-2, title: "Entities included in the organization's sustainability reporting", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, evidence_required: false, metrics: [GOV.ORG.REPORTING_BOUNDARY]}
+  - {code: GRI.2-3, title: "Reporting period, frequency and contact point", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, evidence_required: false, metrics: [GOV.ORG.REPORTING_PERIOD]}
+  - {code: GRI.2-5, title: "External assurance", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, metrics: [GOV.ASSURANCE.EXTERNAL_ASSURANCE]}
+  - {code: GRI.2-7, title: "Employees", pillar: social, theme: GRI 2 General Disclosures, disclosure_type: quantitative, metrics: [SOC.WORKFORCE.TOTAL, SOC.WORKFORCE.PERMANENT, SOC.WORKFORCE.CONTRACTUAL, SOC.DEI.PERM_FEMALE, SOC.DEI.PERM_MALE]}
+  - {code: GRI.2-9, title: "Governance structure and composition", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: both, metrics: [GOV.BOARD.SIZE, GOV.BOARD.INDEPENDENT, GOV.BOARD.WOMEN, GOV.BOARD.COMMITTEES]}
+  - {code: GRI.2-22, title: "Statement on sustainable development strategy", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, evidence_required: false, metrics: [GOV.PURPOSE.STATEMENT]}
+  - {code: GRI.2-23, title: "Policy commitments", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, metrics: [GOV.ETHICS.CODE_OF_CONDUCT, SOC.HUMAN_RIGHTS.POLICY_COMMITMENT]}
+  - {code: GRI.2-26, title: "Mechanisms for seeking advice and raising concerns", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, metrics: [GOV.ETHICS.WHISTLEBLOWER_MECHANISM]}
+  - {code: GRI.2-28, title: "Membership associations", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, evidence_required: false, metrics: [GOV.MEMBERSHIPS.INDUSTRY_ASSOCIATIONS]}
+  - {code: GRI.2-29, title: "Approach to stakeholder engagement", pillar: governance, theme: GRI 2 General Disclosures, disclosure_type: narrative, evidence_required: false, metrics: [GOV.STAKEHOLDER.ENGAGEMENT_APPROACH]}
+  - {code: GRI.3-3, title: "Management of material topics", pillar: governance, theme: GRI 3 Material Topics, disclosure_type: narrative, evidence_required: false, metrics: [GOV.STAKEHOLDER.MATERIAL_TOPICS]}
+  - {code: GRI.201-1, title: "Direct economic value generated and distributed", pillar: prosperity, theme: GRI 201 Economic Performance, disclosure_type: quantitative, metrics: [ECO.EVGD.WEALTH_GENERATED, ECO.EVGD.EMPLOYEES, ECO.EVGD.GOVERNMENT, ECO.EVGD.SOCIETY, ECO.EVGD.DIVIDENDS, ECO.EVGD.INTEREST, ECO.EVGD.RETAINED]}
+  - {code: GRI.201-4, title: "Financial assistance received from government", pillar: prosperity, theme: GRI 201 Economic Performance, disclosure_type: quantitative, metrics: [ECO.GOVT.FINANCIAL_ASSISTANCE]}
+  - {code: GRI.205-2, title: "Communication and training about anti-corruption policies and procedures", pillar: governance, theme: GRI 205 Anti-corruption, disclosure_type: quantitative, metrics: [GOV.ETHICS.EC_TRAINING_SESSIONS, GOV.ETHICS.EC_ATTENDEES, GOV.ETHICS.ANTI_CORRUPTION_TRAINING_PCT]}
+  - {code: GRI.205-3, title: "Confirmed incidents of corruption and actions taken", pillar: governance, theme: GRI 205 Anti-corruption, disclosure_type: quantitative, metrics: [GOV.ETHICS.CORRUPTION_CASES_SUBSTANTIATED]}
+  - {code: GRI.207-1, title: "Approach to tax", pillar: prosperity, theme: GRI 207 Tax, disclosure_type: narrative, metrics: [ECO.TAX.POLICY_STATEMENT]}
+  - {code: GRI.302-1, title: "Energy consumption within the organization", pillar: environment, theme: GRI 302 Energy, disclosure_type: quantitative, metrics: [ENV.ENERGY.TOTAL]}
+  - {code: GRI.302-3, title: "Energy intensity", pillar: environment, theme: GRI 302 Energy, disclosure_type: quantitative, metrics: [ENV.ENERGY.INTENSITY_REVENUE]}
+  - {code: GRI.302-4, title: "Reduction of energy consumption", pillar: environment, theme: GRI 302 Energy, disclosure_type: both, metrics: [ENV.ENERGY.SAVINGS_MWH, ENV.ENERGY.EFFICIENCY_REDUCTION_PCT]}
+  - {code: GRI.303-3, title: "Water withdrawal", pillar: environment, theme: GRI 303 Water and Effluents, disclosure_type: quantitative, metrics: [ENV.WATER.WITHDRAWN, ENV.WATER.WITHDRAWN_STRESSED_PCT]}
+  - {code: GRI.303-4, title: "Water discharge", pillar: environment, theme: GRI 303 Water and Effluents, disclosure_type: quantitative, metrics: [ENV.WATER.DISCHARGED]}
+  - {code: GRI.303-5, title: "Water consumption", pillar: environment, theme: GRI 303 Water and Effluents, disclosure_type: quantitative, metrics: [ENV.WATER.CONSUMED, ENV.WATER.CONSUMED_STRESSED_PCT]}
+  - {code: GRI.304-1, title: "Operational sites in or adjacent to protected areas / high biodiversity value areas", pillar: environment, theme: GRI 304 Biodiversity, disclosure_type: quantitative, metrics: [ENV.BIODIVERSITY.SITES_NEAR_PROTECTED, ENV.BIODIVERSITY.AREA_NEAR_PROTECTED_HA]}
+  - {code: GRI.304-3, title: "Habitats protected or restored", pillar: environment, theme: GRI 304 Biodiversity, disclosure_type: both, metrics: [ENV.BIODIVERSITY.MANGROVE_HA, ENV.BIODIVERSITY.AFFORESTATION_HA, ENV.BIODIVERSITY.TREES_PLANTED]}
+  - {code: GRI.305-1, title: "Direct (Scope 1) GHG emissions", pillar: environment, theme: GRI 305 Emissions, disclosure_type: quantitative, metrics: [ENV.GHG.SCOPE1, ENV.GHG.GASES_COVERED]}
+  - {code: GRI.305-2, title: "Energy indirect (Scope 2) GHG emissions", pillar: environment, theme: GRI 305 Emissions, disclosure_type: quantitative, metrics: [ENV.GHG.SCOPE2]}
+  - {code: GRI.305-3, title: "Other indirect (Scope 3) GHG emissions", pillar: environment, theme: GRI 305 Emissions, disclosure_type: quantitative, metrics: [ENV.GHG.SCOPE3]}
+  - {code: GRI.305-4, title: "GHG emissions intensity", pillar: environment, theme: GRI 305 Emissions, disclosure_type: quantitative, metrics: [ENV.GHG.INTENSITY_REVENUE]}
+  - {code: GRI.305-5, title: "Reduction of GHG emissions", pillar: environment, theme: GRI 305 Emissions, disclosure_type: both, metrics: [ENV.GHG.CO2_REDUCTION_INITIATIVE_TPA, ENV.GHG.YOY_CHANGE_PCT]}
+  - {code: GRI.306-3, title: "Waste generated", pillar: environment, theme: GRI 306 Waste, disclosure_type: quantitative, metrics: [ENV.WASTE.TOTAL, ENV.WASTE.HAZARDOUS, ENV.WASTE.NON_HAZARDOUS]}
+  - {code: GRI.401-1, title: "New employee hires and employee turnover", pillar: social, theme: GRI 401 Employment, disclosure_type: quantitative, metrics: [SOC.WORKFORCE.HIRES, SOC.WORKFORCE.HIRE_RATE_PCT, SOC.WORKFORCE.TURNOVER, SOC.WORKFORCE.TURNOVER_RATE_PCT]}
+  - {code: GRI.401-3, title: "Parental leave", pillar: social, theme: GRI 401 Employment, disclosure_type: both, metrics: [SOC.DEI.MATERNITY_LEAVE_MONTHS, SOC.DEI.PATERNITY_LEAVE_DAYS]}
+  - {code: GRI.403-1, title: "Occupational health and safety management system", pillar: social, theme: GRI 403 OHS, disclosure_type: narrative, metrics: [SOC.OHS.MANAGEMENT_SYSTEM_DESCRIPTION]}
+  - {code: GRI.403-5, title: "Worker training on occupational health and safety", pillar: social, theme: GRI 403 OHS, disclosure_type: both, metrics: [SOC.OHS.UPSKILLING_HOURS, SOC.OHS.RESOURCES_UPSKILLED]}
+  - {code: GRI.403-9, title: "Work-related injuries", pillar: social, theme: GRI 403 OHS, disclosure_type: quantitative, metrics: [SOC.OHS.FATALITIES_EMP, SOC.OHS.FATALITIES_CONTRACTOR, SOC.OHS.RECORDABLE_EMP, SOC.OHS.RECORDABLE_CONTRACTOR, SOC.OHS.HIGH_CONSEQUENCE_INJURIES, SOC.OHS.HOURS_EMP, SOC.OHS.HOURS_CONTRACTOR, SOC.OHS.TRIR_EMP, SOC.OHS.TRIR_CONTRACTOR]}
+  - {code: GRI.404-1, title: "Average hours of training per year per employee", pillar: social, theme: GRI 404 Training and Education, disclosure_type: quantitative, metrics: [SOC.TALENT.AVG_TRAINING_HOURS_PER_EMPLOYEE, SOC.TALENT.AVG_TRAINING_HOURS_FEMALE, SOC.TALENT.AVG_TRAINING_HOURS_MALE]}
+  - {code: GRI.405-1, title: "Diversity of governance bodies and employees", pillar: social, theme: GRI 405 Diversity and Equal Opportunity, disclosure_type: quantitative, metrics: [GOV.BOARD.WOMEN_PCT, SOC.DEI.PERM_FEMALE_PCT, SOC.DEI.PERM_AGE_U30_PCT, SOC.DEI.PERM_AGE_31_50_PCT, SOC.DEI.PERM_AGE_50P_PCT]}
+  - {code: GRI.405-2, title: "Ratio of basic salary and remuneration of women to men", pillar: social, theme: GRI 405 Diversity and Equal Opportunity, disclosure_type: quantitative, metrics: [SOC.COMP.GENDER_PAY_RATIO]}
+  - {code: GRI.408-1, title: "Operations and suppliers at significant risk for incidents of child labor", pillar: social, theme: GRI 408 Child Labor, disclosure_type: narrative, metrics: [SOC.LABOR.CHILD_FORCED_LABOR_RISK_STATEMENT]}
+  - {code: GRI.413-1, title: "Operations with local community engagement, impact assessments and development programs", pillar: social, theme: GRI 413 Local Communities, disclosure_type: both, evidence_required: false, metrics: [SOC.COMMUNITY.INVESTMENT_PKR_MN, SOC.COMMUNITY.EF_STUDENTS_FORMAL, SOC.COMMUNITY.EF_PATIENTS_OPD, SOC.COMMUNITY.TF_STUDENTS]}

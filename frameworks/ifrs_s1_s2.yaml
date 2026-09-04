@@ -1,0 +1,27 @@
+# IFRS Sustainability Disclosure Standards — IFRS S1 (general) and IFRS S2 (climate). Subset for gap analysis.
+framework:
+  code: IFRS_S
+  name: IFRS Sustainability Disclosure Standards (S1 / S2)
+  publisher: International Sustainability Standards Board (ISSB)
+  description: IFRS S1 General Requirements and IFRS S2 Climate-related Disclosures. The 2023 report states an intention to align climate reporting "in due course".
+  jurisdiction: Global
+version:
+  version: "2023"
+  effective_date: 2024-01-01
+  status: current
+  source_url: https://www.ifrs.org/issued-standards/ifrs-sustainability-standards-navigator/
+requirements:
+  - {code: IFRS.S1.GOV, title: "S1 Governance — bodies and management responsible for sustainability-related risks and opportunities", pillar: governance, theme: IFRS S1 Governance, disclosure_type: narrative, metrics: [GOV.BOARD.SUSTAINABILITY_OVERSIGHT, GOV.BOARD.COMMITTEES]}
+  - {code: IFRS.S1.STRATEGY, title: "S1 Strategy — sustainability-related risks and opportunities and their effects on business model, strategy and financial position", pillar: governance, theme: IFRS S1 Strategy, disclosure_type: narrative, metrics: [GOV.RISK.ERM_FRAMEWORK, GOV.STAKEHOLDER.MATERIAL_TOPICS]}
+  - {code: IFRS.S1.RISK, title: "S1 Risk management — processes to identify, assess, prioritise and monitor sustainability-related risks", pillar: governance, theme: IFRS S1 Risk Management, disclosure_type: narrative, metrics: [GOV.RISK.ERM_FRAMEWORK]}
+  - {code: IFRS.S1.METRICS, title: "S1 Metrics and targets — metrics used to measure and manage sustainability-related risks and opportunities", pillar: governance, theme: IFRS S1 Metrics and Targets, disclosure_type: both, metrics: [GOV.STAKEHOLDER.MATERIAL_TOPICS, ENV.CLIMATE.PARIS_TARGET_SET]}
+  - {code: IFRS.S2.GOV, title: "S2 Governance — oversight of climate-related risks and opportunities", pillar: environment, theme: IFRS S2 Governance, disclosure_type: narrative, metrics: [GOV.BOARD.SUSTAINABILITY_OVERSIGHT]}
+  - {code: IFRS.S2.STRATEGY.RISKS, title: "S2 Strategy — climate-related physical and transition risks and opportunities", pillar: environment, theme: IFRS S2 Strategy, disclosure_type: narrative, metrics: [GOV.RISK.CLIMATE_RISK_ASSESSMENT_STATUS]}
+  - {code: IFRS.S2.STRATEGY.FINANCIAL, title: "S2 Strategy — current and anticipated financial effects of climate-related risks and opportunities", pillar: environment, theme: IFRS S2 Strategy, disclosure_type: quantitative, metrics: [ENV.CLIMATE.FINANCIAL_EFFECTS], guidance: "The 2023 report states financial implications are not yet available — metric gap."}
+  - {code: IFRS.S2.STRATEGY.RESILIENCE, title: "S2 Strategy — climate resilience and scenario analysis", pillar: environment, theme: IFRS S2 Strategy, disclosure_type: narrative, metrics: [ENV.CLIMATE.SCENARIO_ANALYSIS]}
+  - {code: IFRS.S2.29a, title: "S2 Metrics — Scope 1, Scope 2 and Scope 3 GHG emissions (tCO2e), measurement approach and inputs", pillar: environment, theme: IFRS S2 Metrics and Targets, disclosure_type: quantitative, metrics: [ENV.GHG.SCOPE1, ENV.GHG.SCOPE2, ENV.GHG.SCOPE3, ENV.GHG.GASES_COVERED, ENV.GHG.METHODOLOGY]}
+  - {code: IFRS.S2.29b, title: "S2 Metrics — climate-related transition risks (amount and % of assets/activities vulnerable)", pillar: environment, theme: IFRS S2 Metrics and Targets, disclosure_type: quantitative, metrics: [ENV.CLIMATE.TRANSITION_RISK_EXPOSURE]}
+  - {code: IFRS.S2.29c, title: "S2 Metrics — climate-related physical risks (amount and % of assets/activities vulnerable)", pillar: environment, theme: IFRS S2 Metrics and Targets, disclosure_type: quantitative, metrics: [ENV.CLIMATE.PHYSICAL_RISK_EXPOSURE]}
+  - {code: IFRS.S2.29e, title: "S2 Metrics — capital deployment towards climate-related risks and opportunities", pillar: environment, theme: IFRS S2 Metrics and Targets, disclosure_type: quantitative, metrics: [ENV.CLIMATE.CAPITAL_DEPLOYMENT]}
+  - {code: IFRS.S2.29f, title: "S2 Metrics — internal carbon price", pillar: environment, theme: IFRS S2 Metrics and Targets, disclosure_type: quantitative, metrics: [ENV.CLIMATE.INTERNAL_CARBON_PRICE]}
+  - {code: IFRS.S2.33, title: "S2 Targets — quantitative and qualitative climate-related targets, base year, milestones", pillar: environment, theme: IFRS S2 Metrics and Targets, disclosure_type: both, metrics: [ENV.CLIMATE.PARIS_TARGET_SET, ENV.CLIMATE.GHG_TARGET]}

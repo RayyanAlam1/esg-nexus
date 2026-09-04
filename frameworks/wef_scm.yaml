@@ -1,0 +1,167 @@
+# World Economic Forum — Stakeholder Capitalism Metrics (Core), the primary framework of the 2023 report.
+framework:
+  code: WEF_SCM
+  name: WEF Stakeholder Capitalism Metrics (Core)
+  publisher: World Economic Forum / International Business Council
+  description: 21 core metrics across Governance, Planet, People and Prosperity pillars ("Measuring Stakeholder Capitalism", 2020).
+  jurisdiction: Global
+version:
+  version: "2020"
+  effective_date: 2020-09-22
+  status: current
+  source_url: https://www.weforum.org/reports/measuring-stakeholder-capitalism-towards-common-metrics-and-consistent-reporting-of-sustainable-value-creation
+requirements:
+  # ---------------- Governance ----------------
+  - code: WEF.GOV.PURPOSE
+    title: Setting purpose
+    pillar: governance
+    theme: Governing purpose
+    disclosure_type: narrative
+    description: The company's stated purpose as the expression of the means by which a business proposes solutions to economic, environmental and social issues.
+    metrics: [GOV.PURPOSE.STATEMENT]
+  - code: WEF.GOV.BOARD_COMPOSITION
+    title: Governance body composition
+    pillar: governance
+    theme: Quality of governing body
+    disclosure_type: both
+    description: Composition of the highest governance body and its committees by competencies, executive/non-executive, independence, tenure, other commitments, gender, under-represented groups and stakeholder representation.
+    metrics: [GOV.BOARD.SIZE, GOV.BOARD.INDEPENDENT, GOV.BOARD.NON_EXECUTIVE, GOV.BOARD.EXECUTIVE, GOV.BOARD.WOMEN, GOV.BOARD.INDEPENDENCE_PCT, GOV.BOARD.WOMEN_PCT, GOV.BOARD.MEETINGS]
+  - code: WEF.GOV.MATERIAL_ISSUES
+    title: Material issues impacting stakeholders
+    pillar: governance
+    theme: Stakeholder engagement
+    disclosure_type: narrative
+    description: A list of the topics that are material to key stakeholders and the company, how the topics were identified and how stakeholders were engaged.
+    metrics: [GOV.STAKEHOLDER.MATERIAL_TOPICS]
+  - code: WEF.GOV.ANTI_CORRUPTION
+    title: Anti-corruption
+    pillar: governance
+    theme: Ethical behaviour
+    disclosure_type: both
+    description: (a) Percentage of governance body members, employees and business partners trained on anti-corruption policies, by region; (b) number and nature of corruption incidents confirmed; (c) initiatives to combat corruption.
+    metrics: [GOV.ETHICS.ANTI_CORRUPTION_TRAINING_PCT, GOV.ETHICS.CORRUPTION_CASES_SUBSTANTIATED, GOV.ETHICS.EC_TRAINING_SESSIONS, GOV.ETHICS.EC_ATTENDEES, GOV.ETHICS.EC_LEARNING_HOURS]
+  - code: WEF.GOV.ETHICS_MECHANISMS
+    title: Protected ethics advice and reporting mechanisms
+    pillar: governance
+    theme: Ethical behaviour
+    disclosure_type: narrative
+    description: Internal and external mechanisms for seeking advice about ethical and lawful behaviour and for reporting concerns.
+    metrics: [GOV.ETHICS.WHISTLEBLOWER_MECHANISM, GOV.ETHICS.CODE_OF_CONDUCT]
+  - code: WEF.GOV.RISK_OPPORTUNITY
+    title: Integrating risk and opportunity into business process
+    pillar: governance
+    theme: Risk and opportunity oversight
+    disclosure_type: narrative
+    description: Principal material risks and opportunities, risk appetite, movement over time and response, integrating economic, environmental and social issues including climate change and data stewardship.
+    metrics: [GOV.RISK.ERM_FRAMEWORK, GOV.RISK.CLIMATE_RISK_ASSESSMENT_STATUS]
+  # ---------------- Planet ----------------
+  - code: WEF.PLANET.GHG_EMISSIONS
+    title: Greenhouse gas (GHG) emissions
+    pillar: environment
+    theme: Climate change
+    disclosure_type: quantitative
+    description: For all relevant GHGs report Scope 1 and Scope 2 in tCO2e; estimate and report material Scope 3 where appropriate.
+    metrics: [ENV.GHG.SCOPE1, ENV.GHG.SCOPE2, ENV.GHG.SCOPE1_2_TOTAL, ENV.GHG.SCOPE3]
+    guidance: Scope 3 was not reported in 2023 — a metric gap unless an omission is approved.
+  - code: WEF.PLANET.TCFD
+    title: TCFD implementation and Paris-aligned targets
+    pillar: environment
+    theme: Climate change
+    disclosure_type: both
+    description: Fully implement TCFD recommendations (or disclose a ≤3-year timeline) and disclose whether Paris-aligned GHG targets (well-below 2°C, net zero before 2050) have been set or committed to.
+    metrics: [ENV.CLIMATE.TCFD_ALIGNMENT, ENV.CLIMATE.PARIS_TARGET_SET]
+  - code: WEF.PLANET.LAND_USE
+    title: Land use and ecological sensitivity
+    pillar: environment
+    theme: Nature loss
+    disclosure_type: quantitative
+    description: Number and area (hectares) of sites owned, leased or managed in or adjacent to protected areas and/or key biodiversity areas.
+    metrics: [ENV.BIODIVERSITY.SITES_NEAR_PROTECTED, ENV.BIODIVERSITY.AREA_NEAR_PROTECTED_HA]
+  - code: WEF.PLANET.WATER
+    title: Water consumption and withdrawal in water-stressed areas
+    pillar: environment
+    theme: Freshwater availability
+    disclosure_type: quantitative
+    description: Megalitres withdrawn and consumed, and the percentage of each in regions with high or extremely high baseline water stress (WRI Aqueduct).
+    metrics: [ENV.WATER.WITHDRAWN, ENV.WATER.CONSUMED, ENV.WATER.WITHDRAWN_STRESSED_PCT, ENV.WATER.CONSUMED_STRESSED_PCT]
+  # ---------------- People ----------------
+  - code: WEF.PEOPLE.DIVERSITY
+    title: Diversity and inclusion
+    pillar: social
+    theme: Dignity and equality
+    disclosure_type: quantitative
+    description: Percentage of employees per employee category, by age group, gender and other indicators of diversity.
+    metrics: [SOC.DEI.PERM_FEMALE_PCT, SOC.DEI.CONTRACT_FEMALE_PCT, SOC.DEI.PERM_AGE_U30_PCT, SOC.DEI.PERM_AGE_31_50_PCT, SOC.DEI.PERM_AGE_50P_PCT, SOC.DEI.CONTRACT_AGE_U30_PCT, SOC.DEI.CONTRACT_AGE_31_50_PCT, SOC.DEI.CONTRACT_AGE_50P_PCT]
+  - code: WEF.PEOPLE.PAY_EQUALITY
+    title: Pay equality
+    pillar: social
+    theme: Dignity and equality
+    disclosure_type: quantitative
+    description: Ratio of basic salary and remuneration for each employee category by significant location for women to men and other equality areas.
+    metrics: [SOC.COMP.GENDER_PAY_RATIO]
+  - code: WEF.PEOPLE.WAGE_LEVEL
+    title: Wage level
+    pillar: social
+    theme: Dignity and equality
+    disclosure_type: quantitative
+    description: (a) Ratio of standard entry-level wage by gender to local minimum wage; (b) ratio of CEO total compensation to median employee compensation.
+    metrics: [SOC.COMP.ENTRY_WAGE_TO_MIN_WAGE_RATIO, SOC.COMP.CEO_PAY_RATIO]
+    guidance: CEO pay ratio was omitted in 2023 due to confidentiality — record as an approved omission or a gap.
+  - code: WEF.PEOPLE.CHILD_FORCED_LABOR
+    title: Risk for incidents of child, forced or compulsory labour
+    pillar: social
+    theme: Dignity and equality
+    disclosure_type: narrative
+    description: Operations and suppliers considered to have significant risk of child, forced or compulsory labour.
+    metrics: [SOC.LABOR.CHILD_FORCED_LABOR_INCIDENTS, SOC.LABOR.CHILD_FORCED_LABOR_RISK_STATEMENT]
+  - code: WEF.PEOPLE.HEALTH_SAFETY
+    title: Health and safety
+    pillar: social
+    theme: Health and well-being
+    disclosure_type: both
+    description: Number and rate of fatalities, high-consequence injuries, recordable injuries, main injury types, hours worked; and how the organisation facilitates access to non-occupational medical and healthcare services.
+    metrics: [SOC.OHS.FATALITIES_EMP, SOC.OHS.FATALITIES_CONTRACTOR, SOC.OHS.RECORDABLE_EMP, SOC.OHS.RECORDABLE_CONTRACTOR, SOC.OHS.HIGH_CONSEQUENCE_INJURIES, SOC.OHS.HOURS_EMP, SOC.OHS.HOURS_CONTRACTOR, SOC.OHS.TRIR_EMP, SOC.OHS.TRIR_CONTRACTOR, SOC.OHS.FATALITY_RATE_CONTRACTOR, SOC.WELLBEING.NON_OCCUPATIONAL_HEALTH_ACCESS]
+  - code: WEF.PEOPLE.TRAINING
+    title: Training provided
+    pillar: social
+    theme: Skills for the future
+    disclosure_type: quantitative
+    description: Average hours of training per person by gender and employee category; average training and development expenditure per full-time employee.
+    metrics: [SOC.TALENT.AVG_TRAINING_HOURS_PER_EMPLOYEE, SOC.TALENT.AVG_TRAINING_HOURS_FEMALE, SOC.TALENT.AVG_TRAINING_HOURS_MALE, SOC.TALENT.TRAINING_SPEND_PER_EMPLOYEE_PKR]
+  # ---------------- Prosperity ----------------
+  - code: WEF.PROSPERITY.EMPLOYMENT
+    title: Absolute number and rate of employment
+    pillar: prosperity
+    theme: Employment and wealth generation
+    disclosure_type: quantitative
+    description: Total number and rate of new hires and of employee turnover by age group, gender, other diversity indicators and region.
+    metrics: [SOC.WORKFORCE.HIRES, SOC.WORKFORCE.HIRE_RATE_PCT, SOC.WORKFORCE.HIRES_MALE, SOC.WORKFORCE.HIRES_FEMALE, SOC.WORKFORCE.HIRES_AGE_U30, SOC.WORKFORCE.HIRES_AGE_31_50, SOC.WORKFORCE.HIRES_AGE_50P, SOC.WORKFORCE.TURNOVER, SOC.WORKFORCE.TURNOVER_RATE_PCT, SOC.WORKFORCE.TURNOVER_MALE, SOC.WORKFORCE.TURNOVER_FEMALE, SOC.WORKFORCE.TURNOVER_AGE_U30, SOC.WORKFORCE.TURNOVER_AGE_31_50, SOC.WORKFORCE.TURNOVER_AGE_50P]
+  - code: WEF.PROSPERITY.ECONOMIC_CONTRIBUTION
+    title: Economic contribution
+    pillar: prosperity
+    theme: Employment and wealth generation
+    disclosure_type: quantitative
+    description: (a) Direct economic value generated and distributed — revenue, operating costs, employee wages and benefits, payments to providers of capital, payments to government, community investment; (b) financial assistance received from government.
+    metrics: [ECO.EVGD.WEALTH_GENERATED, ECO.EVGD.TOTAL_REVENUE_INCL_TAX, ECO.EVGD.BOUGHT_IN, ECO.EVGD.EMPLOYEES, ECO.EVGD.GOVERNMENT, ECO.EVGD.SOCIETY, ECO.EVGD.DIVIDENDS, ECO.EVGD.INTEREST, ECO.EVGD.RETAINED, ECO.GOVT.FINANCIAL_ASSISTANCE]
+  - code: WEF.PROSPERITY.FINANCIAL_INVESTMENT
+    title: Financial investment contribution
+    pillar: prosperity
+    theme: Employment and wealth generation
+    disclosure_type: both
+    description: (a) Total capital expenditure minus depreciation with investment-strategy narrative; (b) share buybacks plus dividend payments with capital-return narrative.
+    metrics: [ECO.FIN.CAPEX, ECO.FIN.DEPRECIATION, ECO.FIN.NET_INVESTMENT, ECO.INVEST.BUYBACK_VALUE_PKR_MN, ECO.FIN.DIVIDEND_PAID, ECO.INVEST.CAPITAL_RETURNED]
+  - code: WEF.PROSPERITY.RD
+    title: Total R&D expenses
+    pillar: prosperity
+    theme: Innovation of better products and services
+    disclosure_type: quantitative
+    description: Total costs related to research and development.
+    metrics: [ECO.INNOVATION.RD_EXPENSE]
+    guidance: Referenced to note 40 of the consolidated financial statements; value not in the sustainability report.
+  - code: WEF.PROSPERITY.TAX
+    title: Total tax paid
+    pillar: prosperity
+    theme: Community and social vitality
+    disclosure_type: quantitative
+    description: Total global tax borne by category — corporate income taxes, property taxes, non-creditable VAT/sales taxes, employer payroll taxes and other taxes.
+    metrics: [ECO.TAX.CORPORATE_INCOME_TAX, ECO.TAX.SALES_TAX, ECO.TAX.OTHER, ECO.TAX.TOTAL]

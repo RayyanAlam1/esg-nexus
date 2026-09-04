@@ -1,0 +1,44 @@
+# Data sources and datasets. The published report is the primary source in this reference tenant; the operational
+# systems named in the report (SAP, SuccessFactors, VelocityEHS, historians) are registered as connectors so the
+# lineage shows where each figure would originate in production.
+sources:
+  - code: SRC-REPORT-2023
+    name: Sustainability Report 2023 (published PDF)
+    kind: pdf
+    system_name: Corporate Communications
+    owner: Corporate Communications
+    description: Extracted with the document ingestion pipeline (page text + tables); every metric value cites its printed page.
+    datasets:
+      - {code: DS-RPT-ENV, name: Planet tables (energy, GHG, water, waste), pillar: environment, period: FY2023}
+      - {code: DS-RPT-SOC, name: People and OHS tables, pillar: social, period: FY2023}
+      - {code: DS-RPT-GOV, name: Governance disclosures, pillar: governance, period: FY2023}
+      - {code: DS-RPT-ECO, name: Prosperity key figures and wealth statement, pillar: prosperity, period: FY2023}
+  - code: SRC-SAP
+    name: OneSAP ERP (Finance, MM, PM, PP, SD)
+    kind: erp
+    system_name: SAP
+    owner: Chief Financial Officer / ICT
+    description: Financial figures, procurement, plant maintenance, weighbridge and freightage data (report p.113, p.115).
+  - code: SRC-SUCCESSFACTORS
+    name: SAP SuccessFactors (HR)
+    kind: hr
+    system_name: SuccessFactors
+    owner: Chief People Officer
+    description: Headcount, hiring, turnover, learning, succession, compensation modules (report p.46, p.113).
+  - code: SRC-VELOCITYEHS
+    name: VelocityEHS HSE MIS (operational risk + ESG modules)
+    kind: environmental
+    system_name: VelocityEHS
+    owner: Group HSE (ECTD)
+    description: Incident reporting, hours worked, environmental parameter monitoring (report p.114, p.135).
+  - code: SRC-HISTORIANS
+    name: Plant data historians (EPCL, EFERT)
+    kind: ems
+    system_name: OT historians / AspenTech
+    owner: Plant managers
+    description: Energy, steam, water and process data from IT-OT convergence (report p.115–116).
+  - code: SRC-MANUAL
+    name: Manual entry
+    kind: manual
+    owner: ESG Analyst
+    description: Analyst-entered values with mandatory evidence attachment.

@@ -1,0 +1,73 @@
+# Organisation, reporting boundary, entities, periods and demo users.
+# Source: Engro Corporation Limited Sustainability Report 2023 (pages 01–02 "about the report", 07–08 "group structure").
+tenant:
+  slug: ecorp
+  name: Engro Corporation (reference tenant)
+  deployment_model: saas
+
+organization:
+  code: ECORP
+  name: Engro Corporation Limited
+  legal_name: Engro Corporation Limited
+  legal_form: Public Listed Company
+  headquarters: Karachi, Pakistan
+  country: Pakistan
+  stock_ticker: "PSX: ENGRO"
+  sector: Diversified conglomerate (fertilizer, chlor-vinyl, energy, terminals, telecom infrastructure, foods, trading)
+  website: https://www.engro.com
+  contact: {department: Corporate Communications, email: corpcomms@engro.com, phone: "+92 21 111 211 211"}
+  description: >
+    Holding company managing investments in subsidiaries, associates and joint ventures engaged in manufacturing and
+    trading of fertilizer, chlor-vinyl products, telecommunication infrastructure, dairy processing, power generation,
+    coal mining, foods, LNG and bulk chemical terminals.
+  reporting_boundary: >
+    Non-financial information reflects the consolidated operations of Engro Corporation and its businesses based in
+    Pakistan in which it has management control. Effects beyond business operations are excluded due to
+    non-availability of verifiable data (report p.01).
+
+periods:
+  - {code: FY2021, label: "FY 2021", start: 2021-01-01, end: 2021-12-31, status: closed}
+  - {code: FY2022, label: "FY 2022", start: 2022-01-01, end: 2022-12-31, status: closed, is_baseline: true}
+  - {code: FY2023, label: "FY 2023", start: 2023-01-01, end: 2023-12-31, status: open}
+  - {code: FY2024, label: "FY 2024", start: 2024-01-01, end: 2024-12-31, status: open}
+
+# Entity hierarchy. `ownership_pct` and consolidation method from the group structure chart (p.07-08).
+# Reporting boundary for ESG data = entities with management control (full consolidation). Associates/JVs without
+# management control (FCEPL) are outside the ESG boundary although their financial performance is described.
+entities:
+  - {code: ECORP, name: Engro Corporation Limited (Holding), kind: group, ownership_pct: 100, consolidation_method: full, country: Pakistan, location: Karachi, sector: Holding company}
+  - {code: ECORP-HQ, parent: ECORP, name: Engro Corporation (holding company head office), kind: business_unit, consolidation_method: full, country: Pakistan, location: Karachi, description: "Holding-company staff, offices and their footprint; the ECORP root carries group totals."}
+  - {code: EFERT, parent: ECORP, name: Engro Fertilizers Limited, kind: subsidiary, ownership_pct: 56.2, consolidation_method: full, country: Pakistan, location: Daharki / Karachi, sector: Urea & fertilizer manufacturing, attributes: {psx_listed: true, certifications: [ISO/IEC 17025 (Zarkhez lab), IFA Protect & Sustain]}}
+  - {code: EFERT-DAHARKI, parent: EFERT, name: EFERT Daharki Plant (Base plant, EnVen), kind: plant, consolidation_method: full, country: Pakistan, region: Sindh, location: Daharki, Ghotki, attributes: {water_stressed: true, water_stress_source: WRI Aqueduct (report p.91)}}
+  - {code: EFERT-ZARKHEZ, parent: EFERT, name: EFERT Zarkhez Plant, kind: plant, consolidation_method: full, country: Pakistan, region: Sindh, location: Port Qasim, Karachi}
+  - {code: EFERT-AGRITRADE, parent: EFERT, name: Efert Agritrade (Pvt.) Limited, kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan, sector: Fertilizer trading}
+  - {code: EPCL, parent: ECORP, name: Engro Polymer & Chemicals Limited, kind: subsidiary, ownership_pct: 56.19, consolidation_method: full, country: Pakistan, location: Port Qasim, Karachi, sector: Chlor-vinyl (PVC, VCM, caustic soda), attributes: {psx_listed: true, memberships: [WEF Global Plastics Action Partnership, CORE Alliance]}}
+  - {code: EPCL-PQ, parent: EPCL, name: EPCL Port Qasim Complex, kind: plant, consolidation_method: full, country: Pakistan, region: Sindh, location: Port Qasim, Karachi}
+  - {code: THINKPVC, parent: EPCL, name: Think PVC (Pvt.) Limited, kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan}
+  - {code: EPLAST, parent: EPCL, name: Engro Plasticizer (Pvt.) Limited, kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan}
+  - {code: EPEROX, parent: EPCL, name: Engro Peroxide (Pvt.) Limited (Hydrogen Peroxide, ~28 KTPA, start 2H 2024), kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan}
+  - {code: EEL, parent: ECORP, name: Engro Energy Limited, kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan, sector: Power generation & coal mining, attributes: {note: "Thermal assets under evaluation for divestment (PSX notice 26 Feb 2024)"}}
+  - {code: EPQL, parent: EEL, name: Engro Powergen Qadirpur Limited, kind: subsidiary, ownership_pct: 68.9, consolidation_method: full, country: Pakistan, region: Sindh, location: Qadirpur, Ghotki, sector: Gas-fired IPP (permeate gas), attributes: {water_stressed: true, psx_listed: true}}
+  - {code: EPTL, parent: EEL, name: Engro Powergen Thar (Pvt.) Limited, kind: subsidiary, ownership_pct: 50.1, consolidation_method: full, country: Pakistan, region: Sindh, location: Thar Block II, sector: Coal-fired IPP, attributes: {certifications: [ISO 50001, 5-S System], nepra_hse_rating_pct: 92}}
+  - {code: SECMC, parent: EEL, name: Sindh Engro Coal Mining Company Limited, kind: joint_venture, ownership_pct: 11.9, consolidation_method: full, country: Pakistan, region: Sindh, location: Thar Block II, sector: Lignite mining, attributes: {note: "Management control via EEL; consolidated in ESG boundary (mining fugitive CH4 included)"}}
+  - {code: EVTL, parent: ECORP, name: Engro Vopak Terminal Limited, kind: joint_venture, ownership_pct: 50, consolidation_method: full, country: Pakistan, location: Port Qasim, Karachi, sector: Bulk liquid chemical & LPG terminal}
+  - {code: ELENGY, parent: ECORP, name: Elengy Terminal Pakistan Limited, kind: subsidiary, ownership_pct: 56, consolidation_method: full, country: Pakistan}
+  - {code: EETL, parent: ELENGY, name: Engro Elengy Terminal (Pvt.) Limited, kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan, location: Port Qasim, Karachi, sector: LNG regasification terminal}
+  - {code: EVTL_EETL, parent: ECORP, name: Terminals (EVTL + EETL combined people data), kind: business_unit, consolidation_method: full, country: Pakistan, location: Port Qasim, Karachi, description: "Combined reporting unit — EVTL and EETL share management and human resources (p.41); used for metrics the report discloses only for both terminals together (people, solar capacity, mangroves). Metrics reported separately per terminal sit on EVTL / EETL, so no double counting occurs."}
+  - {code: EEAP, parent: ECORP, name: Engro Eximp Agriproducts (Pvt.) Limited, kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan, sector: Rice processing & export, attributes: {water_stressed: true}}
+  - {code: EEFZE, parent: ECORP, name: Engro Eximp FZE (UAE trading arm), kind: trading, ownership_pct: 100, consolidation_method: full, country: United Arab Emirates, location: Dubai, sector: International commodity trading, in_reporting_boundary: false, description: "Outside the Pakistan ESG reporting boundary; financial performance described."}
+  - {code: ENFRA, parent: ECORP, name: Engro Enfrashare (Pvt.) Limited, kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan, sector: Telecom tower infrastructure}
+  - {code: ECONNECT, parent: ECORP, name: Engro Connect (Pvt.) Limited, kind: subsidiary, ownership_pct: 100, consolidation_method: full, country: Pakistan}
+  - {code: FCEPL, parent: ECORP, name: FrieslandCampina Engro Pakistan Limited, kind: associate, ownership_pct: 39.93, consolidation_method: equity, in_reporting_boundary: false, country: Pakistan, sector: Dairy & foods, description: "Associate without management control — outside the ESG data boundary."}
+  - {code: EF, parent: ECORP, name: Engro Foundation (Trust), kind: foundation, consolidation_method: full, country: Pakistan, sector: Corporate philanthropy}
+  - {code: TF, parent: EEL, name: Thar Foundation (CSR wing of Thar Block II partners), kind: foundation, consolidation_method: full, country: Pakistan, region: Sindh, location: Islamkot, Tharparkar, sector: Community development}
+
+users:
+  - {email: admin@esgnexus.local, name: Platform Administrator, password: Admin!2024, roles: [super_admin, org_admin]}
+  - {email: cso@ecorp.local, name: Chief Sustainability Officer, password: Exec!2024, roles: [executive]}
+  - {email: manager@ecorp.local, name: ESG Manager, password: Manager!2024, roles: [esg_manager]}
+  - {email: analyst@ecorp.local, name: ESG Analyst, password: Analyst!2024, roles: [esg_analyst]}
+  - {email: contributor@ecorp.local, name: Plant Data Contributor (EFERT), password: Data!2024, roles: [data_contributor], entity: EFERT}
+  - {email: reviewer@ecorp.local, name: Sustainability Reviewer, password: Review!2024, roles: [reviewer]}
+  - {email: approver@ecorp.local, name: Report Approver, password: Approve!2024, roles: [report_approver]}
+  - {email: auditor@ecorp.local, name: External Assurance Provider, password: Audit!2024, roles: [auditor]}

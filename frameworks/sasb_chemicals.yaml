@@ -1,0 +1,23 @@
+# SASB Chemicals industry standard — subset relevant to fertilizer / chlor-vinyl operations (EFERT, EPCL).
+framework:
+  code: SASB_CHEM
+  name: SASB Standards — Chemicals (RT-CH)
+  publisher: IFRS Foundation (SASB Standards)
+  description: Industry-specific disclosure topics and metrics for the chemicals industry. Applied to the fertilizer and polymer segments.
+  jurisdiction: Global
+  industry: Chemicals
+version:
+  version: "2023-12"
+  effective_date: 2023-12-01
+  status: current
+  source_url: https://sasb.ifrs.org/standards/
+requirements:
+  - {code: SASB.RT-CH-110a.1, title: "Gross global Scope 1 emissions, percentage covered under emissions-limiting regulations", pillar: environment, theme: GHG Emissions, disclosure_type: quantitative, applicability: {entities: [EFERT, EPCL]}, metrics: [ENV.GHG.SCOPE1]}
+  - {code: SASB.RT-CH-110a.2, title: "Discussion of strategy to manage Scope 1 emissions, targets and performance", pillar: environment, theme: GHG Emissions, disclosure_type: narrative, applicability: {entities: [EFERT, EPCL]}, metrics: [ENV.GHG.CO2_REDUCTION_INITIATIVE_TPA, ENV.CLIMATE.GHG_TARGET]}
+  - {code: SASB.RT-CH-130a.1, title: "Total energy consumed, percentage grid electricity, percentage renewable", pillar: environment, theme: Energy Management, disclosure_type: quantitative, applicability: {entities: [EFERT, EPCL]}, metrics: [ENV.ENERGY.TOTAL, ENV.ENERGY.RENEWABLE_SHARE_PCT]}
+  - {code: SASB.RT-CH-140a.1, title: "Total water withdrawn, total water consumed, percentage of each in high/extremely high baseline water stress regions", pillar: environment, theme: Water Management, disclosure_type: quantitative, applicability: {entities: [EFERT, EPCL]}, metrics: [ENV.WATER.WITHDRAWN, ENV.WATER.CONSUMED, ENV.WATER.WITHDRAWN_STRESSED_PCT]}
+  - {code: SASB.RT-CH-150a.1, title: "Amount of hazardous waste generated, percentage recycled", pillar: environment, theme: Hazardous Waste Management, disclosure_type: quantitative, applicability: {entities: [EFERT, EPCL]}, metrics: [ENV.WASTE.HAZARDOUS, ENV.WASTE.DIVERTED_PCT]}
+  - {code: SASB.RT-CH-320a.1, title: "Total recordable incident rate (TRIR) and fatality rate for direct employees and contract employees", pillar: social, theme: Workforce Health and Safety, disclosure_type: quantitative, metrics: [SOC.OHS.TRIR_EMP, SOC.OHS.TRIR_CONTRACTOR, SOC.OHS.FATALITY_RATE_EMP, SOC.OHS.FATALITY_RATE_CONTRACTOR]}
+  - {code: SASB.RT-CH-320a.2, title: "Description of efforts to assess, monitor and reduce exposure of employees and contract workers to long-term (chronic) health risks", pillar: social, theme: Workforce Health and Safety, disclosure_type: narrative, metrics: [SOC.OHS.HEALTH_RISK_ASSESSMENT_DESCRIPTION]}
+  - {code: SASB.RT-CH-540a.1, title: "Process Safety Incidents Count (PSIC), Process Safety Total Incident Rate (PSTIR), Process Safety Incident Severity Rate (PSISR)", pillar: social, theme: Operational Safety, disclosure_type: quantitative, applicability: {entities: [EFERT, EPCL]}, metrics: [SOC.OHS.PROCESS_SAFETY_INCIDENTS], guidance: "Not disclosed in the 2023 report — metric gap."}
+  - {code: SASB.RT-CH-000.A, title: "Production by reportable segment", pillar: prosperity, theme: Activity Metrics, disclosure_type: quantitative, applicability: {entities: [EFERT, EPCL]}, metrics: [ECO.BUSINESS.EFERT_UREA_PRODUCTION_KT, ECO.BUSINESS.EPCL_VCM_PRODUCTION_KT]}

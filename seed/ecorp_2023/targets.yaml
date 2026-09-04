@@ -1,0 +1,103 @@
+# Targets. The 2023 report discloses very few quantitative targets; those below are either stated commitments or
+# "not_set" placeholders that surface as gaps (never invent targets).
+targets:
+  - metric: SOC.OHS.FATALITIES_EMP
+    entity: ECORP
+    target_value: 0
+    direction: maintain
+    kind: absolute
+    target_year: 2024
+    status: active
+    description: HSE policy commitment to ZERO occupational injuries and fatalities (p.59).
+    evidence: P59
+  - metric: SOC.OHS.FATALITIES_CONTRACTOR
+    entity: ECORP
+    target_value: 0
+    direction: decrease
+    kind: absolute
+    target_year: 2024
+    status: missed
+    description: Zero-harm commitment; one contractor fatality occurred in both 2022 and 2023.
+    evidence: P59
+  - metric: SOC.OHS.RECORDABLE_EMP
+    entity: ECORP
+    target_value: 0
+    direction: decrease
+    kind: absolute
+    target_year: 2024
+    status: active
+    description: Continual work towards zero occupational injuries (HSE policy).
+    evidence: P59
+  - metric: SOC.TALENT.ENGAGEMENT_SCORE_PCT
+    entity: ECORP
+    target_value: 67
+    direction: increase
+    kind: absolute
+    target_year: 2023
+    status: achieved
+    description: Aim to score above the global average (67% in 2023 per Qualtrics) — achieved at 83%.
+    evidence: P49
+  - metric: SOC.WELLBEING.WELLBEING_SCORE_PCT
+    entity: ECORP
+    target_value: 71
+    direction: increase
+    kind: absolute
+    target_year: 2023
+    status: achieved
+    description: Outperform the global wellbeing average (71%) — achieved at 83%.
+    evidence: P50
+  - metric: ENV.BIODIVERSITY.MANGROVE_SAPLINGS_PLEDGED
+    entity: EFERT
+    target_value: 1000
+    direction: achieve
+    kind: absolute
+    target_year: 2024
+    status: active
+    description: Pledge to plant 1,000 mangrove saplings ("Plant a Tree, Plant a Hope", May 2023).
+    evidence: P83
+  - metric: ECO.BUSINESS.EEL_MINE_CAPACITY_MTPA
+    entity: SECMC
+    baseline_value: 7.6
+    target_value: 11.4
+    direction: increase
+    kind: absolute
+    target_year: 2026
+    status: active
+    description: Phase III mine expansion to 11.4 MTPA committed (16.4 MTPA approved by Government of Sindh).
+    evidence: P105
+  - metric: SOC.COMMUNITY.EF_TECHLAB_STUDENTS
+    entity: EF
+    baseline_value: 50
+    target_value: 100
+    direction: increase
+    kind: absolute
+    target_year: 2024
+    status: active
+    description: Tech Lab phased approach to train 100 students (Phase I 50 completed).
+    evidence: P69
+  - metric: ENV.GHG.SCOPE1_2_TOTAL
+    entity: ECORP
+    direction: decrease
+    kind: absolute
+    status: not_set
+    description: No Paris-aligned or quantitative GHG reduction target disclosed — gap against WEF Planet/TCFD, IFRS S2.33 and ESRS E1-4.
+    evidence: P111
+  - metric: ENV.WATER.WITHDRAWN
+    entity: ECORP
+    direction: decrease
+    kind: absolute
+    status: not_set
+    description: No quantitative water reduction target disclosed.
+  - metric: ENV.WASTE.TOTAL
+    entity: ECORP
+    direction: decrease
+    kind: absolute
+    status: not_set
+    description: No quantitative waste reduction target disclosed.
+  - metric: SOC.DEI.PERM_FEMALE_PCT
+    entity: ECORP
+    direction: increase
+    kind: absolute
+    status: not_set
+    description: Diversity ambition to increase gender diversity at senior leadership and fresh induction levels stated qualitatively; no numeric target disclosed.
+    evidence: P45

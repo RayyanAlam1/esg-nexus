@@ -1,0 +1,29 @@
+framework:
+  code: UN_SDG
+  name: UN Sustainable Development Goals
+  publisher: United Nations
+  description: The 17 Sustainable Development Goals (2015). Contribution is reported via business operations, Engro Foundation and Thar Foundation.
+  jurisdiction: Global
+version:
+  version: "2015"
+  effective_date: 2015-09-25
+  status: current
+  source_url: https://sdgs.un.org/goals
+requirements:
+  - {code: SDG.1, title: "SDG 1 — No Poverty", pillar: social, theme: People, disclosure_type: both, evidence_required: false, metrics: [SOC.COMMUNITY.EF_CVC_FARMERS, SOC.COMMUNITY.TF_EMPLOYMENT_KT, SOC.COMMUNITY.TF_SMALL_GRANTS, SOC.COMMUNITY.EF_FEEDSOL_FARMERS]}
+  - {code: SDG.2, title: "SDG 2 — Zero Hunger", pillar: social, theme: People, disclosure_type: both, evidence_required: false, metrics: [ECO.BUSINESS.EFERT_UREA_SALES_KT, SOC.COMMUNITY.TF_FISH_KG, SOC.COMMUNITY.TF_CHILD_NUTRITION_SCREENED]}
+  - {code: SDG.3, title: "SDG 3 — Good Health and Well-being", pillar: social, theme: People, disclosure_type: both, evidence_required: false, metrics: [SOC.OHS.TRIR_EMP, SOC.WELLBEING.WELLBEING_SCORE_PCT, SOC.COMMUNITY.EF_PATIENTS_OPD, SOC.COMMUNITY.TF_OPD, SOC.COMMUNITY.EF_SPECIALIZED_BENEFICIARIES]}
+  - {code: SDG.4, title: "SDG 4 — Quality Education", pillar: social, theme: People, disclosure_type: both, evidence_required: false, metrics: [SOC.TALENT.LEARNING_HOURS_TOTAL, SOC.COMMUNITY.EF_STUDENTS_FORMAL, SOC.COMMUNITY.TF_STUDENTS, SOC.COMMUNITY.EF_TTC_ENROLMENT]}
+  - {code: SDG.5, title: "SDG 5 — Gender Equality", pillar: social, theme: People, disclosure_type: both, evidence_required: false, metrics: [SOC.DEI.PERM_FEMALE_PCT, SOC.WORKFORCE.HIRES_FEMALE, SOC.COMMUNITY.TF_WOMEN_DUMP_TRUCK, SOC.COMMUNITY.TF_FEMALE_TEACHERS, SOC.DEI.C2_WOMEN_RISE_PCT]}
+  - {code: SDG.6, title: "SDG 6 — Clean Water and Sanitation", pillar: environment, theme: Planet, disclosure_type: both, evidence_required: false, metrics: [ENV.WATER.WITHDRAWN, ENV.WATER.CONSUMED, ENV.WATER.DISCHARGED, SOC.COMMUNITY.EF_WATER_LITERS, SOC.COMMUNITY.TF_RO_PLANTS]}
+  - {code: SDG.7, title: "SDG 7 — Affordable and Clean Energy", pillar: environment, theme: Planet, disclosure_type: both, evidence_required: false, metrics: [ENV.ENERGY.TOTAL, ENV.ENERGY.RENEWABLE_CAPACITY_KW, ECO.BUSINESS.EEL_GRID_GWH, SOC.COMMUNITY.TF_SOLAR_HOUSEHOLDS]}
+  - {code: SDG.8, title: "SDG 8 — Decent Work and Economic Growth", pillar: prosperity, theme: Prosperity, disclosure_type: both, evidence_required: false, metrics: [SOC.WORKFORCE.TOTAL, SOC.WORKFORCE.HIRES, ECO.FIN.REVENUE, ECO.EVGD.WEALTH_GENERATED, SOC.COMP.ENTRY_WAGE_TO_MIN_WAGE_RATIO]}
+  - {code: SDG.9, title: "SDG 9 — Industry, Innovation and Infrastructure", pillar: prosperity, theme: Prosperity, disclosure_type: both, evidence_required: false, metrics: [ECO.FIN.CAPEX, ECO.BUSINESS.ENFRA_TOWERS, GOV.DIGITAL.ENNOVATE_IDEAS, GOV.DIGITAL.EASYDMS_DOCUMENTS]}
+  - {code: SDG.10, title: "SDG 10 — Reduced Inequalities", pillar: social, theme: People, disclosure_type: both, evidence_required: false, metrics: [SOC.DEI.PWD_EMPLOYEES, SOC.DEI.DEI_AMBASSADORS, SOC.COMMUNITY.TF_SMALL_GRANTS]}
+  - {code: SDG.11, title: "SDG 11 — Sustainable Cities and Communities", pillar: social, theme: People, disclosure_type: both, evidence_required: false, metrics: [SOC.COMMUNITY.EF_HOUSES_BUILT, SOC.COMMUNITY.TF_HOUSEHOLDS_RELOCATED, SOC.COMMUNITY.TF_LATRINES, SOC.COMMUNITY.TF_VILLAGES_SOLARIZED_PCT]}
+  - {code: SDG.12, title: "SDG 12 — Responsible Consumption and Production", pillar: environment, theme: Planet, disclosure_type: both, evidence_required: false, metrics: [ENV.WASTE.TOTAL, ENV.WASTE.HAZARDOUS, ENV.WASTE.PLASTIC_BAGS_ELIMINATED_PCT, ENV.MGMT.HSE_L1_STANDARDS, SOC.OHS.RBHSE_PERSON_HOURS]}
+  - {code: SDG.13, title: "SDG 13 — Climate Action", pillar: environment, theme: Planet, disclosure_type: both, evidence_required: false, metrics: [ENV.GHG.SCOPE1_2_TOTAL, ENV.GHG.YOY_CHANGE_PCT, ENV.GHG.CARBON_STORED_NATURE, GOV.RISK.CLIMATE_RISK_ASSESSMENT_STATUS]}
+  - {code: SDG.14, title: "SDG 14 — Life Below Water", pillar: environment, theme: Planet, disclosure_type: both, evidence_required: false, metrics: [ENV.BIODIVERSITY.DOLPHIN_POPULATION, SOC.COMMUNITY.EF_SFEP_VESSELS_CONVERTED, ENV.BIODIVERSITY.MANGROVE_HA, SOC.COMMUNITY.EF_SFEP_TRAINING_PARTICIPANTS]}
+  - {code: SDG.15, title: "SDG 15 — Life on Land", pillar: environment, theme: Planet, disclosure_type: both, evidence_required: false, metrics: [ENV.BIODIVERSITY.TREES_PLANTED, ENV.BIODIVERSITY.AFFORESTATION_HA, ENV.BIODIVERSITY.VULTURE_NEST_TREES, ENV.BIODIVERSITY.SPECIES_BIRDS_DOCUMENTED]}
+  - {code: SDG.16, title: "SDG 16 — Peace, Justice and Strong Institutions", pillar: governance, theme: Governance, disclosure_type: both, evidence_required: false, metrics: [GOV.ETHICS.CORRUPTION_CASES_SUBSTANTIATED, GOV.ETHICS.WHISTLEBLOWER_MECHANISM, GOV.BOARD.INDEPENDENCE_PCT]}
+  - {code: SDG.17, title: "SDG 17 — Partnerships for the Goals", pillar: governance, theme: Governance, disclosure_type: narrative, evidence_required: false, metrics: [GOV.MEMBERSHIPS.INDUSTRY_ASSOCIATIONS, GOV.MEMBERSHIPS.CSO_PARTNERS]}

@@ -1,0 +1,105 @@
+# Materiality assessment (report pp.37–38). The report lists material topics without publishing scores; the
+# impact/financial scores below are the platform's *structured representation* of the report's ranking:
+# topics listed as material receive scores above the threshold (3.0). Scores are marked as derived from the
+# report's qualitative prioritisation and are editable by the ESG Manager. Non-material topics are included
+# below threshold so the matrix shows the full universe.
+assessment:
+  name: FY2023 Materiality Assessment (WEF-aligned, ERM-scored)
+  period: FY2023
+  approach: impact
+  threshold: 3.0
+  methodology: >
+    Stakeholder engagement (dependency and influence) → internal impact assessment on quantitative and
+    qualitative factors (severity × likelihood) → prioritisation against a materiality threshold informed by
+    Engro's Enterprise Risk Management framework. Impacts exceeding the threshold are material.
+  evidence: [P37, P38]
+  status: approved
+
+topics:
+  - {code: economic_performance, name: Economic Performance, pillar: prosperity, impact_severity: 5, impact_likelihood: 5, financial_magnitude: 5, financial_likelihood: 5, stakeholder_priority: 5, is_material: true,
+     metrics: [ECO.FIN.REVENUE, ECO.FIN.EBITDA, ECO.EVGD.WEALTH_GENERATED, ECO.TAX.TOTAL, ECO.FIN.CAPEX],
+     requirements: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, WEF.PROSPERITY.TAX, GRI.201-1],
+     risks: ["Macroeconomic volatility, PKR devaluation and Super Tax (p.103)", "Interest-rate exposure at Enfrashare (p.105)", "Thermal-asset divestment and IAS 36 remeasurement (p.103)"],
+     opportunities: ["Export strategy and Engro Eximp FZE global trading (p.110)", "Import substitution — USD 835 mn urea, USD 92 mn PVC (p.99)"],
+     rationale: "Listed as material (Economic pillar, p.38). Core to stakeholder value creation and strategic priorities."}
+  - {code: ethics_compliance, name: Ethics and Compliance, pillar: governance, impact_severity: 4, impact_likelihood: 4, financial_magnitude: 4, financial_likelihood: 3, stakeholder_priority: 5, is_material: true,
+     metrics: [GOV.ETHICS.CORRUPTION_CASES_SUBSTANTIATED, GOV.ETHICS.EC_ATTENDEES, GOV.ETHICS.EC_LEARNING_HOURS, GOV.BOARD.INDEPENDENCE_PCT],
+     requirements: [WEF.GOV.ANTI_CORRUPTION, WEF.GOV.ETHICS_MECHANISMS, GRI.205-3, UNGC.P10],
+     risks: ["Substantiated corruption cases rose from 2 to 4 (p.31)"],
+     opportunities: ["Group-wide E&C roadshows and Speak Out platform strengthen culture (p.31–32)"],
+     rationale: "Listed as material (Economic pillar, p.38); one of three core values."}
+  - {code: employee_wellbeing, name: Employee Benefits and Wellbeing, pillar: social, impact_severity: 4, impact_likelihood: 4, financial_magnitude: 3, financial_likelihood: 3, stakeholder_priority: 4, is_material: true,
+     metrics: [SOC.TALENT.ENGAGEMENT_SCORE_PCT, SOC.WELLBEING.WELLBEING_SCORE_PCT, SOC.WORKFORCE.TURNOVER_RATE_PCT, SOC.TALENT.TRAINING_SPEND_PER_EMPLOYEE_PKR],
+     requirements: [WEF.PEOPLE.TRAINING, WEF.PROSPERITY.EMPLOYMENT, GRI.401-1],
+     risks: ["Talent migration to the Middle East (p.43)", "Wellbeing score declining 88% → 86% → 83% (p.50)"],
+     opportunities: ["LEAP capability platform, TDP and succession planning (p.53–55)"],
+     rationale: "Listed as material (Social pillar, p.38)."}
+  - {code: ohs, name: Occupational Health and Safety, pillar: social, impact_severity: 5, impact_likelihood: 3, financial_magnitude: 4, financial_likelihood: 3, stakeholder_priority: 5, is_material: true,
+     metrics: [SOC.OHS.TRIR_EMP, SOC.OHS.TRIR_CONTRACTOR, SOC.OHS.FATALITIES_CONTRACTOR, SOC.OHS.RECORDABLE_EMP, SOC.OHS.HOURS_CONTRACTOR],
+     requirements: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9, SASB.RT-CH-320a.1],
+     risks: ["One contractor fatality in each of 2022 and 2023 (p.67)", "Major accident hazards at high-hazard sites (p.65)"],
+     opportunities: ["Risk-based HSE management system with DuPont; 73 L1 standards (p.65, p.135)"],
+     rationale: "Listed as material (Social pillar, p.38); HSE is a core value."}
+  - {code: dei, name: Diversity, Equity & Inclusion, pillar: social, impact_severity: 3, impact_likelihood: 4, financial_magnitude: 2, financial_likelihood: 3, stakeholder_priority: 4, is_material: true,
+     metrics: [SOC.DEI.PERM_FEMALE_PCT, SOC.WORKFORCE.HIRES_FEMALE_PCT, SOC.DEI.PWD_EMPLOYEES, GOV.BOARD.WOMEN_PCT],
+     requirements: [WEF.PEOPLE.DIVERSITY, WEF.PEOPLE.PAY_EQUALITY, GRI.405-1, UNGC.P6],
+     risks: ["Women 12% of permanent workforce; no numeric diversity target (p.43, p.45)"],
+     opportunities: ["DEILP, Break Ke Baad, Khudi, Uraan programmes (p.51–53)"],
+     rationale: "Listed as material (Social pillar, p.38)."}
+  - {code: community, name: Community Investments, pillar: social, impact_severity: 4, impact_likelihood: 4, financial_magnitude: 2, financial_likelihood: 2, stakeholder_priority: 4, is_material: true,
+     metrics: [SOC.COMMUNITY.INVESTMENT_PKR_MN, SOC.COMMUNITY.EF_STUDENTS_FORMAL, SOC.COMMUNITY.EF_PATIENTS_OPD, SOC.COMMUNITY.TF_EMPLOYMENT_KT, SOC.COMMUNITY.EF_CVC_FARMERS],
+     requirements: [GRI.413-1, SDG.1, SDG.3, SDG.4],
+     risks: ["Social licence to operate at Thar Block II and Daharki"],
+     opportunities: ["Inclusive business model, Engro Foundation and Thar Foundation programmes (p.68–76)"],
+     rationale: "Listed as material (Social pillar, p.38)."}
+  - {code: energy_emissions, name: Energy & Emissions, pillar: environment, impact_severity: 5, impact_likelihood: 5, financial_magnitude: 4, financial_likelihood: 4, stakeholder_priority: 4, is_material: true,
+     metrics: [ENV.ENERGY.TOTAL, ENV.GHG.SCOPE1, ENV.GHG.SCOPE2, ENV.GHG.SCOPE1_2_TOTAL, ENV.GHG.INTENSITY_REVENUE, ENV.ENERGY.RENEWABLE_CAPACITY_KW],
+     requirements: [WEF.PLANET.GHG_EMISSIONS, WEF.PLANET.TCFD, GRI.305-1, IFRS.S2.29a, ESRS.E1-6],
+     risks: ["Total GHG up 7% to 7.4 MtCO2e (p.81)", "No Scope 3, no Paris-aligned target, TCFD preliminary only (p.111)", "Energy-price surge of 51% (p.20)"],
+     opportunities: ["Energy efficiency projects (EFERT LTR, EPCL Zero-Gap 9,000 tCO2/yr)", "Solarisation and nature-based solutions (p.83)"],
+     rationale: "Listed as material (Environmental pillar, p.38); energy-intensive manufacturing."}
+  - {code: water, name: Water, pillar: environment, impact_severity: 4, impact_likelihood: 4, financial_magnitude: 3, financial_likelihood: 3, stakeholder_priority: 4, is_material: true,
+     metrics: [ENV.WATER.WITHDRAWN, ENV.WATER.CONSUMED, ENV.WATER.DISCHARGED, ENV.WATER.WITHDRAWN_STRESSED_PCT],
+     requirements: [WEF.PLANET.WATER, GRI.303-3, GRI.303-5, ESRS.E3-4],
+     risks: ["Three sites in water-stressed areas (EFERT Daharki, EPQL, EEAP) (p.91)", "% withdrawal in stressed areas not disclosed"],
+     opportunities: ["ETP reuse, cooling-tower optimisation, tap retrofits (p.92–93)"],
+     rationale: "Listed as material (Environmental pillar, p.38)."}
+  - {code: materials, name: Materials (Availability, Procurement & Utilisation), pillar: environment, impact_severity: 4, impact_likelihood: 3, financial_magnitude: 4, financial_likelihood: 4, stakeholder_priority: 3, is_material: true,
+     metrics: [ECO.BUSINESS.EFERT_UREA_PRODUCTION_KT, ECO.BUSINESS.EPCL_VCM_PRODUCTION_KT, ECO.INVEST.PEF_PROJECT_USD_MN],
+     requirements: [SASB.RT-CH-000.A, SDG.12],
+     risks: ["Indigenous gas pressure decline — PEF project (p.108)", "Gas pricing disadvantage vs peers (p.19)"],
+     opportunities: ["Circular plastics research via CPI (p.139)"],
+     rationale: "Listed as material (Environmental pillar, p.38); no dedicated quantitative material-consumption metrics are disclosed — metric gap."}
+  - {code: waste, name: Waste, pillar: environment, impact_severity: 3, impact_likelihood: 4, financial_magnitude: 2, financial_likelihood: 3, stakeholder_priority: 3, is_material: true,
+     metrics: [ENV.WASTE.TOTAL, ENV.WASTE.HAZARDOUS, ENV.WASTE.NON_HAZARDOUS, ENV.WASTE.DIVERTED_PCT],
+     requirements: [GRI.306-3, ESRS.E5-5, SASB.RT-CH-150a.1],
+     risks: ["Hazardous waste up 20% to 437 kt, dominated by mining (p.93)", "Recycling rate not disclosed"],
+     opportunities: ["Beyond Plastic (100% bag elimination at EEL sites), composting at EFERT (p.137)"],
+     rationale: "Listed as material (Environmental pillar, p.38)."}
+  # Topics assessed but not listed as material — shown below threshold on the matrix
+  - {code: biodiversity, name: Biodiversity & Land Use, pillar: environment, impact_severity: 3, impact_likelihood: 2, financial_magnitude: 1, financial_likelihood: 2, stakeholder_priority: 3, is_material: false,
+     metrics: [ENV.BIODIVERSITY.SITES_NEAR_PROTECTED, ENV.BIODIVERSITY.TREES_PLANTED, ENV.BIODIVERSITY.MANGROVE_HA],
+     requirements: [WEF.PLANET.LAND_USE, GRI.304-1],
+     rationale: "Reported (pp.84–90) but not among the listed material topics; no sites adjacent to protected areas."}
+  - {code: climate_risk, name: Climate Risk & Adaptation, pillar: environment, impact_severity: 4, impact_likelihood: 3, financial_magnitude: 3, financial_likelihood: 3, stakeholder_priority: 3, is_material: false,
+     metrics: [GOV.RISK.CLIMATE_RISK_ASSESSMENT_STATUS, ENV.CLIMATE.PARIS_TARGET_SET],
+     requirements: [WEF.PLANET.TCFD, IFRS.S2.STRATEGY.RISKS],
+     rationale: "Preliminary TCFD assessment only; Pakistan is highly climate-vulnerable (p.137). Candidate for elevation to material in the next cycle."}
+  - {code: cybersecurity, name: Cybersecurity & Data Stewardship, pillar: governance, impact_severity: 3, impact_likelihood: 3, financial_magnitude: 3, financial_likelihood: 2, stakeholder_priority: 2, is_material: false,
+     metrics: [GOV.CYBER.PHISHING_CAMPAIGNS_PER_YEAR, GOV.CYBER.SOC_OPERATIONAL],
+     requirements: [WEF.GOV.RISK_OPPORTUNITY],
+     rationale: "Extensively described (pp.117–120) but not a listed material topic."}
+  - {code: human_rights, name: Human Rights & Labour Practices, pillar: social, impact_severity: 3, impact_likelihood: 2, financial_magnitude: 2, financial_likelihood: 2, stakeholder_priority: 3, is_material: false,
+     metrics: [SOC.LABOR.CHILD_FORCED_LABOR_INCIDENTS, SOC.COMP.ENTRY_WAGE_TO_MIN_WAGE_RATIO],
+     requirements: [WEF.PEOPLE.CHILD_FORCED_LABOR, UNGC.P1, UNGC.P3],
+     rationale: "Zero incidents reported; supplier-level risk and collective bargaining not disclosed."}
+
+stakeholder_inputs:
+  - {group: Shareholders & investors, topic: economic_performance, priority: 5, channel: "AGM, corporate briefings, PSX announcements, investor relations site (p.35)", concern: "Performance, dividends, thermal-asset divestment"}
+  - {group: Government & regulators, topic: ethics_compliance, priority: 4, channel: "GRRA division meetings, data submissions, events (p.35)", concern: "Legal and regulatory compliance, gas pricing policy"}
+  - {group: Customers / consumers, topic: economic_performance, priority: 4, channel: "Meetings, surveys, digital platforms, Humsafar app (p.35)", concern: "Product availability and quality (urea at ~40% discount to import parity)"}
+  - {group: Employees, topic: employee_wellbeing, priority: 5, channel: "Townhalls, engagement survey, learning circles, Workplace platform (p.36)", concern: "Engagement 83%, wellbeing, career growth, DE&I"}
+  - {group: Lenders & insurers, topic: economic_performance, priority: 3, channel: "Regular meetings, financial statements (p.35)", concern: "Credit strength (AA+/A1+)"}
+  - {group: Local communities & vulnerable groups, topic: community, priority: 5, channel: "Engro Foundation and Thar Foundation programmes, Speak Out (p.33)", concern: "Education, health, livelihoods, water, resettlement"}
+  - {group: Civil society & NGOs, topic: energy_emissions, priority: 3, channel: "Partnerships with WWF, IUCN, TCF (p.143)", concern: "Biodiversity, climate, plastics circularity"}
+  - {group: Suppliers & vendors, topic: ethics_compliance, priority: 3, channel: "Meetings, visits, training events, Speak Out (p.36)", concern: "Anti-corruption expectations, contractor safety"}
