@@ -43,10 +43,10 @@ class Readiness:
 def compute(db: Session, tenant_id: int, organization_id: int, period: ReportingPeriod, *, framework_codes: list[str] | None = None, report: Report | None = None) -> Readiness:
     entity_ids = [e.id for e in db.execute(select(Entity).where(Entity.organization_id == organization_id)).scalars().all()]
     metrics = (
-        db.execute(select(MetricDefinition).where(MetricDefinition.tenant_id == tenant_id, MetricDefinition.is_active == True, MetricDefinition.kind != "narrative"))
+        db.execute(select(MetricDefinition).where(MetricDefinition.tenant_id == tenant_id, MetricDefinition.is_active.is_(True), MetricDefinition.kind != "narrative"))
         .scalars()
         .all()
-    )  # noqa: E712
+    )
     values = db.execute(select(MetricValue).where(MetricValue.period_id == period.id, MetricValue.entity_id.in_(entity_ids))).scalars().all() if entity_ids else []
     explanation: list[str] = []
 

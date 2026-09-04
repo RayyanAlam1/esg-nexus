@@ -32,7 +32,7 @@ def run_metric_rules(db: Session, tenant_id: int, organization_id: int, period: 
     """Evaluate metric_value-scope rules for every value in the period plus every KPI at group level."""
     rules = rules_engine.active_rules(db, tenant_id, "metric_value")
     entities = {e.id: e for e in db.execute(select(Entity).where(Entity.organization_id == organization_id)).scalars().all()}
-    metrics = {m.id: m for m in db.execute(select(MetricDefinition).where(MetricDefinition.tenant_id == tenant_id, MetricDefinition.is_active == True)).scalars().all()}  # noqa: E712
+    metrics = {m.id: m for m in db.execute(select(MetricDefinition).where(MetricDefinition.tenant_id == tenant_id, MetricDefinition.is_active.is_(True))).scalars().all()}
     values = db.execute(select(MetricValue).where(MetricValue.period_id == period.id, MetricValue.entity_id.in_(list(entities)))).scalars().all() if entities else []
     seen: set[tuple[int, int]] = set()
     triggered: list[dict] = []

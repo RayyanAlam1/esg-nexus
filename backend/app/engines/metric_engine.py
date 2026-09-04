@@ -45,13 +45,7 @@ def previous_period(db: Session, period: ReportingPeriod) -> ReportingPeriod | N
 
 
 def current_formula(db: Session, metric: MetricDefinition) -> tuple[str | None, str]:
-    cv = (
-        db.execute(
-            select(CalculationVersion).where(CalculationVersion.metric_id == metric.id, CalculationVersion.is_current == True)  # noqa: E712
-        )
-        .scalars()
-        .first()
-    )
+    cv = db.execute(select(CalculationVersion).where(CalculationVersion.metric_id == metric.id, CalculationVersion.is_current.is_(True))).scalars().first()
     if cv:
         return cv.formula, cv.version
     return metric.formula, f"{metric.version}.0"
@@ -161,13 +155,11 @@ def calculate(db: Session, tenant_id: int, metric: MetricDefinition, entity: Ent
 def recalculate_all(db: Session, tenant_id: int, organization_id: int, period: ReportingPeriod, *, user_id: int | None = None) -> list[CalcResult]:
     """Recalculate every derived metric for every entity in the organisation for `period`, dependency-ordered."""
     metrics = (
-        db.execute(
-            select(MetricDefinition).where(MetricDefinition.tenant_id == tenant_id, MetricDefinition.is_active == True, MetricDefinition.formula.isnot(None))  # noqa: E712
-        )
+        db.execute(select(MetricDefinition).where(MetricDefinition.tenant_id == tenant_id, MetricDefinition.is_active.is_(True), MetricDefinition.formula.isnot(None)))
         .scalars()
         .all()
     )
-    entities = db.execute(select(Entity).where(Entity.organization_id == organization_id, Entity.is_active == True)).scalars().all()  # noqa: E712
+    entities = db.execute(select(Entity).where(Entity.organization_id == organization_id, Entity.is_active.is_(True))).scalars().all()
     ordered = _topological(metrics)
     results: list[CalcResult] = []
     for metric in ordered:

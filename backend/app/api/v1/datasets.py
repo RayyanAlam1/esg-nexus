@@ -81,7 +81,7 @@ def records(version_id: int, principal: User, db: DB, page: Page = Depends(), on
         raise NotFoundError("Dataset version not found")
     stmt = select(DatasetRecord).where(DatasetRecord.version_id == dv.id)
     if only_invalid:
-        stmt = stmt.where(DatasetRecord.is_valid == False)  # noqa: E712
+        stmt = stmt.where(DatasetRecord.is_valid.is_(False))
     return paginate(db, stmt.order_by(DatasetRecord.row_index), page, DatasetRecord)
 
 
