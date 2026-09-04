@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased text-[13px] leading-5;
+}
+
+*:focus-visible {
+  outline: 2px solid #1b7f79;
+  outline-offset: 1px;
+}
+
+@layer components {
+  .card {
+    @apply bg-white border border-gray-200 rounded-md;
+  }
+  .card-header {
+    @apply flex items-center justify-between px-4 py-2.5 border-b border-gray-200;
+  }
+  .card-title {
+    @apply text-[13px] font-semibold text-navy;
+  }
+  .label {
+    @apply block text-xxs font-medium uppercase tracking-wide text-gray-500 mb-1;
+  }
+  .input {
+    @apply w-full border border-gray-300 rounded px-2.5 py-1.5 text-[13px] bg-white focus:border-teal focus:ring-0 disabled:bg-gray-50 disabled:text-gray-500;
+  }
+  .btn {
+    @apply inline-flex items-center gap-1.5 rounded border px-3 py-1.5 text-[13px] font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap;
+  }
+  .btn-primary {
+    @apply btn bg-navy border-navy text-white hover:bg-navy-600;
+  }
+  .btn-accent {
+    @apply btn bg-teal border-teal text-white hover:bg-teal-700;
+  }
+  .btn-secondary {
+    @apply btn bg-white border-gray-300 text-gray-800 hover:bg-gray-50;
+  }
+  .btn-danger {
+    @apply btn bg-white border-red-300 text-[#8F2C22] hover:bg-red-50;
+  }
+  .btn-ghost {
+    @apply btn border-transparent text-gray-700 hover:bg-gray-100;
+  }
+  .btn-sm {
+    @apply px-2 py-1 text-xs;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-xxs font-medium uppercase tracking-wide whitespace-nowrap;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-gray-300 bg-white px-2 py-0.5 text-xs text-gray-700;
+  }
+  .table {
+    @apply w-full text-[13px] border-collapse;
+  }
+  .table th {
+    @apply text-left text-xxs font-semibold uppercase tracking-wide text-gray-500 px-3 py-2 border-b border-gray-200 bg-gray-50 whitespace-nowrap;
+  }
+  .table td {
+    @apply px-3 py-2 border-b border-gray-100 align-top;
+  }
+  .table tbody tr:hover {
+    @apply bg-navy-50/60;
+  }
+  .kv {
+    @apply grid grid-cols-[minmax(120px,max-content)_1fr] gap-x-4 gap-y-1.5 text-[13px];
+  }
+  .kv dt {
+    @apply text-gray-500;
+  }
+  .kv dd {
+    @apply text-gray-900 break-words;
+  }
+  .mono {
+    @apply font-mono text-xs;
+  }
+  .section-q {
+    @apply text-[11px] font-semibold uppercase tracking-wider text-teal mb-1;
+  }
+}
+
+/* Markdown rendering */
+.md {
+  @apply text-[13px] leading-6 text-gray-800;
+}
+.md h1 {
+  @apply text-lg font-semibold text-navy mt-4 mb-2;
+}
+.md h2 {
+  @apply text-base font-semibold text-navy mt-4 mb-2;
+}
+.md h3 {
+  @apply text-sm font-semibold text-navy mt-3 mb-1;
+}
+.md p {
+  @apply my-2;
+}
+.md ul {
+  @apply list-disc pl-5 my-2;
+}
+.md ol {
+  @apply list-decimal pl-5 my-2;
+}
+.md code {
+  @apply font-mono text-xs bg-gray-100 px-1 rounded;
+}
+.md pre {
+  @apply bg-gray-100 rounded p-2 overflow-x-auto my-2;
+}
+.md table {
+  @apply w-full text-xs border-collapse my-2;
+}
+.md th {
+  @apply bg-navy text-white text-left px-2 py-1;
+}
+.md td {
+  @apply border-b border-gray-200 px-2 py-1 align-top;
+}
+.md blockquote {
+  @apply border-l-2 border-teal pl-3 text-gray-600 my-2;
+}
+.md a {
+  @apply text-teal underline;
+}
+
+/* Report preview paper frame */
+.paper {
+  @apply bg-white shadow-sm border border-gray-300 mx-auto;
+  width: 794px;
+  max-width: 100%;
+}
+.paper .page {
+  min-height: 1000px;
+}
+
+.skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+.recharts-cartesian-axis-tick text {
+  fill: #5b6470;
+  font-size: 11px;
+}
