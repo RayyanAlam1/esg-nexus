@@ -242,7 +242,7 @@ class ReportBuilder:
     def _entity_table(self, codes: list[str], period: ReportingPeriod, org_id: int) -> dict:
         metrics = [self._metric(c) for c in codes]
         metrics = [m for m in metrics if m]
-        entities = self.db.execute(select(Entity).where(Entity.organization_id == org_id, Entity.in_reporting_boundary == True).order_by(Entity.code)).scalars().all()  # noqa: E712
+        entities = self.db.execute(select(Entity).where(Entity.organization_id == org_id, Entity.in_reporting_boundary.is_(True)).order_by(Entity.code)).scalars().all()
         rows = []
         for e in entities:
             vals = [self._value(m, e, period)["value"] for m in metrics]

@@ -88,7 +88,7 @@ def list_metrics(
     kind: str | None = None,
     framework: str | None = None,
 ):
-    stmt = select(MetricDefinition).where(MetricDefinition.tenant_id == principal.tenant_id, MetricDefinition.is_active == True)  # noqa: E712
+    stmt = select(MetricDefinition).where(MetricDefinition.tenant_id == principal.tenant_id, MetricDefinition.is_active.is_(True))
     if pillar:
         stmt = stmt.where(MetricDefinition.pillar == pillar)
     if topic:
@@ -136,7 +136,7 @@ def kpis(principal: User, db: DB, period: str | None = None, entity: str | None 
     org = get_org(db, principal, org_id)
     p = get_period(db, org, period)
     e = get_entity(db, principal, org, entity)
-    stmt = select(MetricDefinition).where(MetricDefinition.tenant_id == principal.tenant_id, MetricDefinition.is_kpi == True, MetricDefinition.is_active == True)  # noqa: E712
+    stmt = select(MetricDefinition).where(MetricDefinition.tenant_id == principal.tenant_id, MetricDefinition.is_kpi.is_(True), MetricDefinition.is_active.is_(True))
     if pillar:
         stmt = stmt.where(MetricDefinition.pillar == pillar)
     ms = db.execute(stmt.order_by(MetricDefinition.pillar, MetricDefinition.code)).scalars().all()

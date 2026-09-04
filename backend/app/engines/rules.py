@@ -40,7 +40,7 @@ class RuleOutcome:
 
 
 def active_rules(db: Session, tenant_id: int, scope: str | None = None) -> list[GovernanceRule]:
-    stmt = select(GovernanceRule).where(GovernanceRule.tenant_id == tenant_id, GovernanceRule.is_active == True, GovernanceRule.approval_status == "approved")  # noqa: E712
+    stmt = select(GovernanceRule).where(GovernanceRule.tenant_id == tenant_id, GovernanceRule.is_active.is_(True), GovernanceRule.approval_status == "approved")
     if scope:
         stmt = stmt.where(GovernanceRule.scope == scope)
     return db.execute(stmt.order_by(GovernanceRule.code)).scalars().all()

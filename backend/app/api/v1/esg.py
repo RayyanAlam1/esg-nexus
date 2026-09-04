@@ -110,7 +110,7 @@ def overview(principal: User, db: DB, period: str | None = None, entity: str | N
     sev_rank = {"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3, "INFO": 4}
     issues = sorted(issues, key=lambda i: sev_rank.get(i.severity, 5))
     n_values = db.execute(select(func.count(MetricValue.id)).where(MetricValue.period_id == p.id)).scalar()
-    n_metrics = db.execute(select(func.count(MetricDefinition.id)).where(MetricDefinition.tenant_id == principal.tenant_id, MetricDefinition.is_active == True)).scalar()  # noqa: E712
+    n_metrics = db.execute(select(func.count(MetricDefinition.id)).where(MetricDefinition.tenant_id == principal.tenant_id, MetricDefinition.is_active.is_(True))).scalar()
     return {
         "organization": serialize(org),
         "period": serialize(p),
@@ -149,9 +149,9 @@ def pillar(pillar: str, principal: User, db: DB, period: str | None = None, enti
     tps = db.execute(select(EsgTopic).where(EsgTopic.tenant_id == principal.tenant_id, EsgTopic.pillar == pillar).order_by(EsgTopic.sort_order)).scalars().all()
     out_topics = []
     for t in tps:
-        stmt = select(MetricDefinition).where(MetricDefinition.tenant_id == principal.tenant_id, MetricDefinition.topic_code == t.code, MetricDefinition.is_active == True)  # noqa: E712
+        stmt = select(MetricDefinition).where(MetricDefinition.tenant_id == principal.tenant_id, MetricDefinition.topic_code == t.code, MetricDefinition.is_active.is_(True))
         if kpi_only:
-            stmt = stmt.where(MetricDefinition.is_kpi == True)  # noqa: E712
+            stmt = stmt.where(MetricDefinition.is_kpi.is_(True))
         ms = db.execute(stmt.order_by(MetricDefinition.is_kpi.desc(), MetricDefinition.code)).scalars().all()
         cards = [kpi_card(db, principal, m, e, p) for m in ms if m.kind != "narrative"]
         narratives = []

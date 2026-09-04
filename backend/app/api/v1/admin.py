@@ -160,7 +160,7 @@ def reseed(principal: User, db: DB, recompute: bool = True):
 def notifications(principal: User, db: DB, unread: bool = False):
     stmt = select(Notification).where(Notification.tenant_id == principal.tenant_id, (Notification.user_id == principal.user_id) | (Notification.user_id.is_(None)))
     if unread:
-        stmt = stmt.where(Notification.is_read == False)  # noqa: E712
+        stmt = stmt.where(Notification.is_read.is_(False))
     return serialize(db.execute(stmt.order_by(Notification.created_at.desc()).limit(50)).scalars().all())
 
 

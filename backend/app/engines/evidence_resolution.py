@@ -77,7 +77,7 @@ def resolve(db: Session, metric: MetricDefinition, entity: Entity, period: Repor
     # consolidated → children
     if mv is None or mv.value_numeric is None:
         seen = {}
-        for child in db.execute(select(Entity).where(Entity.parent_id == entity.id, Entity.is_active == True)).scalars().all():  # noqa: E712
+        for child in db.execute(select(Entity).where(Entity.parent_id == entity.id, Entity.is_active.is_(True))).scalars().all():
             cmv = db.execute(select(MetricValue).where(MetricValue.metric_id == metric.id, MetricValue.entity_id == child.id, MetricValue.period_id == period.id)).scalars().first()
             if cmv is not None or depth < 2:
                 sub, _ = resolve(db, metric, child, period, cmv, depth=depth + 1)

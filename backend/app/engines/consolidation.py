@@ -24,7 +24,7 @@ class AggregateResult:
 
 
 def children_of(db: Session, entity: Entity) -> list[Entity]:
-    return db.execute(select(Entity).where(Entity.parent_id == entity.id, Entity.is_active == True)).scalars().all()  # noqa: E712
+    return db.execute(select(Entity).where(Entity.parent_id == entity.id, Entity.is_active.is_(True))).scalars().all()
 
 
 def _factor(entity: Entity) -> float:

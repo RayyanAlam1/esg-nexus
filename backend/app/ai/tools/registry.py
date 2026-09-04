@@ -185,7 +185,7 @@ def search_metrics(ctx: ToolContext, query: str, limit: int = 10) -> list[dict]:
     from app.ai.rag.index import tokenize
 
     words = [w for w in tokenize(query) if len(w) > 2]
-    metrics = ctx.db.execute(select(MetricDefinition).where(MetricDefinition.tenant_id == ctx.principal.tenant_id, MetricDefinition.is_active == True)).scalars().all()  # noqa: E712
+    metrics = ctx.db.execute(select(MetricDefinition).where(MetricDefinition.tenant_id == ctx.principal.tenant_id, MetricDefinition.is_active.is_(True))).scalars().all()
     scored = []
     for m in metrics:
         name, code = m.name.lower(), m.code.lower()
