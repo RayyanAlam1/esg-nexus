@@ -1,0 +1,593 @@
+# Governance metrics — principles of governance (pp.25–38), digitalization & information security (pp.111–120),
+# reporting boundary & assurance (pp.01–02, 144–147), memberships (pp.143–144).
+defaults:
+  evidence_required: true
+  assurance: limited
+  status: final
+metrics:
+  # ------------------------------------------------------------------ ORGANISATION & REPORTING
+  - code: GOV.ORG.LEGAL_FORM
+    name: Legal name, ownership and legal form
+    topic: reporting_assurance
+    subtopic: boundary
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [GRI.2-1]
+    evidence_required: false
+    text_values: {ECORP: {FY2023: "Engro Corporation Limited; Public Listed Company (PSX: ENGRO); headquartered in Karachi, Pakistan."}}
+    evidence: [P1]
+  - code: GOV.ORG.REPORTING_BOUNDARY
+    name: Reporting boundary and entities included
+    topic: reporting_assurance
+    subtopic: boundary
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [GRI.2-2]
+    text_values: {ECORP: {FY2023: "Consolidated operations of Engro Corporation and its Pakistan-based businesses under management control; effects beyond business operations excluded due to non-availability of verifiable data. Active entities listed in the group structure (p.07)."}}
+    evidence: [P1, P7]
+  - code: GOV.ORG.REPORTING_PERIOD
+    name: Reporting period, cycle and contact point
+    topic: reporting_assurance
+    subtopic: boundary
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [GRI.2-3]
+    evidence_required: false
+    text_values: {ECORP: {FY2023: "1 January 2023 – 31 December 2023; annual cycle; supplements the corporate annual report; contact Corporate Communications (corpcomms@engro.com)."}}
+    evidence: [P1, P2]
+  - code: GOV.ASSURANCE.EXTERNAL_ASSURANCE
+    name: External assurance scope and standard
+    topic: reporting_assurance
+    subtopic: assurance
+    data_type: text
+    kind: narrative
+    aggregation: none
+    is_kpi: true
+    frameworks: [GRI.2-5]
+    text_values: {ECORP: {FY2023: "Independent limited assurance under ISAE 3000 on selected metrics aligned with WEF Stakeholder Capitalism Core Metrics; Independent Limited Assurance Report included in the report (pp.144–147)."}}
+    evidence: [P2, P145]
+  - code: GOV.ASSURANCE.FRAMEWORKS_APPLIED
+    name: Reporting frameworks applied
+    topic: reporting_assurance
+    subtopic: frameworks
+    data_type: text
+    kind: narrative
+    aggregation: none
+    evidence_required: false
+    text_values: {ECORP: {FY2023: "WEF Stakeholder Capitalism Metrics (Core); UN Sustainable Development Goals; Ten Principles of the UN Global Compact. Data prepared per international standards; reasonable estimates where data unavailable."}}
+    evidence: [P2]
+  - code: GOV.PURPOSE.STATEMENT
+    name: Stated purpose, vision and mission
+    topic: reporting_assurance
+    subtopic: frameworks
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [WEF.GOV.PURPOSE, GRI.2-22]
+    evidence_required: false
+    text_values: {ECORP: {FY2023: "Vision: to be the premier Pakistani enterprise with a global reach, passionately pursuing value creation for all stakeholders. Mission: unlocking Pakistan's potential through globally competitive, inclusive solutions to today's most pressing issues. Core values: health, safety & environment; ethics & integrity; community & society. Six-capitals integrated business model."}}
+    evidence: [P3, P5, P9, P11]
+  # ------------------------------------------------------------------ BOARD
+  - code: GOV.BOARD.SIZE
+    name: Board size (directors including CEO, incl. one casual vacancy)
+    topic: board
+    subtopic: composition
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    is_kpi: true
+    frameworks: [WEF.GOV.BOARD_COMPOSITION, GRI.2-9]
+    materiality: ethics_compliance
+    values: {ECORP: {FY2023: 10}}
+    evidence: [P27]
+    description: Board elected 26 April 2021; 10 directors including the CEO, with one casual vacancy at year end (9 serving).
+  - code: GOV.BOARD.EXECUTIVE
+    name: Executive directors
+    topic: board
+    subtopic: composition
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.GOV.BOARD_COMPOSITION]
+    values: {ECORP: {FY2023: 1}}
+    evidence: [P25, P27]
+  - code: GOV.BOARD.INDEPENDENT
+    name: Independent directors
+    topic: board
+    subtopic: composition
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [WEF.GOV.BOARD_COMPOSITION, GRI.2-9]
+    values: {ECORP: {FY2023: 5}}
+    evidence: [P25, P27]
+    description: 4 independent men + 1 independent woman.
+  - code: GOV.BOARD.NON_EXECUTIVE
+    name: Non-executive directors (incl. casual vacancy)
+    topic: board
+    subtopic: composition
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.GOV.BOARD_COMPOSITION]
+    values: {ECORP: {FY2023: 3}}
+    evidence: [P25, P27]
+    description: 2 non-executive men + 1 non-executive woman; a further seat is a casual vacancy (counted within the 3 per p.25).
+  - code: GOV.BOARD.CASUAL_VACANCY
+    name: Casual vacancies on the Board
+    topic: board
+    subtopic: composition
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 1}}
+    evidence: [P27]
+  - code: GOV.BOARD.WOMEN
+    name: Women directors
+    topic: board
+    subtopic: diversity
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [WEF.GOV.BOARD_COMPOSITION, GRI.2-9]
+    values: {ECORP: {FY2023: 2}}
+    evidence: [P27]
+  - code: GOV.BOARD.MEN
+    name: Men directors
+    topic: board
+    subtopic: diversity
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 7}}
+    evidence: [P27]
+  - code: GOV.BOARD.INDEPENDENCE_PCT
+    name: Board independence (independent ÷ board size)
+    topic: board
+    subtopic: composition
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    formula: "pct({GOV.BOARD.INDEPENDENT}, {GOV.BOARD.SIZE})"
+    inputs: [GOV.BOARD.INDEPENDENT, GOV.BOARD.SIZE]
+    frameworks: [WEF.GOV.BOARD_COMPOSITION, SDG.16]
+    evidence_required: false
+  - code: GOV.BOARD.WOMEN_PCT
+    name: Women on the Board (women ÷ serving directors)
+    topic: board
+    subtopic: diversity
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    formula: "pct({GOV.BOARD.WOMEN}, {GOV.BOARD.WOMEN} + {GOV.BOARD.MEN})"
+    inputs: [GOV.BOARD.WOMEN, GOV.BOARD.MEN]
+    frameworks: [WEF.GOV.BOARD_COMPOSITION, GRI.405-1]
+    evidence_required: false
+  - code: GOV.BOARD.MEETINGS
+    name: Board meetings held
+    topic: board
+    subtopic: meetings
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.GOV.BOARD_COMPOSITION]
+    values: {ECORP: {FY2023: 8}}
+    evidence: [P25, P27]
+  - code: GOV.BOARD.COMMITTEES
+    name: Board committees
+    topic: board
+    subtopic: committees
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    frameworks: [GRI.2-9, IFRS.S1.GOV]
+    values: {ECORP: {FY2023: 3}}
+    text_values: {ECORP: {FY2023: "Board Audit & Risk Committee (5 meetings); Board Finance & Investment Committee (5 meetings); Board People Committee (7 meetings)."}}
+    evidence: [P27, P28]
+  - code: GOV.BOARD.BARC_MEETINGS
+    name: Board Audit & Risk Committee meetings
+    topic: board
+    subtopic: meetings
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 5}}
+    evidence: [P28]
+  - code: GOV.BOARD.BFIC_MEETINGS
+    name: Board Finance & Investment Committee meetings
+    topic: board
+    subtopic: meetings
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 5}}
+    evidence: [P28]
+  - code: GOV.BOARD.BPC_MEETINGS
+    name: Board People Committee meetings
+    topic: board
+    subtopic: meetings
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 7}}
+    evidence: [P28]
+  - code: GOV.BOARD.DIRECTORS_TRAINED_PCT
+    name: Directors trained or exempted under the Directors' Training Program
+    topic: board
+    subtopic: composition
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.GOV.ANTI_CORRUPTION]
+    values: {ECORP: {FY2023: 100}}
+    evidence: [P31]
+  - code: GOV.BOARD.CHANGES
+    name: Board changes during the year (narrative)
+    topic: board
+    subtopic: composition
+    data_type: text
+    kind: narrative
+    aggregation: none
+    evidence_required: false
+    text_values: {ECORP: {FY2023: "Appointed: Shabbir Hussain Hashmi (21 Aug 2023), Mazhar Hasnani (18 Aug 2023, resigned 29 Dec 2023). Ceased: Shahzada Dawood (18 Jun 2023). Resigned: Dominique Russo (15 Aug 2023). Chairman Hussain Dawood (non-executive); CEO Ghias Khan; Ahsan Zafar Syed appointed President & CEO Designate."}}
+    evidence: [P27, P18]
+  - code: GOV.BOARD.SUSTAINABILITY_OVERSIGHT
+    name: Board oversight of sustainability, risk and internal control (narrative)
+    topic: board
+    subtopic: committees
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [IFRS.S1.GOV, IFRS.S2.GOV]
+    text_values: {ECORP: {FY2023: "Board holds ultimate responsibility for direction, internal control and risk; BARC receives internal/external audit reports and reviews control effectiveness quarterly; Internal Audit reports functionally to BARC; Board People Committee oversees HR policies, performance evaluation and succession; E&C function reports to BARC; compliance with Listed Companies (Code of Corporate Governance) Regulations 2019. Climate oversight is not separately described."}}
+    evidence: [P25, P26, P27, P29, P97]
+  # ------------------------------------------------------------------ ETHICS & COMPLIANCE
+  - code: GOV.ETHICS.CORRUPTION_CASES_SUBSTANTIATED
+    name: Substantiated corruption and bribery cases
+    topic: ethics_compliance
+    subtopic: anti_corruption
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.GOV.ANTI_CORRUPTION, GRI.205-3, UNGC.P10, ESRS.G1-4, ESRS.S1-17, SDG.16]
+    materiality: ethics_compliance
+    values: {ECORP: {FY2023: 4, FY2022: 2}}
+    evidence: [P31]
+    description: Total substantiated cases across Engro companies pertaining to corruption & bribery; the split between current-year and prior-year-related incidents required by WEF is not disclosed.
+  - code: GOV.ETHICS.EC_TRAINING_SESSIONS
+    name: Ethics & Compliance training sessions / roadshows
+    topic: ethics_compliance
+    subtopic: training
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [WEF.GOV.ANTI_CORRUPTION, GRI.205-2, UNGC.P10, ESRS.G1-3]
+    materiality: ethics_compliance
+    values: {ECORP: {FY2023: 45, FY2022: 45}}
+    evidence: [P32]
+  - code: GOV.ETHICS.EC_ATTENDEES
+    name: Ethics & Compliance training attendees
+    topic: ethics_compliance
+    subtopic: training
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [WEF.GOV.ANTI_CORRUPTION, GRI.205-2]
+    materiality: ethics_compliance
+    values: {ECORP: {FY2023: 1800, FY2022: 1804}}
+    evidence: [P32]
+  - code: GOV.ETHICS.EC_LEARNING_HOURS
+    name: Ethics & Compliance learning hours
+    topic: ethics_compliance
+    subtopic: training
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [WEF.GOV.ANTI_CORRUPTION, UNGC.P10]
+    values: {ECORP: {FY2023: 5400, FY2022: 4510}}
+    evidence: [P32]
+  - code: GOV.ETHICS.EC_HOURS_PER_ATTENDEE
+    name: Average E&C learning hours per attendee
+    topic: ethics_compliance
+    subtopic: training
+    unit: hours
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    formula: "safe_div({GOV.ETHICS.EC_LEARNING_HOURS}, {GOV.ETHICS.EC_ATTENDEES})"
+    inputs: [GOV.ETHICS.EC_LEARNING_HOURS, GOV.ETHICS.EC_ATTENDEES]
+    evidence_required: false
+  - code: GOV.ETHICS.ANTI_CORRUPTION_TRAINING_PCT
+    name: Share of employees trained on anti-corruption (attendees ÷ total employees)
+    topic: ethics_compliance
+    subtopic: training
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    formula: "pct({GOV.ETHICS.EC_ATTENDEES}, {SOC.WORKFORCE.TOTAL})"
+    inputs: [GOV.ETHICS.EC_ATTENDEES, SOC.WORKFORCE.TOTAL]
+    frameworks: [WEF.GOV.ANTI_CORRUPTION, GRI.205-2, ESRS.G1-3]
+    evidence_required: false
+    description: Proxy computed from attendees and headcount (≈51%). WEF asks for governance body members, employees and business partners by region — the exact breakdown is not disclosed, so this is a partial indicator.
+  - code: GOV.ETHICS.CODE_OF_CONDUCT
+    name: Code of Conduct and policy suite (narrative)
+    topic: ethics_compliance
+    subtopic: policies
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [WEF.GOV.ETHICS_MECHANISMS, GRI.2-23, UNGC.P1, ESRS.G1-1]
+    text_values: {ECORP: {FY2023: "Code of Conduct applies to all employees and Board members; covers Statement of Ethics & Business Practices, Conflicts of Interest policy, Insider Trading policy, Whistleblower policy (Speak Out), Statement of Internal Control System, Gifts & Business Entertainment guidelines, related-party transactions, Competition policy; centralised portals for mandatory CoI and gift disclosures managed by E&C."}}
+    evidence: [P29, P30]
+  - code: GOV.ETHICS.WHISTLEBLOWER_MECHANISM
+    name: Whistleblower and ethics advice mechanisms (narrative)
+    topic: ethics_compliance
+    subtopic: whistleblowing
+    data_type: text
+    kind: narrative
+    aggregation: none
+    is_kpi: true
+    frameworks: [WEF.GOV.ETHICS_MECHANISMS, GRI.2-26, UNGC.P2, UNGC.P10, ESRS.G1-1, SDG.16]
+    text_values: {ECORP: {FY2023: "Speak Out platform (anonymous; internal and external stakeholders; email published on website) managed by the independent E&C team reporting to BARC; Internal Investigation Procedure with independent investigators; feedback to complainants at closure; quarterly summary of all cases to the Board via BARC; employees may seek advice from E&C by email or directly."}}
+    evidence: [P29, P30, P31]
+  - code: GOV.ETHICS.UNGC_SIGNATORY
+    name: UN Global Compact commitment letter submitted
+    topic: ethics_compliance
+    subtopic: policies
+    data_type: boolean
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 1}}
+    evidence: [P31, P144]
+  - code: GOV.ETHICS.AWARENESS_ACTIVITIES
+    name: Group-wide E&C engagement activities
+    topic: ethics_compliance
+    subtopic: training
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 2}}
+    evidence: [P32]
+  # ------------------------------------------------------------------ RISK MANAGEMENT
+  - code: GOV.RISK.ERM_FRAMEWORK
+    name: Enterprise risk management approach (narrative)
+    topic: risk_management
+    subtopic: erm
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [WEF.GOV.RISK_OPPORTUNITY, IFRS.S1.STRATEGY, IFRS.S1.RISK]
+    text_values: {ECORP: {FY2023: "Lean Enterprise Risk Management framework approved by the Board; each subsidiary assesses probability and impact, assigns responsibilities and mitigation strategies monitored by the Management Committee and Board; risks ranked by impact and probability; key risks and mitigants disclosed in the Annual Report; 2024 focus buckets — plant reliability, cost optimisation, supply-chain security, export strategy, global partnerships via Engro Eximp FZE, CGM culture."}}
+    evidence: [P97, P109, P110]
+    notes: "WEF requires company-specific principal risks, risk appetite and movement over time — largely cross-referenced to the Annual Report (narrative gap in the sustainability report itself)."
+  - code: GOV.RISK.CLIMATE_RISK_ASSESSMENT_STATUS
+    name: Climate-related risk assessment status (narrative)
+    topic: risk_management
+    subtopic: climate_risk
+    data_type: text
+    kind: narrative
+    aggregation: none
+    is_kpi: true
+    frameworks: [WEF.GOV.RISK_OPPORTUNITY, IFRS.S2.STRATEGY.RISKS, UNGC.P7, SDG.13]
+    materiality: energy_emissions
+    text_values: {ECORP: {FY2023: "Preliminary, cross-business assessment of climate-related physical and transition risks and opportunities guided by TCFD (initiated 2022); financial implications not yet quantified; adaptation measures identified on an ongoing basis; intention to align with IFRS climate standards."}}
+    evidence: [P111, P137]
+  # ------------------------------------------------------------------ STAKEHOLDER ENGAGEMENT & MATERIALITY
+  - code: GOV.STAKEHOLDER.ENGAGEMENT_APPROACH
+    name: Stakeholder engagement approach (narrative)
+    topic: stakeholder_engagement
+    subtopic: engagement
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [GRI.2-29]
+    evidence_required: false
+    text_values: {ECORP: {FY2023: "Stakeholders mapped by influence, proximity, responsibility, dependency, willingness to engage and representation; key groups — shareholders/investors, government & regulators, customers/consumers, employees, lenders & insurers, local communities & vulnerable groups, civil society/NGOs, suppliers & vendors; channels include AGM, briefings, GRRA division for regulators, townhalls, surveys, supplier visits and the Speak Out platform."}}
+    evidence: [P33, P34, P35, P36]
+  - code: GOV.STAKEHOLDER.MATERIAL_TOPICS
+    name: Material topics and identification process (narrative)
+    topic: stakeholder_engagement
+    subtopic: materiality
+    data_type: text
+    kind: narrative
+    aggregation: none
+    is_kpi: true
+    frameworks: [WEF.GOV.MATERIAL_ISSUES, GRI.3-3, IFRS.S1.STRATEGY, IFRS.S1.METRICS, ESRS.2.SBM-3]
+    text_values: {ECORP: {FY2023: "Material topics — Economic: Economic Performance, Ethics & Compliance; Social: Employee Benefits & Wellbeing, Occupational Health & Safety, Diversity Equity & Inclusion, Community Investments; Environmental: Energy & Emissions, Water, Materials (availability, procurement, utilisation), Waste. Identified via stakeholder engagement, internal impact assessment (severity × likelihood) and prioritisation against a threshold informed by the ERM framework."}}
+    evidence: [P37, P38]
+  - code: GOV.STAKEHOLDER.MATERIALITY_PROCESS
+    name: Materiality assessment methodology (narrative)
+    topic: stakeholder_engagement
+    subtopic: materiality
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [ESRS.2.IRO-1]
+    text_values: {ECORP: {FY2023: "Three criteria — stakeholders of the company; continued growth, performance and success; economy, environment and local communities. Stakeholder engagement → internal impact assessment (quantitative and qualitative, severity and likelihood) → prioritisation via materiality threshold with uniform ERM-based scoring. Financial materiality is not separately scored (single-lens impact assessment; double materiality not explicit)."}}
+    evidence: [P37]
+  - code: GOV.STAKEHOLDER.GROUPS
+    name: Key stakeholder groups identified
+    topic: stakeholder_engagement
+    subtopic: engagement
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    evidence_required: false
+    values: {ECORP: {FY2023: 8}}
+    evidence: [P33]
+  # ------------------------------------------------------------------ CYBERSECURITY & DIGITAL
+  - code: GOV.CYBER.SOC_OPERATIONAL
+    name: Security Operations Centre operational (launched 2022)
+    topic: cybersecurity
+    subtopic: operations
+    data_type: boolean
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 1, FY2022: 1}}
+    evidence: [P119]
+  - code: GOV.CYBER.PHISHING_CAMPAIGNS_PER_YEAR
+    name: Simulated phishing campaigns per year
+    topic: cybersecurity
+    subtopic: awareness
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    assurance: not_assured
+    values: {ECORP: {FY2023: 12}}
+    evidence: [P119]
+    description: Conducted monthly in 2023.
+  - code: GOV.CYBER.GOVERNANCE_FRAMEWORKS
+    name: Information security governance and programmes (narrative)
+    topic: cybersecurity
+    subtopic: governance
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "Centralised Information Security division; alignment with IEC 62443, ISO 27001 and NIST; IS risk assessment and consolidated IT/OT risk register with treatment plans; SOC (24/7 monitoring, IT-OT SOC integration in progress); Digital Risk & Brand Protection service; penetration testing and vulnerability management with security hardening to international benchmarks; awareness training, monthly phishing simulations, Information Security Awareness Month (2 years), bilingual awareness sessions; OT cybersecurity workshops and IC-32 ISA training."}}
+    evidence: [P117, P118, P119, P120]
+  - code: GOV.DIGITAL.ENNOVATE_IDEAS
+    name: Ideas submitted to the Ennovate AI ideathon
+    topic: digitalization
+    subtopic: ai
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.9]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 22}}
+    evidence: [P113]
+    description: Top 6 teams mentored; winners — AI chatbot companion, AI soil & crop monitoring, AI talent marketplace.
+  - code: GOV.DIGITAL.EASYDMS_DOCUMENTS
+    name: Documents uploaded to EasyDMS enterprise content management
+    topic: digitalization
+    subtopic: projects
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.9]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 80000}}
+    evidence: [P113]
+    is_estimate: true
+  - code: GOV.DIGITAL.DRONE_TIME_SAVINGS_PCT
+    name: Time savings from industrial drone inspections (pilot)
+    topic: digitalization
+    subtopic: projects
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {EVTL: {FY2023: 77}}
+    evidence: [P116]
+    is_estimate: true
+  - code: GOV.DIGITAL.DRONE_COST_SAVINGS_PCT
+    name: Cost savings from industrial drone inspections (pilot)
+    topic: digitalization
+    subtopic: projects
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {EVTL: {FY2023: 70}}
+    evidence: [P116]
+    is_estimate: true
+  - code: GOV.DIGITAL.PROJECTS
+    name: Digitalization projects delivered (narrative)
+    topic: digitalization
+    subtopic: projects
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [SDG.9]
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "Governance via Digital Forum, IT/OT SteerCo, Data Governance Council and CEO Connect; EasyDMS (EFERT, EPCL); Enterprise Project Management; SAP for Engro Hydrogen Peroxide plus PM/PP/SD modules; SuccessFactors succession & compensation modules; CXO dashboards; Engro Central employee hub; VelocityEHS operational-risk and ESG modules; invoice management portal; Straight-to-Bank payments; freightage monitoring (2024); weighbridge automation (EPCL); Smart Bilty truck management (EFERT Daharki); Humsafar dealer app; Salesforce–SAP 100% reconciliation and digital payments (EPCL); IT-OT convergence and historian upgrades; industrial drones; tablet-based operator rounds; computer-vision AI CCTV (EPCL); predictive-maintenance pilots; AspenTech DMC3 APC, digital twin and ProMV for VCM (EPCL); cloud-first strategy; S.E.E.D. learning sessions."}}
+    evidence: [P112, P113, P114, P115, P116, P117]
+  # ------------------------------------------------------------------ MEMBERSHIPS & PARTNERSHIPS
+  - code: GOV.MEMBERSHIPS.INDUSTRY_ASSOCIATIONS
+    name: Industry associations and forums (memberships)
+    topic: memberships
+    subtopic: associations
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    frameworks: [GRI.2-28, SDG.17]
+    evidence_required: false
+    values: {ECORP: {FY2023: 10}}
+    text_values: {ECORP: {FY2023: "Pakistan Business Council; German Pakistan Trade and Investment; Pakistan Green Building Council; Pakistan German Business Forum; Council on Foreign Relations; OICCI; Management Association of Pakistan; Karachi Chamber of Commerce; World Economic Forum; UN Global Compact."}}
+    evidence: [P144]
+  - code: GOV.MEMBERSHIPS.CSO_PARTNERS
+    name: Civil-society and institutional partners (Engro Foundation / Thar Foundation)
+    topic: memberships
+    subtopic: partners
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    frameworks: [SDG.17]
+    evidence_required: false
+    values: {ECORP: {FY2023: 16}}
+    text_values: {ECORP: {FY2023: "WWF Pakistan, IUCN, TCF, TTWF, SINA, IRC, Sahara Welfare Foundation, Hunar Foundation, The Water Foundation (Engro Foundation); IUCN, AKUH, Indus Hospital, Aman Foundation, SDG Support Unit Govt of Sindh, Mehran University (Thar Foundation)."}}
+    evidence: [P144]
+  - code: GOV.AWARDS.COUNT
+    name: Awards and recognitions listed
+    topic: reporting_assurance
+    subtopic: frameworks
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    evidence_required: false
+    assurance: not_assured
+    values: {ECORP: {FY2023: 45}}
+    text_values: {ECORP: {FY2023: "Incl. Asiamoney Most Outstanding Company (Industrial, 5th year), inaugural Best for ESG in Pakistan, PSX Top 25 (4th year), UNGC Business Sustainability Awards 2nd position; EFERT RoSPA Gold, OSHE 1st position, Employer of Choice; EPCL PACRA upgrade to AA/A1+, 224 KT record VCM; EVTL Outstanding Sustainability Achievement-Operating Terminal; EPQL 10 million safe man-hours; EPTL ISO 50001, 92% NEPRA HSE rating."}}
+    evidence: [P15, P16]
+    is_estimate: true

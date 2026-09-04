@@ -1,0 +1,158 @@
+# Governance policies (documents the organisation holds) and Governance-as-Code rules (machine-readable).
+policies:
+  - {code: POL-COC, name: Code of Conduct, category: ethics, owner: Ethics & Compliance, version: "2023", effective_date: 2023-01-01, evidence: EV-POL-COC, description: "Statement of Ethics & Business Practices, CoI, insider trading, whistleblower, gifts, related parties, competition."}
+  - {code: POL-HSE, name: HSE Policy, category: hse, owner: Group HSE (ECTD), version: "2023", effective_date: 2023-01-01, evidence: EV-POL-HSE, description: "Zero occupational injuries, process safety mishaps and environmental incidents; risk-based HSE management."}
+  - {code: POL-TAX, name: Tax Policy, category: tax, owner: Chief Financial Officer, version: "2023", evidence: EV-POL-TAX, description: "High level of tax compliance in all jurisdictions."}
+  - {code: POL-SPEAKOUT, name: Whistleblower Policy (Speak Out), category: ethics, owner: Ethics & Compliance, version: "2023", evidence: EV-POL-SPEAKOUT}
+  - {code: POL-ESG-DATA, name: ESG Data Governance Policy (platform), category: data, owner: ESG Manager, version: "1.0", effective_date: 2024-01-01, description: "Every reported metric must be traceable to evidence; calculated values must originate from an approved formula version; final values are locked once a report is approved."}
+  - {code: POL-AI-USE, name: AI Assistance Policy (platform), category: reporting, owner: ESG Manager, version: "1.0", effective_date: 2024-01-01, description: "AI outputs are advisory; numbers in narratives must match governed metrics; outputs below the confidence threshold require human review; no AI output becomes a disclosure without approval."}
+
+# Rule condition context per scope:
+#  metric_value: metric.{code,pillar,topic,kind,evidence_required,is_kpi,assurance_status}, entity.{code,kind,in_boundary},
+#                period.{code,status}, value, is_null, status, source_type, is_estimate, evidence_count,
+#                verified_evidence_count, quality_score, confidence, report_status
+#  ai_output:    agent, confidence, has_sources, unsupported_numbers, missing_citations, injection_detected, guardrail_passed
+#  report:       report.status, readiness, blocking_issues, critical_issues, high_issues, unapproved_sections, framework_alignment
+#  data_change:  object_type, report_status, period_status, user_roles
+rules:
+  - code: GR-001
+    description: Scope 1 emissions with final status must have supporting evidence
+    severity: CRITICAL
+    scope: metric_value
+    condition: "metric.code == 'ENV.GHG.SCOPE1' and status in ('final', 'approved') and evidence_count == 0"
+    action: BLOCK_REPORT_GENERATION
+    message: "Scope 1 emissions for {entity.code} ({period.code}) have no supporting evidence."
+    required_action: Upload supporting evidence (fuel records, meter data, emission-factor workings) or approve an exception.
+    owner: ESG Manager
+    policy: POL-ESG-DATA
+  - code: GR-002
+    description: Any KPI with evidence required but no evidence linked
+    severity: HIGH
+    scope: metric_value
+    condition: "metric.evidence_required and metric.is_kpi and not is_null and evidence_count == 0"
+    action: REQUIRE_EVIDENCE
+    message: "KPI {metric.code} for {entity.code} ({period.code}) is not linked to any evidence."
+    required_action: Link at least one evidence item (report page, source record or document).
+    owner: ESG Manager
+    policy: POL-ESG-DATA
+  - code: GR-003
+    description: KPI missing for the reporting period at group level
+    severity: MEDIUM
+    scope: metric_value
+    condition: "metric.is_kpi and entity.kind == 'group' and is_null and metric.kind != 'narrative'"
+    action: WARN
+    message: "KPI {metric.code} has no value for {period.code} (Data unavailable)."
+    required_action: Ingest the value, mark the metric not applicable for this period, or record an approved omission.
+    owner: ESG Analyst
+  - code: GR-004
+    description: Low data-quality score on a KPI
+    severity: MEDIUM
+    scope: metric_value
+    condition: "metric.is_kpi and quality_score is not None and quality_score < 70"
+    action: REQUIRE_HUMAN_REVIEW
+    message: "Quality score {quality_score} for {metric.code} ({entity.code}, {period.code}) is below 70."
+    required_action: Review the quality explanation and resolve deductions (evidence, consistency, validity).
+    owner: ESG Analyst
+  - code: GR-005
+    description: Estimated values in assured metrics require reviewer approval
+    severity: LOW
+    scope: metric_value
+    condition: "is_estimate and metric.assurance_status == 'limited' and not is_null"
+    action: REQUIRE_APPROVAL
+    message: "{metric.code} for {entity.code} is an estimate within the assured scope."
+    required_action: Reviewer to confirm the estimation approach or replace with measured data.
+    owner: Reviewer
+  - code: GR-006
+    description: Evidence linked but none verified on a final KPI
+    severity: LOW
+    scope: metric_value
+    condition: "metric.is_kpi and status == 'final' and evidence_count > 0 and verified_evidence_count == 0"
+    action: WARN
+    message: "{metric.code} ({entity.code}, {period.code}) relies only on unverified evidence."
+    required_action: Verify the linked evidence items.
+    owner: Auditor
+  - code: GR-010
+    description: AI output below confidence threshold requires human review
+    severity: HIGH
+    scope: ai_output
+    condition: "confidence is not None and confidence < 0.75"
+    action: REQUIRE_HUMAN_REVIEW
+    message: "AI output from {agent} has confidence {confidence} (< 0.75)."
+    required_action: A reviewer must accept, edit or reject the output before use.
+    owner: Reviewer
+    policy: POL-AI-USE
+  - code: GR-011
+    description: AI narrative containing numbers not backed by governed metrics is blocked
+    severity: CRITICAL
+    scope: ai_output
+    condition: "unsupported_numbers > 0"
+    action: BLOCK
+    message: "AI output from {agent} contains {unsupported_numbers} number(s) that do not match any governed metric."
+    required_action: Regenerate with metric references or edit the narrative to remove unsupported figures.
+    owner: ESG Manager
+    policy: POL-AI-USE
+  - code: GR-012
+    description: AI answers must cite sources
+    severity: MEDIUM
+    scope: ai_output
+    condition: "not has_sources"
+    action: REQUIRE_HUMAN_REVIEW
+    message: "AI output from {agent} has no sources or citations."
+    required_action: Regenerate via the RAG research agent or attach sources manually.
+    owner: Reviewer
+    policy: POL-AI-USE
+  - code: GR-013
+    description: Prompt injection detected in input
+    severity: HIGH
+    scope: ai_output
+    condition: "injection_detected"
+    action: BLOCK
+    message: "Input guardrail detected a prompt-injection pattern."
+    required_action: Review the input document or prompt; sanitise and retry.
+    owner: Org Admin
+  - code: GR-020
+    description: Approved or published reports freeze underlying data
+    severity: HIGH
+    scope: data_change
+    condition: "report_status in ('approved', 'published')"
+    action: PREVENT_DATA_MODIFICATION
+    message: "Data for a period with an approved/published report cannot be modified."
+    required_action: Create a restatement in a new report version or unlock via Org Admin with an audit reason.
+    owner: Org Admin
+    policy: POL-ESG-DATA
+  - code: GR-021
+    description: Reports cannot be generated while critical issues are open
+    severity: CRITICAL
+    scope: report
+    condition: "critical_issues > 0 or blocking_issues > 0"
+    action: BLOCK_REPORT_GENERATION
+    message: "{critical_issues} critical and {blocking_issues} blocking issue(s) are open."
+    required_action: Resolve the issues or approve documented exceptions before generating the final report.
+    owner: Report Approver
+  - code: GR-022
+    description: Final report requires all sections approved
+    severity: HIGH
+    scope: report
+    condition: "unapproved_sections > 0"
+    action: BLOCK_REPORT_GENERATION
+    message: "{unapproved_sections} report section(s) are not yet approved."
+    required_action: Complete review and approval of every section.
+    owner: Report Approver
+  - code: GR-023
+    description: Framework alignment below 60% warns before generation
+    severity: MEDIUM
+    scope: report
+    condition: "framework_alignment is not None and framework_alignment < 60"
+    action: WARN
+    message: "Framework alignment is {framework_alignment}% — significant disclosure gaps remain."
+    required_action: Review missing requirements in Standards → Compliance and record omissions where justified.
+    owner: ESG Manager
+  - code: GR-024
+    description: Readiness below 80% requires approver acknowledgement
+    severity: MEDIUM
+    scope: report
+    condition: "readiness is not None and readiness < 80"
+    action: REQUIRE_APPROVAL
+    message: "Report readiness is {readiness}% (< 80%)."
+    required_action: Report Approver must acknowledge residual gaps before final generation.
+    owner: Report Approver

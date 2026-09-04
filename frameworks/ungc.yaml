@@ -1,0 +1,73 @@
+framework:
+  code: UNGC
+  name: UN Global Compact — Ten Principles
+  publisher: United Nations Global Compact
+  description: Ten principles on human rights, labour, environment and anti-corruption. Engro is a signatory; the report maps disclosures to each principle.
+  jurisdiction: Global
+version:
+  version: "2000"
+  effective_date: 2000-07-26
+  status: current
+  source_url: https://unglobalcompact.org/what-is-gc/mission/principles
+requirements:
+  - code: UNGC.P1
+    title: "Principle 1 — Support and respect the protection of internationally proclaimed human rights"
+    pillar: social
+    theme: Human rights
+    disclosure_type: narrative
+    metrics: [SOC.HUMAN_RIGHTS.POLICY_COMMITMENT, GOV.ETHICS.CODE_OF_CONDUCT, SOC.OHS.TRIR_EMP]
+  - code: UNGC.P2
+    title: "Principle 2 — Make sure that they are not complicit in human rights abuses"
+    pillar: social
+    theme: Human rights
+    disclosure_type: narrative
+    metrics: [SOC.HUMAN_RIGHTS.POLICY_COMMITMENT, GOV.ETHICS.WHISTLEBLOWER_MECHANISM]
+  - code: UNGC.P3
+    title: "Principle 3 — Uphold freedom of association and the right to collective bargaining"
+    pillar: social
+    theme: Labour
+    disclosure_type: narrative
+    metrics: [SOC.LABOR.COLLECTIVE_BARGAINING_STATEMENT]
+    guidance: The 2023 report does not disclose collective-bargaining coverage — narrative gap.
+  - code: UNGC.P4
+    title: "Principle 4 — Elimination of all forms of forced and compulsory labour"
+    pillar: social
+    theme: Labour
+    disclosure_type: both
+    metrics: [SOC.LABOR.CHILD_FORCED_LABOR_INCIDENTS, SOC.LABOR.CHILD_FORCED_LABOR_RISK_STATEMENT]
+  - code: UNGC.P5
+    title: "Principle 5 — Effective abolition of child labour"
+    pillar: social
+    theme: Labour
+    disclosure_type: both
+    metrics: [SOC.LABOR.CHILD_FORCED_LABOR_INCIDENTS, SOC.LABOR.CHILD_FORCED_LABOR_RISK_STATEMENT]
+  - code: UNGC.P6
+    title: "Principle 6 — Elimination of discrimination in respect of employment and occupation"
+    pillar: social
+    theme: Labour
+    disclosure_type: both
+    metrics: [SOC.DEI.PERM_FEMALE_PCT, SOC.DEI.PWD_EMPLOYEES, SOC.COMP.ENTRY_WAGE_TO_MIN_WAGE_RATIO, SOC.DEI.DEI_AMBASSADORS]
+  - code: UNGC.P7
+    title: "Principle 7 — Support a precautionary approach to environmental challenges"
+    pillar: environment
+    theme: Environment
+    disclosure_type: narrative
+    metrics: [ENV.MGMT.EMS_DESCRIPTION, GOV.RISK.CLIMATE_RISK_ASSESSMENT_STATUS]
+  - code: UNGC.P8
+    title: "Principle 8 — Undertake initiatives to promote greater environmental responsibility"
+    pillar: environment
+    theme: Environment
+    disclosure_type: both
+    metrics: [ENV.GHG.SCOPE1_2_TOTAL, ENV.ENERGY.TOTAL, ENV.WATER.WITHDRAWN, ENV.WASTE.TOTAL, ENV.BIODIVERSITY.TREES_PLANTED]
+  - code: UNGC.P9
+    title: "Principle 9 — Encourage the development and diffusion of environmentally friendly technologies"
+    pillar: environment
+    theme: Environment
+    disclosure_type: both
+    metrics: [ENV.ENERGY.RENEWABLE_CAPACITY_KW, ENV.ENERGY.EFFICIENCY_REDUCTION_PCT, ENV.GHG.CO2_REDUCTION_INITIATIVE_TPA]
+  - code: UNGC.P10
+    title: "Principle 10 — Work against corruption in all its forms, including extortion and bribery"
+    pillar: governance
+    theme: Anti-corruption
+    disclosure_type: both
+    metrics: [GOV.ETHICS.CORRUPTION_CASES_SUBSTANTIATED, GOV.ETHICS.EC_TRAINING_SESSIONS, GOV.ETHICS.EC_LEARNING_HOURS, GOV.ETHICS.WHISTLEBLOWER_MECHANISM]

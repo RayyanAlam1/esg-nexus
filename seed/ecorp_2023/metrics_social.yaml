@@ -1,0 +1,2826 @@
+# Social metrics — "people" (pp.39–56), occupational health & safety (pp.59–67), community investments (pp.68–76)
+# and the SDG sections (pp.122–133).
+defaults:
+  evidence_required: true
+  assurance: limited
+  status: final
+metrics:
+  # ------------------------------------------------------------------ WORKFORCE
+  - code: SOC.WORKFORCE.TOTAL
+    name: Total employees
+    topic: workforce
+    subtopic: headcount
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: neutral
+    is_kpi: true
+    frameworks: [GRI.2-7, ESRS.S1-6, SDG.8]
+    materiality: employee_wellbeing
+    validation: {min: 0, max_yoy_change_pct: 30}
+    description: Permanent + non-management permanent (NMPT, EFERT only) + contractual employees, group-wide. Company-wise headcount is recorded on each entity; the group root holds the printed total.
+    values:
+      ECORP: {FY2023: 3514, FY2022: 3532}
+      ECORP-HQ: {FY2023: 413, FY2022: 368}
+      EFERT: {FY2023: 1526, FY2022: 1635}
+      EPCL: {FY2023: 491, FY2022: 470}
+      EEL: {FY2023: 710, FY2022: 679}
+      ENFRA: {FY2023: 170, FY2022: 161}
+      EEAP: {FY2023: 101, FY2022: 109}
+      EVTL_EETL: {FY2023: 103, FY2022: 110}
+    evidence: [P41, P42, P101]
+    notes: "Company-wise values read from the bar chart (p.42) and cross-checked against the 'employees under management' shares (p.101): EFERT 43%, EEL 20%, EPCL 14%, ECORP 12%, Enfrashare 5%, EEAP 3%, EVTL/EETL 3%. Entity values sum exactly to the printed totals for both years."
+  - code: SOC.WORKFORCE.PERMANENT
+    name: Permanent employees (management)
+    topic: workforce
+    subtopic: headcount
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    is_kpi: true
+    frameworks: [GRI.2-7, ESRS.S1-6]
+    values: {ECORP: {FY2023: 2370, FY2022: 2411}}
+    evidence: [P41]
+  - code: SOC.WORKFORCE.NMPT
+    name: Non-management permanent employees (NMPT, EFERT only)
+    topic: workforce
+    subtopic: headcount
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {EFERT: {FY2023: 480, FY2022: 475}}
+    evidence: [P41]
+  - code: SOC.WORKFORCE.CONTRACTUAL
+    name: Contractual employees
+    topic: workforce
+    subtopic: headcount
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [GRI.2-7, ESRS.S1-6]
+    values: {ECORP: {FY2023: 664, FY2022: 646}}
+    evidence: [P41]
+  - code: SOC.WORKFORCE.TOTAL_CHECK
+    name: Workforce composition check (permanent + NMPT + contractual)
+    topic: workforce
+    subtopic: headcount
+    unit: headcount
+    data_type: integer
+    kind: derived
+    aggregation: none
+    formula: "nz({SOC.WORKFORCE.PERMANENT}) + nz({SOC.WORKFORCE.NMPT@entity:EFERT}) + nz({SOC.WORKFORCE.CONTRACTUAL})"
+    inputs: [SOC.WORKFORCE.PERMANENT, SOC.WORKFORCE.NMPT, SOC.WORKFORCE.CONTRACTUAL]
+    evidence_required: false
+    description: Recomputes the printed total from its components (2,370 + 480 + 664 = 3,514).
+  - code: SOC.WORKFORCE.ENTITY_SHARE_PCT
+    name: Share of group employees by company
+    topic: workforce
+    subtopic: headcount
+    unit: "%"
+    data_type: percentage
+    kind: percentage
+    aggregation: none
+    formula: "pct({SOC.WORKFORCE.TOTAL}, {SOC.WORKFORCE.TOTAL@entity:ECORP})"
+    inputs: [SOC.WORKFORCE.TOTAL]
+    evidence_required: false
+  - code: SOC.WORKFORCE.HIRES
+    name: New employee hires
+    topic: workforce
+    subtopic: hiring
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: neutral
+    is_kpi: true
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT, GRI.401-1, SDG.8]
+    values: {ECORP: {FY2023: 353, FY2022: 348}}
+    evidence: [P42]
+  - code: SOC.WORKFORCE.HIRE_RATE_PCT
+    name: New hire rate
+    topic: workforce
+    subtopic: hiring
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({SOC.WORKFORCE.HIRES}, {SOC.WORKFORCE.PERMANENT})"
+    inputs: [SOC.WORKFORCE.HIRES, SOC.WORKFORCE.PERMANENT]
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT, GRI.401-1]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 15, FY2022: 14}}
+    evidence: [P42]
+    description: Hires ÷ permanent employees × 100 (reported 15% / 14%; recalculated 14.9% / 14.4%).
+  - code: SOC.WORKFORCE.HIRES_MALE
+    name: New hires — male
+    topic: workforce
+    subtopic: hiring
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 264, FY2022: 274}}
+    evidence: [P42]
+  - code: SOC.WORKFORCE.HIRES_FEMALE
+    name: New hires — female
+    topic: workforce
+    subtopic: hiring
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT, SDG.5]
+    values: {ECORP: {FY2023: 89, FY2022: 74}}
+    evidence: [P42]
+  - code: SOC.WORKFORCE.HIRES_FEMALE_PCT
+    name: Female share of new hires
+    topic: workforce
+    subtopic: hiring
+    unit: "%"
+    data_type: percentage
+    kind: percentage
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    formula: "pct({SOC.WORKFORCE.HIRES_FEMALE}, {SOC.WORKFORCE.HIRES})"
+    inputs: [SOC.WORKFORCE.HIRES_FEMALE, SOC.WORKFORCE.HIRES]
+    evidence_required: false
+  - code: SOC.WORKFORCE.HIRES_AGE_U30
+    name: New hires — age 30 and under
+    topic: workforce
+    subtopic: hiring
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 217, FY2022: 192}}
+    evidence: [P42]
+  - code: SOC.WORKFORCE.HIRES_AGE_31_50
+    name: New hires — age 31–50
+    topic: workforce
+    subtopic: hiring
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 133, FY2022: 152}}
+    evidence: [P42]
+  - code: SOC.WORKFORCE.HIRES_AGE_50P
+    name: New hires — over 50
+    topic: workforce
+    subtopic: hiring
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 3, FY2022: 4}}
+    evidence: [P42]
+  - code: SOC.WORKFORCE.TURNOVER
+    name: Employee turnover (permanent employees)
+    topic: workforce
+    subtopic: turnover
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT, GRI.401-1]
+    values: {ECORP: {FY2023: 389, FY2022: 444}}
+    evidence: [P43]
+  - code: SOC.WORKFORCE.TURNOVER_RATE_PCT
+    name: Employee turnover rate
+    topic: workforce
+    subtopic: turnover
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    direction: lower_is_better
+    is_kpi: true
+    formula: "pct({SOC.WORKFORCE.TURNOVER}, {SOC.WORKFORCE.PERMANENT})"
+    inputs: [SOC.WORKFORCE.TURNOVER, SOC.WORKFORCE.PERMANENT]
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT, GRI.401-1, ESRS.S1-6]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 16, FY2022: 18}}
+    evidence: [P43]
+    description: Exits ÷ permanent employees × 100 (reported 16% / 18%; recalculated 16.4% / 18.4%). Report notes Middle-East talent migration as a driver (p.43).
+  - code: SOC.WORKFORCE.TURNOVER_MALE
+    name: Turnover — male
+    topic: workforce
+    subtopic: turnover
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 327, FY2022: 394}}
+    evidence: [P43]
+  - code: SOC.WORKFORCE.TURNOVER_FEMALE
+    name: Turnover — female
+    topic: workforce
+    subtopic: turnover
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 62, FY2022: 50}}
+    evidence: [P43]
+  - code: SOC.WORKFORCE.TURNOVER_AGE_U30
+    name: Turnover — age 30 and under
+    topic: workforce
+    subtopic: turnover
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 121, FY2022: 174}}
+    evidence: [P43]
+  - code: SOC.WORKFORCE.TURNOVER_AGE_31_50
+    name: Turnover — age 31–50
+    topic: workforce
+    subtopic: turnover
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 254, FY2022: 254}}
+    evidence: [P43]
+  - code: SOC.WORKFORCE.TURNOVER_AGE_50P
+    name: Turnover — over 50
+    topic: workforce
+    subtopic: turnover
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [WEF.PROSPERITY.EMPLOYMENT]
+    values: {ECORP: {FY2023: 14, FY2022: 16}}
+    evidence: [P43]
+  - code: SOC.WORKFORCE.FEMALE_TURNOVER_RATE_PCT
+    name: Female turnover rate (female exits ÷ female permanent employees)
+    topic: workforce
+    subtopic: turnover
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    direction: lower_is_better
+    formula: "pct({SOC.WORKFORCE.TURNOVER_FEMALE}, {SOC.DEI.PERM_FEMALE})"
+    inputs: [SOC.WORKFORCE.TURNOVER_FEMALE, SOC.DEI.PERM_FEMALE]
+    evidence_required: false
+  - code: SOC.WORKFORCE.MALE_TURNOVER_RATE_PCT
+    name: Male turnover rate (male exits ÷ male permanent employees)
+    topic: workforce
+    subtopic: turnover
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    direction: lower_is_better
+    formula: "pct({SOC.WORKFORCE.TURNOVER_MALE}, {SOC.DEI.PERM_MALE})"
+    inputs: [SOC.WORKFORCE.TURNOVER_MALE, SOC.DEI.PERM_MALE]
+    evidence_required: false
+  # ------------------------------------------------------------------ DIVERSITY, EQUITY & INCLUSION
+  - code: SOC.DEI.PERM_MALE
+    name: Permanent employees — male
+    topic: diversity_inclusion
+    subtopic: gender
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [GRI.2-7, ESRS.S1-6]
+    values: {ECORP: {FY2023: 2084, FY2022: 2157}}
+    evidence: [P43]
+  - code: SOC.DEI.PERM_FEMALE
+    name: Permanent employees — female
+    topic: diversity_inclusion
+    subtopic: gender
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [GRI.2-7, ESRS.S1-6]
+    values: {ECORP: {FY2023: 286, FY2022: 254}}
+    evidence: [P43]
+  - code: SOC.DEI.PERM_FEMALE_PCT
+    name: Women in permanent workforce
+    topic: diversity_inclusion
+    subtopic: gender
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    formula: "pct({SOC.DEI.PERM_FEMALE}, {SOC.DEI.PERM_FEMALE} + {SOC.DEI.PERM_MALE})"
+    inputs: [SOC.DEI.PERM_FEMALE, SOC.DEI.PERM_MALE]
+    frameworks: [WEF.PEOPLE.DIVERSITY, GRI.405-1, UNGC.P6, SDG.5]
+    materiality: dei
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 12, FY2022: 11}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_MALE
+    name: Contractual employees — male
+    topic: diversity_inclusion
+    subtopic: gender
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 504, FY2022: 514}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_FEMALE
+    name: Contractual employees — female
+    topic: diversity_inclusion
+    subtopic: gender
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 160, FY2022: 132}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_FEMALE_PCT
+    name: Women in contractual workforce
+    topic: diversity_inclusion
+    subtopic: gender
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    formula: "pct({SOC.DEI.CONTRACT_FEMALE}, {SOC.DEI.CONTRACT_FEMALE} + {SOC.DEI.CONTRACT_MALE})"
+    inputs: [SOC.DEI.CONTRACT_FEMALE, SOC.DEI.CONTRACT_MALE]
+    frameworks: [WEF.PEOPLE.DIVERSITY]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 24, FY2022: 20}}
+    evidence: [P43]
+  - code: SOC.DEI.PERM_AGE_U30
+    name: Permanent employees — age 30 and under
+    topic: diversity_inclusion
+    subtopic: age
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 652, FY2022: 677}}
+    evidence: [P43]
+  - code: SOC.DEI.PERM_AGE_31_50
+    name: Permanent employees — age 31–50
+    topic: diversity_inclusion
+    subtopic: age
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 1536, FY2022: 1555}}
+    evidence: [P43]
+  - code: SOC.DEI.PERM_AGE_50P
+    name: Permanent employees — over 50
+    topic: diversity_inclusion
+    subtopic: age
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 182, FY2022: 179}}
+    evidence: [P43]
+  - code: SOC.DEI.PERM_AGE_U30_PCT
+    name: Permanent employees ≤30 (share)
+    topic: diversity_inclusion
+    subtopic: age
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({SOC.DEI.PERM_AGE_U30}, {SOC.WORKFORCE.PERMANENT})"
+    inputs: [SOC.DEI.PERM_AGE_U30, SOC.WORKFORCE.PERMANENT]
+    frameworks: [WEF.PEOPLE.DIVERSITY, GRI.405-1, ESRS.S1-9]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 28, FY2022: 28}}
+    evidence: [P43]
+  - code: SOC.DEI.PERM_AGE_31_50_PCT
+    name: Permanent employees 31–50 (share)
+    topic: diversity_inclusion
+    subtopic: age
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({SOC.DEI.PERM_AGE_31_50}, {SOC.WORKFORCE.PERMANENT})"
+    inputs: [SOC.DEI.PERM_AGE_31_50, SOC.WORKFORCE.PERMANENT]
+    frameworks: [WEF.PEOPLE.DIVERSITY, GRI.405-1, ESRS.S1-9]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 65, FY2022: 65}}
+    evidence: [P43]
+  - code: SOC.DEI.PERM_AGE_50P_PCT
+    name: Permanent employees over 50 (share)
+    topic: diversity_inclusion
+    subtopic: age
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({SOC.DEI.PERM_AGE_50P}, {SOC.WORKFORCE.PERMANENT})"
+    inputs: [SOC.DEI.PERM_AGE_50P, SOC.WORKFORCE.PERMANENT]
+    frameworks: [WEF.PEOPLE.DIVERSITY, GRI.405-1, ESRS.S1-9]
+    validation: {tolerance_pct: 10}
+    source_type: reported
+    values: {ECORP: {FY2023: 8, FY2022: 7}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_AGE_U30
+    name: Contractual employees — age 30 and under
+    topic: diversity_inclusion
+    subtopic: age
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 488, FY2022: 436}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_AGE_31_50
+    name: Contractual employees — age 31–50
+    topic: diversity_inclusion
+    subtopic: age
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 133, FY2022: 167}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_AGE_50P
+    name: Contractual employees — over 50
+    topic: diversity_inclusion
+    subtopic: age
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 43, FY2022: 43}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_AGE_U30_PCT
+    name: Contractual employees ≤30 (share)
+    topic: diversity_inclusion
+    subtopic: age
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({SOC.DEI.CONTRACT_AGE_U30}, {SOC.WORKFORCE.CONTRACTUAL})"
+    inputs: [SOC.DEI.CONTRACT_AGE_U30, SOC.WORKFORCE.CONTRACTUAL]
+    frameworks: [WEF.PEOPLE.DIVERSITY]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 73, FY2022: 67}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_AGE_31_50_PCT
+    name: Contractual employees 31–50 (share)
+    topic: diversity_inclusion
+    subtopic: age
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({SOC.DEI.CONTRACT_AGE_31_50}, {SOC.WORKFORCE.CONTRACTUAL})"
+    inputs: [SOC.DEI.CONTRACT_AGE_31_50, SOC.WORKFORCE.CONTRACTUAL]
+    frameworks: [WEF.PEOPLE.DIVERSITY]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 20, FY2022: 26}}
+    evidence: [P43]
+  - code: SOC.DEI.CONTRACT_AGE_50P_PCT
+    name: Contractual employees over 50 (share)
+    topic: diversity_inclusion
+    subtopic: age
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({SOC.DEI.CONTRACT_AGE_50P}, {SOC.WORKFORCE.CONTRACTUAL})"
+    inputs: [SOC.DEI.CONTRACT_AGE_50P, SOC.WORKFORCE.CONTRACTUAL]
+    frameworks: [WEF.PEOPLE.DIVERSITY]
+    validation: {tolerance_pct: 10}
+    source_type: reported
+    values: {ECORP: {FY2023: 6, FY2022: 7}}
+    evidence: [P43]
+  - code: SOC.DEI.PWD_EMPLOYEES
+    name: Persons with disabilities employed
+    topic: diversity_inclusion
+    subtopic: disability
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [UNGC.P6, SDG.10]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 12}}
+    evidence: [P130]
+    description: '"Currently, Engro has 12 PWDs onboard" — Khudi one-year contractual training programme launched late 2023.'
+  - code: SOC.DEI.DEI_AMBASSADORS
+    name: Self-nominated DE&I ambassadors (DEILP trainers)
+    topic: diversity_inclusion
+    subtopic: policies
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [UNGC.P6, SDG.10]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 66}}
+    evidence: [P51, P130]
+  - code: SOC.DEI.BOARD_WOMEN_GROUP
+    name: Women on boards across the group
+    topic: diversity_inclusion
+    subtopic: leadership
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    assurance: not_assured
+    values: {ECORP: {FY2023: 11}}
+    evidence: [P129]
+    notes: "'The Board proudly comprises 11 accomplished women' (p.129) — interpreted as group-wide boards; the Engro Corporation board itself has 2 women directors (p.27)."
+  - code: SOC.DEI.C1_WOMEN_RISE_PCT
+    name: Increase in women at C-1 level (direct reports to CEO)
+    topic: diversity_inclusion
+    subtopic: leadership
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [ESRS.S1-9]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 9.09}}
+    evidence: [P129]
+  - code: SOC.DEI.C2_WOMEN_RISE_PCT
+    name: Increase in women at C-2 level (direct reports to Chief Officers)
+    topic: diversity_inclusion
+    subtopic: leadership
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [SDG.5]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 34.6}}
+    evidence: [P129]
+  - code: SOC.DEI.MATERNITY_LEAVE_MONTHS
+    name: Paid maternity leave entitlement
+    topic: diversity_inclusion
+    subtopic: policies
+    unit: months
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    frameworks: [GRI.401-3]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 6}}
+    evidence: [P52]
+  - code: SOC.DEI.PATERNITY_LEAVE_DAYS
+    name: Paid paternity leave entitlement
+    topic: diversity_inclusion
+    subtopic: policies
+    unit: days
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    frameworks: [GRI.401-3]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 15}}
+    evidence: [P52]
+  - code: SOC.DEI.DAYCARES
+    name: In-house daycare facilities
+    topic: diversity_inclusion
+    subtopic: policies
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 2}}
+    evidence: [P52]
+  - code: SOC.DEI.PROGRAMMES
+    name: DE&I programmes and policies (narrative)
+    topic: diversity_inclusion
+    subtopic: policies
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "DE&I Leaders Program (4 modules — Awareness, Acceptance, Advocacy, Anti-Harassment; digitised to LMS); She Moves with Careem commute; Travel-with-Child policy (children up to 3); 6-month maternity / 15-day paternity leave; 2 daycares (4 months–6 years); Anti-Harassment Committees at every subsidiary; Break Ke Baad 12-month returnship (≥3 years experience after ≥2-year gap); Khudi PWD programme; Uraan women's technical training (EVTL, Port Qasim); ENableall PWD internships (EPCL, 3 interns incl. one woman); Karachi Down Syndrome internship (EFERT)."}}
+    evidence: [P51, P52, P53, P130]
+  # ------------------------------------------------------------------ TALENT DEVELOPMENT & ENGAGEMENT
+  - code: SOC.TALENT.TRAINING_HOURS_PERM
+    name: Training hours — permanent employees
+    topic: talent_development
+    subtopic: training
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [GRI.404-1, ESRS.S1-13]
+    values: {ECORP: {FY2023: 66618}}
+    evidence: [P55]
+  - code: SOC.TALENT.TRAINING_HOURS_FEMALE
+    name: Training hours — female permanent employees
+    topic: talent_development
+    subtopic: training
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 8264}}
+    evidence: [P55]
+  - code: SOC.TALENT.TRAINING_HOURS_MALE
+    name: Training hours — male permanent employees
+    topic: talent_development
+    subtopic: training
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    values: {ECORP: {FY2023: 58354}}
+    evidence: [P55]
+  - code: SOC.TALENT.AVG_TRAINING_HOURS_PER_EMPLOYEE
+    name: Average training hours per permanent employee
+    topic: talent_development
+    subtopic: training
+    unit: hours / employee
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    formula: "safe_div({SOC.TALENT.TRAINING_HOURS_PERM}, {SOC.WORKFORCE.PERMANENT})"
+    inputs: [SOC.TALENT.TRAINING_HOURS_PERM, SOC.WORKFORCE.PERMANENT]
+    frameworks: [WEF.PEOPLE.TRAINING, GRI.404-1, ESRS.S1-13]
+    evidence_required: false
+    description: 66,618 ÷ 2,370 ≈ 28.1 hours.
+  - code: SOC.TALENT.AVG_TRAINING_HOURS_FEMALE
+    name: Average training hours — female
+    topic: talent_development
+    subtopic: training
+    unit: hours / employee
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    formula: "safe_div({SOC.TALENT.TRAINING_HOURS_FEMALE}, {SOC.DEI.PERM_FEMALE})"
+    inputs: [SOC.TALENT.TRAINING_HOURS_FEMALE, SOC.DEI.PERM_FEMALE]
+    frameworks: [WEF.PEOPLE.TRAINING, GRI.404-1]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 29}}
+    evidence: [P55]
+  - code: SOC.TALENT.AVG_TRAINING_HOURS_MALE
+    name: Average training hours — male
+    topic: talent_development
+    subtopic: training
+    unit: hours / employee
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    formula: "safe_div({SOC.TALENT.TRAINING_HOURS_MALE}, {SOC.DEI.PERM_MALE})"
+    inputs: [SOC.TALENT.TRAINING_HOURS_MALE, SOC.DEI.PERM_MALE]
+    frameworks: [WEF.PEOPLE.TRAINING, GRI.404-1]
+    validation: {tolerance_pct: 5}
+    source_type: reported
+    values: {ECORP: {FY2023: 28}}
+    evidence: [P55]
+  - code: SOC.TALENT.TRAINING_SPEND_PKR_MN
+    name: Total training spend
+    topic: talent_development
+    subtopic: training
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    values: {ECORP: {FY2023: 213}}
+    evidence: [P56]
+  - code: SOC.TALENT.TRAINING_SPEND_PER_EMPLOYEE_PKR
+    name: Training spend per permanent employee
+    topic: talent_development
+    subtopic: training
+    unit: PKR
+    data_type: currency
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    formula: "safe_div({SOC.TALENT.TRAINING_SPEND_PKR_MN} * 1000000, {SOC.WORKFORCE.PERMANENT})"
+    inputs: [SOC.TALENT.TRAINING_SPEND_PKR_MN, SOC.WORKFORCE.PERMANENT]
+    frameworks: [WEF.PEOPLE.TRAINING]
+    validation: {tolerance_pct: 2}
+    source_type: reported
+    values: {ECORP: {FY2023: 90000}}
+    evidence: [P56]
+    description: "~Rs 90,000 per permanent employee (recalculated 89,873)."
+  - code: SOC.TALENT.LEARNING_HOURS_TOTAL
+    name: Total learning-initiative hours (all platforms)
+    topic: talent_development
+    subtopic: learning
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.4]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 50000}}
+    evidence: [P54, P128]
+    is_estimate: true
+    notes: "'over 50,000 hours' — lower bound stored."
+  - code: SOC.TALENT.COURSERA_HOURS
+    name: Coursera learning hours
+    topic: talent_development
+    subtopic: learning
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 9300}}
+    evidence: [P54]
+    is_estimate: true
+  - code: SOC.TALENT.COURSERA_UTILIZATION_PCT
+    name: Coursera licence utilisation
+    topic: talent_development
+    subtopic: learning
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 70}}
+    evidence: [P54]
+  - code: SOC.TALENT.TECHNICAL_COURSES
+    name: Unique technical courses hosted on LMS
+    topic: talent_development
+    subtopic: learning
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 1000}}
+    evidence: [P54]
+    is_estimate: true
+  - code: SOC.TALENT.SDLC_SESSIONS
+    name: Shahzada Dawood Learning Circle sessions
+    topic: talent_development
+    subtopic: learning
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 10}}
+    evidence: [P57]
+  - code: SOC.TALENT.SDLC_PARTICIPANTS
+    name: Learning Circle participants
+    topic: talent_development
+    subtopic: learning
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 1500}}
+    evidence: [P57]
+    is_estimate: true
+  - code: SOC.TALENT.TDP_COHORT
+    name: Talent Development Program first cohort
+    topic: talent_development
+    subtopic: succession
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 52}}
+    evidence: [P55]
+  - code: SOC.TALENT.ENGAGEMENT_SCORE_PCT
+    name: Employee engagement score
+    topic: talent_development
+    subtopic: engagement
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    materiality: employee_wellbeing
+    assurance: not_assured
+    values: {ECORP: {FY2023: 83, FY2022: 83, FY2021: 86}}
+    evidence: [P49, P17]
+  - code: SOC.TALENT.ENGAGEMENT_GLOBAL_BENCHMARK_PCT
+    name: Global engagement benchmark (Qualtrics Employee Trends)
+    topic: talent_development
+    subtopic: engagement
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    evidence_required: false
+    assurance: not_assured
+    values: {ECORP: {FY2023: 67, FY2022: 66, FY2021: 66}}
+    evidence: [P49]
+  - code: SOC.TALENT.ENGAGEMENT_VS_BENCHMARK_PTS
+    name: Engagement score vs global benchmark (percentage points)
+    topic: talent_development
+    subtopic: engagement
+    unit: pts
+    data_type: decimal
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    formula: "{SOC.TALENT.ENGAGEMENT_SCORE_PCT} - {SOC.TALENT.ENGAGEMENT_GLOBAL_BENCHMARK_PCT}"
+    inputs: [SOC.TALENT.ENGAGEMENT_SCORE_PCT, SOC.TALENT.ENGAGEMENT_GLOBAL_BENCHMARK_PCT]
+    evidence_required: false
+  - code: SOC.TALENT.PROGRAMMES
+    name: Talent acquisition, onboarding and development programmes (narrative)
+    topic: talent_development
+    subtopic: learning
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "MOUs with GIKI, NUST and COMSATS; Graduate Trainee Engineer programme (top 10 universities); centralised Suleman Dawood Internship; digital Internal Job Posting; SuccessFactors onboarding + LEAP 100-day programme (11 modules); LEAP capability framework (Onboarding, Functional/Technical, Leadership via Executive Leadership Academy); 100% digitised succession planning (SPCDP module); first Talent Development Program (52 talents); 50-50 balanced scorecard performance management; ranked top 6% of organisations for L&D platforms (HRBS Survey 2023)."}}
+    evidence: [P45, P47, P48, P53, P54, P55]
+  # ------------------------------------------------------------------ COMPENSATION
+  - code: SOC.COMP.ENTRY_WAGE_TO_MIN_WAGE_RATIO
+    name: Ratio of standard entry-level wage to local minimum wage
+    topic: compensation
+    subtopic: wage_level
+    unit: ratio
+    data_type: ratio
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [WEF.PEOPLE.WAGE_LEVEL, UNGC.P6, SDG.8]
+    values: {ECORP: {FY2023: 3}}
+    evidence: [P56]
+    description: Entry level via GTE programme; ratio 3x; pay does not vary by gender. Trade apprentices governed by the Apprenticeship Ordinance 1962 (not subject to minimum-wage law).
+  - code: SOC.COMP.GENDER_PAY_RATIO
+    name: Ratio of basic salary and remuneration of women to men
+    topic: compensation
+    subtopic: pay_equality
+    unit: ratio
+    data_type: ratio
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PEOPLE.PAY_EQUALITY, GRI.405-2, ESRS.S1-16]
+    description: The report states pay does not differentiate by gender and no pay gap is created at hiring, increment or promotion (p.53), but no quantitative ratio by employee category/location is disclosed. Data unavailable.
+  - code: SOC.COMP.CEO_PAY_RATIO
+    name: Ratio of CEO total annual compensation to median employee compensation
+    topic: compensation
+    subtopic: wage_level
+    unit: ratio
+    data_type: ratio
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PEOPLE.WAGE_LEVEL, ESRS.S1-16]
+    description: Omitted in the 2023 report due to confidential data (WEF index, p.151). Recorded as an approved omission in the framework mapping.
+  - code: SOC.COMP.PAY_PHILOSOPHY
+    name: Compensation and rewards philosophy (narrative)
+    topic: compensation
+    subtopic: pay_equality
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "Fair, non-discriminatory compensation policy; pay determined by market pay equity, individual performance and leadership competency rating; remuneration set at hiring, increment and promotion so no pay gap is created from the onset."}}
+    evidence: [P53]
+  # ------------------------------------------------------------------ LABOUR PRACTICES & HUMAN RIGHTS
+  - code: SOC.LABOR.CHILD_FORCED_LABOR_INCIDENTS
+    name: Incidents of child, forced or compulsory labour
+    topic: labor_practices
+    subtopic: child_forced_labor
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PEOPLE.CHILD_FORCED_LABOR, UNGC.P4, UNGC.P5, ESRS.S1-17]
+    values: {ECORP: {FY2023: 0}}
+    evidence: [P56]
+  - code: SOC.LABOR.CHILD_FORCED_LABOR_RISK_STATEMENT
+    name: Child / forced labour risk assessment (narrative)
+    topic: labor_practices
+    subtopic: child_forced_labor
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [WEF.PEOPLE.CHILD_FORCED_LABOR, GRI.408-1, UNGC.P4, UNGC.P5]
+    text_values: {ECORP: {FY2023: "Compliant with Pakistan labour laws; no incidents of child, forced or compulsory labour within the organisation. Supplier-level risk assessment is not described."}}
+    evidence: [P56]
+    notes: "WEF requires operations AND suppliers at risk — supplier coverage is a narrative gap."
+  - code: SOC.LABOR.COLLECTIVE_BARGAINING_STATEMENT
+    name: Freedom of association and collective bargaining (narrative)
+    topic: labor_practices
+    subtopic: collective_bargaining
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [UNGC.P3]
+    description: Not disclosed in the 2023 report — narrative gap (UNGC Principle 3 mapped to general people pages).
+  - code: SOC.HUMAN_RIGHTS.POLICY_COMMITMENT
+    name: Human rights policy commitment and grievance channels (narrative)
+    topic: labor_practices
+    subtopic: grievance
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [UNGC.P1, UNGC.P2, GRI.2-23]
+    text_values: {ECORP: {FY2023: "Code of Conduct applies to all employees and directors; Speak Out whistleblower platform (anonymous, managed by independent E&C function reporting to BARC) accepts human-rights, safety, employment and ethics concerns from internal and external stakeholders; Internal Investigation Procedure with quarterly Board reporting."}}
+    evidence: [P29, P30, P31]
+  # ------------------------------------------------------------------ OCCUPATIONAL HEALTH & SAFETY
+  - code: SOC.OHS.HOURS_EMP
+    name: Hours worked — employees
+    topic: health_safety
+    subtopic: hours
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    is_kpi: true
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9, ESRS.S1-14]
+    materiality: ohs
+    values: {ECORP: {FY2023: 6840000, FY2022: 7250000}}
+    evidence: [P67]
+  - code: SOC.OHS.HOURS_CONTRACTOR
+    name: Hours worked — contractors
+    topic: health_safety
+    subtopic: hours
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    is_kpi: true
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9]
+    materiality: ohs
+    values: {ECORP: {FY2023: 29600000, FY2022: 34800000}}
+    evidence: [P67]
+  - code: SOC.OHS.HOURS_TOTAL
+    name: Hours worked — employees and contractors
+    topic: health_safety
+    subtopic: hours
+    unit: hours
+    data_type: decimal
+    kind: derived
+    aggregation: sum
+    formula: "nz({SOC.OHS.HOURS_EMP}) + nz({SOC.OHS.HOURS_CONTRACTOR})"
+    inputs: [SOC.OHS.HOURS_EMP, SOC.OHS.HOURS_CONTRACTOR]
+    evidence_required: false
+  - code: SOC.OHS.RECORDABLE_EMP
+    name: Recordable work-related injuries — employees
+    topic: health_safety
+    subtopic: injuries
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9, ESRS.S1-14]
+    materiality: ohs
+    values: {ECORP: {FY2023: 3, FY2022: 2}}
+    evidence: [P67]
+  - code: SOC.OHS.RECORDABLE_CONTRACTOR
+    name: Recordable work-related injuries — contractors (excluding fatalities)
+    topic: health_safety
+    subtopic: injuries
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9]
+    materiality: ohs
+    values: {ECORP: {FY2023: 13, FY2022: 21}}
+    evidence: [P67]
+  - code: SOC.OHS.FATALITIES_EMP
+    name: Work-related fatalities — employees
+    topic: health_safety
+    subtopic: injuries
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9, ESRS.S1-14]
+    materiality: ohs
+    values: {ECORP: {FY2023: 0, FY2022: 0}}
+    evidence: [P67]
+    notes: "No employee fatality is mentioned; employee TRIR is based on recordable injuries only."
+  - code: SOC.OHS.FATALITIES_CONTRACTOR
+    name: Work-related fatalities — contractors
+    topic: health_safety
+    subtopic: injuries
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9, ESRS.S1-14]
+    materiality: ohs
+    values: {ECORP: {FY2023: 1, FY2022: 1}}
+    evidence: [P67]
+  - code: SOC.OHS.HIGH_CONSEQUENCE_INJURIES
+    name: High-consequence work-related injuries (excluding fatalities)
+    topic: health_safety
+    subtopic: injuries
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9]
+    materiality: ohs
+    description: Not disclosed separately in 2023 (only recordable injuries and fatalities). Data unavailable — metric gap for WEF/GRI 403-9.
+  - code: SOC.OHS.INJURY_TYPES
+    name: Main types of work-related injury
+    topic: health_safety
+    subtopic: injuries
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY]
+    description: Not disclosed in 2023 — narrative gap.
+  - code: SOC.OHS.TRIR_EMP
+    name: Total Recordable Incident Rate — employees (per 200,000 hours)
+    topic: health_safety
+    subtopic: rates
+    unit: per 200,000 h
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    direction: lower_is_better
+    is_kpi: true
+    formula: "safe_div(nz({SOC.OHS.RECORDABLE_EMP}) * 200000, {SOC.OHS.HOURS_EMP})"
+    inputs: [SOC.OHS.RECORDABLE_EMP, SOC.OHS.HOURS_EMP]
+    method: Recordable injuries × 200,000 ÷ hours worked (OSHA basis, as stated on p.67).
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9, ESRS.S1-14, SASB.RT-CH-320a.1, UNGC.P1, SDG.3]
+    materiality: ohs
+    validation: {min: 0, tolerance_pct: 10}
+    source_type: reported
+    values: {ECORP: {FY2023: 0.09, FY2022: 0.06}}
+    evidence: [P67]
+    notes: "Reported to two decimals (0.09 / 0.06); recalculated 0.0877 / 0.0552 — tolerance set to 10% to absorb rounding."
+  - code: SOC.OHS.TRIR_CONTRACTOR
+    name: Total Recordable Incident Rate — contractors (per 200,000 hours)
+    topic: health_safety
+    subtopic: rates
+    unit: per 200,000 h
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    direction: lower_is_better
+    is_kpi: true
+    formula: "safe_div((nz({SOC.OHS.RECORDABLE_CONTRACTOR}) + nz({SOC.OHS.FATALITIES_CONTRACTOR})) * 200000, {SOC.OHS.HOURS_CONTRACTOR})"
+    inputs: [SOC.OHS.RECORDABLE_CONTRACTOR, SOC.OHS.FATALITIES_CONTRACTOR, SOC.OHS.HOURS_CONTRACTOR]
+    method: (Recordable injuries + fatalities) × 200,000 ÷ contractor hours — the report states contractor TRIR is "due to 1 fatality and 13 recordable injuries".
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, GRI.403-9, SASB.RT-CH-320a.1]
+    materiality: ohs
+    validation: {min: 0, tolerance_pct: 10}
+    source_type: reported
+    values: {ECORP: {FY2023: 0.09, FY2022: 0.13}}
+    evidence: [P67]
+    notes: "Recalculated 0.0946 (2023) / 0.1264 (2022)."
+  - code: SOC.OHS.FATALITY_RATE_EMP
+    name: Fatality rate — employees (per 200,000 hours)
+    topic: health_safety
+    subtopic: rates
+    unit: per 200,000 h
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    direction: lower_is_better
+    formula: "safe_div(nz({SOC.OHS.FATALITIES_EMP}) * 200000, {SOC.OHS.HOURS_EMP})"
+    inputs: [SOC.OHS.FATALITIES_EMP, SOC.OHS.HOURS_EMP]
+    frameworks: [SASB.RT-CH-320a.1]
+    evidence_required: false
+  - code: SOC.OHS.FATALITY_RATE_CONTRACTOR
+    name: Fatality rate — contractors (per 200,000 hours)
+    topic: health_safety
+    subtopic: rates
+    unit: per 200,000 h
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    direction: lower_is_better
+    formula: "safe_div(nz({SOC.OHS.FATALITIES_CONTRACTOR}) * 200000, {SOC.OHS.HOURS_CONTRACTOR})"
+    inputs: [SOC.OHS.FATALITIES_CONTRACTOR, SOC.OHS.HOURS_CONTRACTOR]
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY, SASB.RT-CH-320a.1]
+    evidence_required: false
+  - code: SOC.OHS.LTIFR_EMP
+    name: Lost-time injury frequency rate — employees (per 1,000,000 hours)
+    topic: health_safety
+    subtopic: rates
+    unit: per 1,000,000 h
+    data_type: ratio
+    kind: derived
+    aggregation: none
+    direction: lower_is_better
+    formula: "safe_div(nz({SOC.OHS.LOST_TIME_INJURIES_EMP}) * 1000000, {SOC.OHS.HOURS_EMP})"
+    inputs: [SOC.OHS.LOST_TIME_INJURIES_EMP, SOC.OHS.HOURS_EMP]
+    evidence_required: false
+    description: Lost-time injuries are not disclosed at group level — evaluates to Data unavailable until the input is provided.
+  - code: SOC.OHS.LOST_TIME_INJURIES_EMP
+    name: Lost-time injuries — employees
+    topic: health_safety
+    subtopic: injuries
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    description: Group-level LTI count not disclosed (EVTL reports 0 LTI since 2011). Data unavailable.
+  - code: SOC.OHS.PROCESS_SAFETY_INCIDENTS
+    name: Process safety incidents count (Tier 1/2)
+    topic: health_safety
+    subtopic: process_safety
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    frameworks: [SASB.RT-CH-540a.1]
+    description: Not disclosed in 2023 — metric gap for SASB RT-CH-540a.1.
+  - code: SOC.OHS.RBHSE_PERSON_HOURS
+    name: Person-hours invested in risk-based HSE transformation (phase 1)
+    topic: health_safety
+    subtopic: training
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.12]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 44000}}
+    evidence: [P65, P135]
+    is_estimate: true
+  - code: SOC.OHS.UPSKILLING_HOURS
+    name: HSE risk-assessment upskilling hours (PHA, LOPA, HAZID, Bow Tie)
+    topic: health_safety
+    subtopic: training
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    frameworks: [GRI.403-5]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 10000}}
+    evidence: [P65, P136]
+    is_estimate: true
+  - code: SOC.OHS.RESOURCES_UPSKILLED
+    name: Resources upskilled in HSE risk assessment
+    topic: health_safety
+    subtopic: training
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [GRI.403-5]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 450}}
+    evidence: [P65, P136]
+    is_estimate: true
+  - code: SOC.OHS.HAZOP_LEADERS_TRAINED
+    name: HAZOP leaders trained
+    topic: health_safety
+    subtopic: training
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 21}}
+    evidence: [P65, P136]
+  - code: SOC.OHS.SAFE_DAYS_EVTL
+    name: Consecutive safe days (terminal operations)
+    topic: health_safety
+    subtopic: injuries
+    unit: days
+    data_type: integer
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EVTL: {FY2023: 9531}}
+    evidence: [P16]
+    notes: "0 LTI and 0 TRIR since 2011; 26 years of safe operations."
+  - code: SOC.OHS.SAFE_MANHOURS_EPQL
+    name: Safe man-hours without lost-workday injury
+    topic: health_safety
+    subtopic: injuries
+    unit: hours
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EPQL: {FY2023: 10000000}}
+    evidence: [P16]
+  - code: SOC.OHS.NEPRA_HSE_RATING_PCT
+    name: NEPRA annual HSE rating
+    topic: health_safety
+    subtopic: rates
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EPTL: {FY2023: 92}}
+    evidence: [P16]
+  - code: SOC.OHS.MANAGEMENT_SYSTEM_DESCRIPTION
+    name: OHS management system and governance (narrative)
+    topic: health_safety
+    subtopic: process_safety
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [GRI.403-1]
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "Integrated operating-discipline management system; HSE policy targeting zero occupational injuries, process safety mishaps and environmental incidents (PEAR — People, Environment, Assets, Reputation); transition from compliance-based to risk-based HSE management with DuPont Sustainable Solutions (3 phases: high-consequence scenario review completed 2023, barrier management, detailed risk assessments); Group HSE function with CCHSE forum, Corp/Division/Sub HSE committees and D-level committees; PHA toolkit (HAZID, HAZOP, PHR, SIL, HAZAN, FMEA, What-If, Bowtie, LOPA, FTA, facility siting, FERA); Light-House lessons-learned initiative; VelocityEHS HSE MIS with operational risk and ESG modules; standards benchmarked to OSHA, DuPont, British Safety Council, SHMS Queensland and certified by an independent third party."}}
+    evidence: [P59, P60, P61, P62, P63, P64, P65, P114]
+  - code: SOC.OHS.HEALTH_RISK_ASSESSMENT_DESCRIPTION
+    name: Occupational health risk assessment programme (narrative)
+    topic: health_safety
+    subtopic: health
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [SASB.RT-CH-320a.2]
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "Group Health Risk Assessment (HRA) standard applied annually for OHIH matters; Health Assessment and Review Procedure covering Fit-to-Work assessments (pre-employment, pre-placement, job-specific, for-cause, third-party contractor, periodic, termination); medical data handled under personal data protection and medical confidentiality standards."}}
+    evidence: [P66]
+  - code: SOC.OHS.TRAINING_TOPICS
+    name: HSE training topics delivered (narrative)
+    topic: health_safety
+    subtopic: training
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "Process safety and risk management; emergency response; incident investigation; safety training for line supervision; electrical safety; DuPont RBA & Bow Tie; personnel safety management; HSE fundamentals; PHA; work permit system; fire safety; ship unloading / truck loading / static electricity (EVTL); heat stress; EMS; IMS (ISO 9001/14001/18001); PPE; first aid & CPR; turnaround safety."}}
+    evidence: [P67, P68]
+  # ------------------------------------------------------------------ WELLBEING
+  - code: SOC.WELLBEING.WELLBEING_SCORE_PCT
+    name: Employee wellbeing score
+    topic: wellbeing
+    subtopic: wellbeing
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [SDG.3]
+    materiality: employee_wellbeing
+    assurance: not_assured
+    values: {ECORP: {FY2023: 83, FY2022: 86, FY2021: 88}}
+    evidence: [P50, P125]
+  - code: SOC.WELLBEING.GLOBAL_BENCHMARK_PCT
+    name: Global wellbeing benchmark (Qualtrics)
+    topic: wellbeing
+    subtopic: wellbeing
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    evidence_required: false
+    assurance: not_assured
+    values: {ECORP: {FY2023: 71, FY2022: 72, FY2021: 72}}
+    evidence: [P50, P125]
+  - code: SOC.WELLBEING.FITNESS_TEAMS
+    name: 41-Day Fitness Challenge — teams
+    topic: wellbeing
+    subtopic: fitness
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 24, FY2022: 25}}
+    evidence: [P125]
+  - code: SOC.WELLBEING.FITNESS_PARTICIPANTS
+    name: 41-Day Fitness Challenge — participants
+    topic: wellbeing
+    subtopic: fitness
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    assurance: not_assured
+    values: {ECORP: {FY2023: 252, FY2022: 110}}
+    evidence: [P125]
+  - code: SOC.WELLBEING.FITNESS_WOMEN
+    name: 41-Day Fitness Challenge — women participants
+    topic: wellbeing
+    subtopic: fitness
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 88, FY2022: 56}}
+    evidence: [P125]
+  - code: SOC.WELLBEING.FITNESS_PWD
+    name: 41-Day Fitness Challenge — PWD participants
+    topic: wellbeing
+    subtopic: fitness
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {ECORP: {FY2023: 4, FY2022: 0}}
+    evidence: [P125]
+  - code: SOC.WELLBEING.NON_OCCUPATIONAL_HEALTH_ACCESS
+    name: Access to non-occupational medical and healthcare services (narrative)
+    topic: wellbeing
+    subtopic: wellbeing
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [WEF.PEOPLE.HEALTH_SAFETY]
+    assurance: not_assured
+    text_values: {ECORP: {FY2023: "Medical benefit policies for employees and immediate family: OPD, dental, hospitalisation (in-patient), additional medical assistance and periodic company-sponsored check-ups; on-site clinics; nutrition, emotional wellness counselling and fitness programmes (yoga, HIIT, in-house gym, 41-Day Fitness Challenge)."}}
+    evidence: [P50, P66, P125]
+  # ------------------------------------------------------------------ COMMUNITY INVESTMENT — ENGRO FOUNDATION
+  - code: SOC.COMMUNITY.INVESTMENT_PKR_MN
+    name: Community investment (donations to education, health, environment, disaster relief)
+    topic: community_investment
+    subtopic: education
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [GRI.413-1, WEF.PROSPERITY.ECONOMIC_CONTRIBUTION]
+    materiality: community
+    values: {ECORP: {FY2023: 1454, FY2022: 801}}
+    evidence: [P103, P104]
+    description: '"To Society" line of the wealth-distribution statement.'
+  - code: SOC.COMMUNITY.INVESTMENT_SHARE_EDUCATION_PCT
+    name: Social investment share — education
+    topic: community_investment
+    subtopic: education
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 52}}
+    evidence: [P101]
+    is_estimate: true
+    notes: "Read from the 'social investment areas' pie chart (p.101); label-to-value assignment has lower confidence because the chart text is unlabeled in extraction."
+  - code: SOC.COMMUNITY.INVESTMENT_SHARE_HEALTH_PCT
+    name: Social investment share — health
+    topic: community_investment
+    subtopic: health
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 6}}
+    evidence: [P101]
+    is_estimate: true
+  - code: SOC.COMMUNITY.INVESTMENT_SHARE_LIVELIHOODS_PCT
+    name: Social investment share — livelihoods
+    topic: community_investment
+    subtopic: livelihoods
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 2}}
+    evidence: [P101]
+    is_estimate: true
+  - code: SOC.COMMUNITY.INVESTMENT_SHARE_ENVIRONMENT_PCT
+    name: Social investment share — environment
+    topic: community_investment
+    subtopic: environment
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 6}}
+    evidence: [P101]
+    is_estimate: true
+  - code: SOC.COMMUNITY.INVESTMENT_SHARE_INFRASTRUCTURE_PCT
+    name: Social investment share — infrastructure
+    topic: community_investment
+    subtopic: infrastructure
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 4}}
+    evidence: [P101]
+    is_estimate: true
+  - code: SOC.COMMUNITY.INVESTMENT_SHARE_OTHERS_PCT
+    name: Social investment share — others
+    topic: community_investment
+    subtopic: infrastructure
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {ECORP: {FY2023: 30}}
+    evidence: [P101]
+    is_estimate: true
+  - code: SOC.COMMUNITY.INVESTMENT_SHARE_CHECK
+    name: Social investment shares total (should equal 100)
+    topic: community_investment
+    subtopic: infrastructure
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "nz({SOC.COMMUNITY.INVESTMENT_SHARE_EDUCATION_PCT}) + nz({SOC.COMMUNITY.INVESTMENT_SHARE_HEALTH_PCT}) + nz({SOC.COMMUNITY.INVESTMENT_SHARE_LIVELIHOODS_PCT}) + nz({SOC.COMMUNITY.INVESTMENT_SHARE_ENVIRONMENT_PCT}) + nz({SOC.COMMUNITY.INVESTMENT_SHARE_INFRASTRUCTURE_PCT}) + nz({SOC.COMMUNITY.INVESTMENT_SHARE_OTHERS_PCT})"
+    inputs: [SOC.COMMUNITY.INVESTMENT_SHARE_EDUCATION_PCT, SOC.COMMUNITY.INVESTMENT_SHARE_HEALTH_PCT, SOC.COMMUNITY.INVESTMENT_SHARE_LIVELIHOODS_PCT, SOC.COMMUNITY.INVESTMENT_SHARE_ENVIRONMENT_PCT, SOC.COMMUNITY.INVESTMENT_SHARE_INFRASTRUCTURE_PCT, SOC.COMMUNITY.INVESTMENT_SHARE_OTHERS_PCT]
+    evidence_required: false
+    validation: {min: 99, max: 101}
+  - code: SOC.COMMUNITY.EF_STUDENTS_FORMAL
+    name: Students benefiting from Engro Foundation-supported schools
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [SDG.4, GRI.413-1]
+    materiality: community
+    assurance: not_assured
+    values: {EF: {FY2023: 7500}}
+    evidence: [P69, P127]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_SCHOOLS_ADOPTED
+    name: Schools under School Adoption Programme (Daharki & Qadirpur)
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 12}}
+    evidence: [P69]
+  - code: SOC.COMMUNITY.EF_SCHOOLS_ADOPTED_STUDENTS
+    name: Students enrolled — adopted schools
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 2700}}
+    evidence: [P69]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_KATCHA_SCHOOLS
+    name: Katcha Schools Programme schools (Ghotki)
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 15}}
+    evidence: [P69]
+  - code: SOC.COMMUNITY.EF_KATCHA_STUDENTS
+    name: Students enrolled — Katcha schools
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 2050}}
+    evidence: [P69]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_KATCHA_GIRLS_MIDDLE
+    name: Girls enrolled in Katcha girls' middle school
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EF: {FY2023: 71}}
+    evidence: [P69]
+    notes: "Started with 10 students in 2017."
+  - code: SOC.COMMUNITY.EF_SAHARA_STUDENTS
+    name: Sahara Community School enrolment (Daharki)
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 500}}
+    evidence: [P69]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_TCF_SCHOOLS
+    name: Schools with The Citizens Foundation (3 Karachi, 1 Daharki)
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 4}}
+    evidence: [P69]
+  - code: SOC.COMMUNITY.EF_TCF_STUDENTS
+    name: Students enrolled — TCF schools
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 2100}}
+    evidence: [P69]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_MICRO_SCHOOL_STUDENTS
+    name: Students enrolled — digital micro-schools pilot (Karachi, TTWF)
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 175}}
+    evidence: [P69, P127]
+  - code: SOC.COMMUNITY.EF_STUDENTS_TECHNICAL
+    name: Students benefiting from technical training programmes
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 700}}
+    evidence: [P70]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_TTC_NEW_BATCH
+    name: New DAE batch inducted — Technical Training College Daharki
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 210}}
+    evidence: [P70, P129]
+  - code: SOC.COMMUNITY.EF_TTC_ENROLMENT
+    name: Total DAE enrolment — Technical Training College Daharki
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: none
+    frameworks: [SDG.4]
+    assurance: not_assured
+    values: {EF: {FY2023: 460}}
+    evidence: [P70, P129]
+  - code: SOC.COMMUNITY.EF_TECHKARO_ECOM_APPLICATIONS
+    name: Tech Karo e-commerce course applications
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 270}}
+    evidence: [P69]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_TECHKARO_ECOM_GRADS
+    name: Tech Karo e-commerce graduates
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 57}}
+    evidence: [P69, P70]
+  - code: SOC.COMMUNITY.EF_TECHKARO_ECOM_FEMALE_PCT
+    name: Tech Karo e-commerce graduates — female share
+    topic: community_investment
+    subtopic: education
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {EF: {FY2023: 70}}
+    evidence: [P69]
+  - code: SOC.COMMUNITY.EF_TECHKARO_PLACED
+    name: Tech Karo graduates placed in jobs
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 23}}
+    evidence: [P69]
+  - code: SOC.COMMUNITY.EF_TECHKARO_DL_APPLICATIONS
+    name: Tech Karo Digital Literacy applications
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 300}}
+    evidence: [P69]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_TECHKARO_DL_GRADS
+    name: Tech Karo Digital Literacy graduates
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 96}}
+    evidence: [P69, P70]
+  - code: SOC.COMMUNITY.EF_TECHKARO_DL_FEMALE_PCT
+    name: Tech Karo Digital Literacy graduates — female share
+    topic: community_investment
+    subtopic: education
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {EF: {FY2023: 91}}
+    evidence: [P69]
+  - code: SOC.COMMUNITY.EF_LIFE_SKILLS_SESSIONS
+    name: Life-skills sessions with P&G (Tech Karo)
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 7}}
+    evidence: [P69]
+  - code: SOC.COMMUNITY.EF_TECHLAB_STUDENTS
+    name: Tech Lab Phase I students (front-end development)
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 50}}
+    evidence: [P69, P70]
+    notes: "Programme targets 100 students over two phases; 96 technical + 24 life-skills hours."
+  - code: SOC.COMMUNITY.EF_HUNAR_GIRLS_ENROLLED
+    name: EPQL Hunar coaching academy — girls enrolled
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 28}}
+    evidence: [P70, P129]
+  - code: SOC.COMMUNITY.EF_HUNAR_GIRLS_PASSED
+    name: EPQL Hunar — girls passing DAE entrance test
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 27}}
+    evidence: [P70, P129]
+  - code: SOC.COMMUNITY.EF_STITCHING_TRAINED
+    name: Girls trained at stitching centre (Ghotki)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 25}}
+    evidence: [P70, P129]
+    notes: "Graduates earning PKR 3–5K per month after 3-month training and machine distribution."
+  - code: SOC.COMMUNITY.EF_CVC_FARMERS
+    name: Smallholder farmers trained — Chili Value Chain project
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [SDG.1]
+    materiality: community
+    assurance: not_assured
+    values: {EF: {FY2023: 5000}}
+    evidence: [P71, P123, P17]
+    is_estimate: true
+    notes: "'over 5,000' families in 161 villages (Umerkot, Mirpurkhas); co-funded by USDA via Winrock International; completed Dec 2023."
+  - code: SOC.COMMUNITY.EF_CVC_WOMEN_FARMERS
+    name: Women farmers trained — Chili Value Chain
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 500}}
+    evidence: [P71, P123]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_CVC_VILLAGES
+    name: Villages covered — Chili Value Chain
+    topic: community_investment
+    subtopic: livelihoods
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 161}}
+    evidence: [P71]
+  - code: SOC.COMMUNITY.EF_CVC_SEED_ENTREPRENEURS
+    name: Seed entrepreneurs developed — Chili Value Chain
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 25}}
+    evidence: [P71, P123]
+  - code: SOC.COMMUNITY.EF_CVC_PEER_FARMERS
+    name: Farmers reached through peer learning — Chili Value Chain
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 1000}}
+    evidence: [P71]
+    notes: "Plus an estimated spillover of another 1,000 farmers."
+  - code: SOC.COMMUNITY.EF_SFEP_VESSELS_CONVERTED
+    name: Gillnet vessels converted to bottom-set longline (SFEP)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.14]
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 8}}
+    evidence: [P88, P72]
+    notes: "Source inconsistency: p.72 describes 'three pelagic gillnet fishing vessels' converted (Phase III activity); p.88 states 'eight' vessels benefiting 120 crew — the programme total is stored and the discrepancy is flagged."
+  - code: SOC.COMMUNITY.EF_SFEP_CREW_BENEFITED
+    name: Crew members benefiting from vessel conversion (SFEP)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 120}}
+    evidence: [P88]
+  - code: SOC.COMMUNITY.EF_SFEP_ASSETS_DISTRIBUTED
+    name: Fishing assets distributed (25 iceboxes, 40 toolkits, 40 safety kits)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 105}}
+    evidence: [P72, P88]
+  - code: SOC.COMMUNITY.EF_SFEP_FISHERS_TRAINED
+    name: Longline crew and skippers trained in data collection (SFEP)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 60}}
+    evidence: [P89]
+  - code: SOC.COMMUNITY.EF_SFEP_MASTER_TRAINERS
+    name: Master trainers trained on sustainable fisheries (SFEP)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 20}}
+    evidence: [P89]
+  - code: SOC.COMMUNITY.EF_SFEP_TRAINING_PARTICIPANTS
+    name: Fishers trained in 3-day sustainable fisheries sessions (SFEP)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.14]
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 210}}
+    evidence: [P89]
+  - code: SOC.COMMUNITY.EF_SFEP_OFFICIALS_TRAINED
+    name: Fisheries department officials trained on the data app (SFEP)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 25}}
+    evidence: [P89]
+  - code: SOC.COMMUNITY.EF_SFEP_WOMEN_ENTERPRISES
+    name: Fisherwomen supported into home-based enterprises (SFEP)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 14}}
+    evidence: [P72, P129]
+  - code: SOC.COMMUNITY.EF_SFEP_SEAFOOD_QC_TRAINED
+    name: Fisherwomen trained in seafood quality control (SFEP)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 10}}
+    evidence: [P72, P89]
+  - code: SOC.COMMUNITY.EF_SFEP_COMMUNITY_ENGAGED
+    name: Participants in SFEP health, youth and mobilisation sessions
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 1500}}
+    evidence: [P72]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_FEEDSOL_FARMERS
+    name: Farmers served by Feed Sol social enterprise (5-year cumulative)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.1]
+    assurance: not_assured
+    values: {EF: {FY2023: 4000}}
+    evidence: [P71, P123]
+    is_estimate: true
+    notes: "40% of production to small farmers (1–6 animals), 30% to medium farmers."
+  - code: SOC.COMMUNITY.EF_FEEDSOL_SALES_PKR_MN
+    name: Feed Sol cumulative sales (5 years)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {EF: {FY2023: 700}}
+    evidence: [P123]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_IATC_AWARDS_PKR_MN
+    name: I Am The Change award prizes disbursed
+    topic: community_investment
+    subtopic: livelihoods
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 5}}
+    evidence: [P71, P123]
+    description: Two recipients (National Disability & Development Forum; ConnectHear) × PKR 2.5 million.
+  - code: SOC.COMMUNITY.EF_MICROENTERPRISE_PROJECTS
+    name: Micro-livelihood grant projects (Daharki)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 12}}
+    evidence: [P123]
+    description: 3 goat-farming, 6 grocery stores, 3 ice-cream businesses.
+  - code: SOC.COMMUNITY.EF_PATIENTS_OPD
+    name: Patients treated at Engro Foundation OPD clinics and camps
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [SDG.3, GRI.413-1]
+    materiality: community
+    assurance: not_assured
+    values: {EF: {FY2023: 64800}}
+    evidence: [P71, P125]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_SAHARA_CLINIC_PATIENTS
+    name: Sahara Clinic (Daharki) patients treated
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 10882}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_QADIRPUR_CLINIC_PATIENTS
+    name: Engro Clinic (Qadirpur) patients treated
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 11771}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_SINA_CLINIC_PATIENTS
+    name: Sina Clinic (Gaghar Phatak, Karachi) patients treated
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 37000}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_SUKKUR_CLINIC_PATIENTS
+    name: Engro Clinic (Sukkur) patients treated
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 5223}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_OPD_SUM_CHECK
+    name: OPD patients — sum of clinics (check vs printed 64,800+)
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: derived
+    aggregation: none
+    formula: "nz({SOC.COMMUNITY.EF_SAHARA_CLINIC_PATIENTS}) + nz({SOC.COMMUNITY.EF_QADIRPUR_CLINIC_PATIENTS}) + nz({SOC.COMMUNITY.EF_SINA_CLINIC_PATIENTS}) + nz({SOC.COMMUNITY.EF_SUKKUR_CLINIC_PATIENTS})"
+    inputs: [SOC.COMMUNITY.EF_SAHARA_CLINIC_PATIENTS, SOC.COMMUNITY.EF_QADIRPUR_CLINIC_PATIENTS, SOC.COMMUNITY.EF_SINA_CLINIC_PATIENTS, SOC.COMMUNITY.EF_SUKKUR_CLINIC_PATIENTS]
+    evidence_required: false
+    description: 10,882 + 11,771 + 37,000 + 5,223 = 64,876 — consistent with "64,800+".
+  - code: SOC.COMMUNITY.EF_MENTAL_HEALTH_CONSULTS
+    name: Mental health consultations (Sina Clinic camps, Karachi)
+    topic: community_investment
+    subtopic: health
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 1753}}
+    evidence: [P125]
+  - code: SOC.COMMUNITY.EF_SPECIALIZED_BENEFICIARIES
+    name: Beneficiaries of specialised health facilities
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.3]
+    assurance: not_assured
+    values: {EF: {FY2023: 9100}}
+    evidence: [P71, P125]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_HEPATITIS_VACCINATIONS
+    name: Hepatitis vaccinations (Ghotki programme)
+    topic: community_investment
+    subtopic: health
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 600}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_HEPATITIS_TREATMENTS
+    name: Hepatitis treatments (Ghotki programme)
+    topic: community_investment
+    subtopic: health
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 524}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_SNAKEBITE_PATIENTS
+    name: Free snake-bite treatments
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 5819}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_RABIES_PATIENTS
+    name: Free dog-bite / rabies centre patients
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 1708}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_ARTIFICIAL_LIMBS_PATIENTS
+    name: Artificial limbs clinic beneficiaries
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 484}}
+    evidence: [P71, P125]
+  - code: SOC.COMMUNITY.EF_HOUSES_BUILT
+    name: Climate-resilient houses built (2022 flood rehabilitation, Qambar-Shahdadkot)
+    topic: community_investment
+    subtopic: infrastructure
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.11]
+    assurance: not_assured
+    values: {EF: {FY2023: 146}}
+    evidence: [P71, P131]
+    notes: "Financed by EVTL, implemented with Sindh Rural Support Organization; houses elevated 3 ft."
+  - code: SOC.COMMUNITY.EF_WATER_TANKS
+    name: Community water tanks built (flood rehabilitation)
+    topic: community_investment
+    subtopic: water
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 7}}
+    evidence: [P71, P131]
+  - code: SOC.COMMUNITY.EF_FILTRATION_PLANTS
+    name: Water filtration plants installed with The Water Foundation (Karachi)
+    topic: community_investment
+    subtopic: water
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 5}}
+    evidence: [P132]
+    description: Including one RO unit at Gaghar Phatak.
+  - code: SOC.COMMUNITY.EF_WATER_LITERS
+    name: Clean drinking water provided (Karachi filtration plants)
+    topic: community_investment
+    subtopic: water
+    unit: L
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.6]
+    assurance: not_assured
+    values: {EF: {FY2023: 8000000}}
+    evidence: [P132]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_WATER_BENEFICIARIES
+    name: Community members served by filtration plants
+    topic: community_investment
+    subtopic: water
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 155000}}
+    evidence: [P132]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EF_WATER_LITERS_PER_DAY
+    name: Average clean water supplied per day (Karachi plants)
+    topic: community_investment
+    subtopic: water
+    unit: L / day
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 22000}}
+    evidence: [P132]
+  - code: SOC.COMMUNITY.EFERT_RO_PLANTS
+    name: RO plants installed by EFERT (CAER villages, Daharki, Ghotki railway station)
+    topic: community_investment
+    subtopic: water
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EFERT: {FY2023: 12}}
+    evidence: [P132]
+    notes: "Mostly solar-powered."
+  - code: SOC.COMMUNITY.EFERT_RO_LITERS
+    name: Water supplied by EFERT RO plants
+    topic: community_investment
+    subtopic: water
+    unit: L
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EFERT: {FY2023: 15000000}}
+    evidence: [P132]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EFERT_RO_HOUSEHOLDS
+    name: Households served by EFERT RO plants
+    topic: community_investment
+    subtopic: water
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EFERT: {FY2023: 4000}}
+    evidence: [P132]
+    is_estimate: true
+  - code: SOC.COMMUNITY.EFERT_WATER_AWARENESS_SESSIONS
+    name: "'Save water save life' awareness sessions (Sahiwal)"
+    topic: community_investment
+    subtopic: water
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EFERT: {FY2023: 11}}
+    evidence: [P132]
+  - code: SOC.COMMUNITY.EFERT_WATER_AWARENESS_REACH
+    name: Community members reached by water awareness sessions
+    topic: community_investment
+    subtopic: water
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EFERT: {FY2023: 3500}}
+    evidence: [P132]
+  - code: SOC.COMMUNITY.EF_CPI_FUNDING_USD
+    name: International funding secured by the Circular Plastics Institute
+    topic: community_investment
+    subtopic: environment
+    unit: USD
+    data_type: currency
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 85000}}
+    evidence: [P139]
+  # ------------------------------------------------------------------ COMMUNITY INVESTMENT — THAR FOUNDATION
+  - code: SOC.COMMUNITY.TF_SCHOOLS
+    name: Thar Foundation school units operational
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 23}}
+    evidence: [P73, P129]
+    notes: "IT lab with laptops in every TF school; 4-language MTB-MLE programme in 21+ classrooms."
+  - code: SOC.COMMUNITY.TF_STUDENTS
+    name: Children enrolled in Thar Foundation schools
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [SDG.4, GRI.413-1]
+    materiality: community
+    assurance: not_assured
+    values: {TF: {FY2023: 4715}}
+    evidence: [P73, P129]
+  - code: SOC.COMMUNITY.TF_GIRLS
+    name: Girls enrolled in Thar Foundation schools
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 1508}}
+    evidence: [P73, P129]
+  - code: SOC.COMMUNITY.TF_GIRLS_SHARE_PCT
+    name: Girls' share of Thar Foundation enrolment
+    topic: community_investment
+    subtopic: education
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({SOC.COMMUNITY.TF_GIRLS}, {SOC.COMMUNITY.TF_STUDENTS})"
+    inputs: [SOC.COMMUNITY.TF_GIRLS, SOC.COMMUNITY.TF_STUDENTS]
+    evidence_required: false
+  - code: SOC.COMMUNITY.TF_FEMALE_TEACHERS
+    name: Female teachers employed (all 166 teachers are women)
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.5]
+    assurance: not_assured
+    values: {TF: {FY2023: 166}}
+    evidence: [P73, P130]
+  - code: SOC.COMMUNITY.TF_PRIMARY_ENROLMENT_PCT
+    name: Primary enrolment in Block-II villages (ages 4–9)
+    topic: community_investment
+    subtopic: education
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 100}}
+    evidence: [P73, P129]
+  - code: SOC.COMMUNITY.TF_BOARD_RESULT_PCT
+    name: Average federal board examination result (TF schools)
+    topic: community_investment
+    subtopic: education
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 75}}
+    evidence: [P73]
+  - code: SOC.COMMUNITY.TF_SCHOLARSHIPS
+    name: Scholarships awarded (IBA Sukkur, GPI Mithi)
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 50}}
+    evidence: [P73, P129]
+    is_estimate: true
+  - code: SOC.COMMUNITY.TF_CAREER_COUNSELING_STUDENTS
+    name: Students on career-counselling exposure visits
+    topic: community_investment
+    subtopic: education
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 60}}
+    evidence: [P73]
+  - code: SOC.COMMUNITY.TF_SITE_VISITS
+    name: Site-exposure visits for schools
+    topic: community_investment
+    subtopic: education
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 25}}
+    evidence: [P73]
+  - code: SOC.COMMUNITY.TF_EMPLOYMENT_KT
+    name: People employed through Khushhal Thar database
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [SDG.1, SDG.8]
+    materiality: community
+    assurance: not_assured
+    values: {TF: {FY2023: 26500}}
+    evidence: [P73, P123]
+  - code: SOC.COMMUNITY.TF_EMPLOYMENT_SHARE_PCT
+    name: Share of total Thar project employment via Khushhal Thar
+    topic: community_investment
+    subtopic: livelihoods
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 60}}
+    evidence: [P73, P123]
+    is_estimate: true
+  - code: SOC.COMMUNITY.TF_VOCATIONAL_TRAINED
+    name: Vocational trainees completed (solar & welding, 2 batches)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 46}}
+    evidence: [P73, P129]
+  - code: SOC.COMMUNITY.TF_YOUTH_TECH_TRAINED
+    name: Local youths trained on technical skills and employed in local industry
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 3000}}
+    evidence: [P73, P129]
+  - code: SOC.COMMUNITY.TF_YOUTH_MECH_ELEC_TRAINED
+    name: Local youths trained on mechanical and electrical courses
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 250}}
+    evidence: [P73, P129]
+  - code: SOC.COMMUNITY.TF_USL_SELECTED
+    name: First batch selected for self O&M (Primehr)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 34}}
+    evidence: [P73]
+  - code: SOC.COMMUNITY.TF_DRIVERS_TESTED
+    name: Tharparkar drivers appearing for dump-truck test
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 250}}
+    evidence: [P73]
+  - code: SOC.COMMUNITY.TF_SMALL_GRANTS
+    name: Small enterprise grants (incl. women and differently-abled persons)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.1, SDG.10]
+    assurance: not_assured
+    values: {TF: {FY2023: 134}}
+    evidence: [P73, P123]
+  - code: SOC.COMMUNITY.TF_WOMEN_DUMP_TRUCK
+    name: Women trained as dump-truck drivers
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.5]
+    assurance: not_assured
+    values: {TF: {FY2023: 70}}
+    evidence: [P74, P130]
+    is_estimate: true
+  - code: SOC.COMMUNITY.TF_WOMEN_RICKSHAW
+    name: Women trained as rickshaw drivers (school transport)
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 2}}
+    evidence: [P74, P130]
+  - code: SOC.COMMUNITY.TF_WOMEN_ENTREPRENEUR_GRANTS
+    name: Local female entrepreneurs provided with grants
+    topic: community_investment
+    subtopic: livelihoods
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 64}}
+    evidence: [P74, P130]
+  - code: SOC.COMMUNITY.TF_OPD
+    name: Total OPD patient flow — Thar Foundation health facilities
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [SDG.3]
+    materiality: community
+    assurance: not_assured
+    values: {TF: {FY2023: 73000}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_HOSPITAL_BEDS
+    name: Thar Foundation Hospital capacity (Islamkot)
+    topic: community_investment
+    subtopic: health
+    unit: beds
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 120}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_CHILD_NUTRITION_SCREENED
+    name: Children screened for nutrition (6 months–5 years)
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.2]
+    assurance: not_assured
+    values: {TF: {FY2023: 7000}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_MOTHERS_COUNSELLED
+    name: Mothers counselled on balanced diet
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 1000}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_EYE_SCREENED
+    name: Patients screened at free eye camp (Al-Baseer)
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 2500}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_EYE_SURGERIES
+    name: Free phaco surgeries supported
+    topic: community_investment
+    subtopic: health
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 109}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_TB_SCREENED
+    name: Patients screened at TB camps (digital X-ray, with IRD)
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 733}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_TB_POSITIVE
+    name: TB-positive cases identified and registered
+    topic: community_investment
+    subtopic: health
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 5}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_CONSULTANT_CLINIC_OPD
+    name: OPD flow at weekly consultant clinics (Indus Hospital, from Nov 2023)
+    topic: community_investment
+    subtopic: health
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 750}}
+    evidence: [P74, P126]
+    is_estimate: true
+  - code: SOC.COMMUNITY.TF_MOBILE_VAN_VILLAGES
+    name: Villages served by mobile health van (taluka Islamkot)
+    topic: community_investment
+    subtopic: health
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 42}}
+    evidence: [P76, P126]
+  - code: SOC.COMMUNITY.TF_POLIO_VACCINATED_PCT
+    name: Anti-polio vaccination coverage — Thar Coal Block-II
+    topic: community_investment
+    subtopic: health
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 100}}
+    evidence: [P74, P126]
+  - code: SOC.COMMUNITY.TF_HEPATITIS_PREVALENCE_PCT
+    name: Hepatitis prevalence — Block-II (below 1%)
+    topic: community_investment
+    subtopic: health
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: lower_is_better
+    assurance: not_assured
+    values: {TF: {FY2023: 1}}
+    evidence: [P74, P126]
+    is_estimate: true
+    notes: "Reported as 'prevalence rate below 1%' — upper bound stored."
+  - code: SOC.COMMUNITY.TF_HOUSEHOLDS_RELOCATED
+    name: Households relocated to New Senhri Dars model village
+    topic: community_investment
+    subtopic: infrastructure
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.11]
+    assurance: not_assured
+    values: {TF: {FY2023: 172}}
+    evidence: [P133]
+  - code: SOC.COMMUNITY.TF_HOUSEHOLDS_GORANO_RESETTLED
+    name: Households resettled — Allah Dino Hajjam (Gorano)
+    topic: community_investment
+    subtopic: infrastructure
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 16}}
+    evidence: [P133]
+    notes: "A further 6-household village (Shafi Ji Dhani) is under resettlement."
+  - code: SOC.COMMUNITY.TF_LATRINES
+    name: Low-cost pit latrines constructed (Village Improvement Programme)
+    topic: community_investment
+    subtopic: infrastructure
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.11]
+    assurance: not_assured
+    values: {TF: {FY2023: 70}}
+    evidence: [P133]
+  - code: SOC.COMMUNITY.TF_SOLAR_SYSTEMS_GORANO
+    name: Solar systems installed — Gorano area
+    topic: community_investment
+    subtopic: infrastructure
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 70}}
+    evidence: [P133]
+  - code: SOC.COMMUNITY.TF_SOLAR_UNITS_BLOCK2
+    name: Solar units installed — Block-II village solarisation pilot
+    topic: community_investment
+    subtopic: infrastructure
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 1035}}
+    evidence: [P133]
+  - code: SOC.COMMUNITY.TF_SOLAR_HOUSEHOLDS
+    name: Households benefiting from Block-II solarisation
+    topic: community_investment
+    subtopic: infrastructure
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.7]
+    assurance: not_assured
+    values: {TF: {FY2023: 2500}}
+    evidence: [P133]
+    is_estimate: true
+  - code: SOC.COMMUNITY.TF_VILLAGES_SOLARIZED_PCT
+    name: Block-II villages solarised (6 of 9)
+    topic: community_investment
+    subtopic: infrastructure
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    frameworks: [SDG.11]
+    assurance: not_assured
+    values: {TF: {FY2023: 70}}
+    evidence: [P133]
+  - code: SOC.COMMUNITY.TF_RO_PLANTS
+    name: RO plants supplying clean drinking water (Thar)
+    topic: community_investment
+    subtopic: water
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.6]
+    assurance: not_assured
+    values: {TF: {FY2023: 19}}
+    evidence: [P133]
+    notes: "2 new RO units inaugurated at Meghe Jo Tar; RO management committees formed."
+  - code: SOC.COMMUNITY.TF_RO_BENEFICIARIES
+    name: Individuals benefiting from Thar RO plants
+    topic: community_investment
+    subtopic: water
+    unit: headcount
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 35000}}
+    evidence: [P133]
+    is_estimate: true
+  - code: SOC.COMMUNITY.TF_FISH_KG
+    name: Fish distributed to the community from Gorano lake
+    topic: community_investment
+    subtopic: livelihoods
+    unit: kg
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    frameworks: [SDG.2]
+    assurance: not_assured
+    values: {TF: {FY2023: 70000}}
+    evidence: [P124]
+    is_estimate: true
+  - code: SOC.COMMUNITY.TF_BIOSALINE_ORCHARD_ACRES
+    name: Bio-saline fruit orchard planned with PARC
+    topic: community_investment
+    subtopic: livelihoods
+    unit: acres
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 20}}
+    evidence: [P74]
+  - code: SOC.COMMUNITY.PROGRAMMES
+    name: Community investment model and partnerships (narrative)
+    topic: community_investment
+    subtopic: livelihoods
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values:
+      EF: {FY2023: "Inclusive business model: group-company and external donor contributions channelled through Engro Foundation into livelihoods & capacity building, education & skills, environment & ecosystems, healthcare, infrastructure and disaster relief; partners include WWF, IUCN, TCF, TTWF, SINA, IRC, Sahara Welfare Foundation, Hunar Foundation, TWF, Malala Fund (STEAM), USDA/Winrock, National Foods (chili supply chain MoU)."}
+      TF: {FY2023: "CSR wing of Thar Block II partners (Government of Sindh, Engro Energy, HubCo, HBL, CMEC, Thal Limited); partners include IUCN, AKUH, Indus Hospital, Aman Foundation, SDG Support Unit (Govt of Sindh), Mehran University; Sindh Mental Health Authority tele-psychiatry agreement; 1122 emergency services initiative."}
+    evidence: [P68, P73, P74, P75, P76, P143]

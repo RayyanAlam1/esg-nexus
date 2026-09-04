@@ -1,0 +1,1253 @@
+# Prosperity metrics — "performance with purpose" (pp.95–110): key figures, snapshot, wealth generated & distributed,
+# business-unit performance, capex & buyback, tax, credit ratings. Monetary values in PKR millions unless stated.
+defaults:
+  evidence_required: true
+  assurance: limited
+  status: final
+metrics:
+  # ------------------------------------------------------------------ CONSOLIDATED FINANCIALS
+  - code: ECO.FIN.REVENUE
+    name: Consolidated revenue
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, SDG.8]
+    materiality: economic_performance
+    values: {ECORP: {FY2023: 482489, FY2022: 356428}}
+    evidence: [P97, P101, P103]
+  - code: ECO.FIN.REVENUE_GROWTH_PCT
+    name: Consolidated revenue growth
+    topic: economic_performance
+    subtopic: growth
+    unit: "%"
+    data_type: percentage
+    kind: yoy
+    aggregation: none
+    direction: higher_is_better
+    formula: "yoy({ECO.FIN.REVENUE}, {ECO.FIN.REVENUE@prev})"
+    inputs: [ECO.FIN.REVENUE]
+    validation: {tolerance_pct: 3}
+    source_type: reported
+    values: {ECORP: {FY2023: 35}}
+    evidence: [P19, P103]
+    description: Reported "grew by 35%"; recalculated 35.4%.
+  - code: ECO.FIN.EBITDA
+    name: EBITDA
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    values: {ECORP: {FY2023: 142176, FY2022: 113318}}
+    evidence: [P97]
+  - code: ECO.FIN.EBITDA_MARGIN_PCT
+    name: EBITDA margin
+    topic: economic_performance
+    subtopic: financials
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({ECO.FIN.EBITDA}, {ECO.FIN.REVENUE})"
+    inputs: [ECO.FIN.EBITDA, ECO.FIN.REVENUE]
+    evidence_required: false
+  - code: ECO.FIN.EPS
+    name: Earnings per share (after thermal-asset remeasurement)
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR
+    data_type: currency
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    values: {ECORP: {FY2023: 38.60, FY2022: 42.23}}
+    evidence: [P97, P103]
+  - code: ECO.FIN.EPS_EXCL_THERMAL
+    name: Earnings per share excluding thermal-asset carrying-value adjustment
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 63.01, FY2022: 42.23}}
+    evidence: [P97, P103]
+  - code: ECO.FIN.PAT_CONSOLIDATED
+    name: Consolidated profit after tax (after thermal remeasurement)
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    values: {ECORP: {FY2023: 36000, FY2022: 46000}}
+    evidence: [P103]
+    is_estimate: true
+    notes: "Reported in billions (PKR 36 bn 2023; PKR 46 bn 2022 pre-adjustment basis)."
+  - code: ECO.FIN.PAT_BEFORE_THERMAL
+    name: Consolidated PAT before thermal-asset accounting impact
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 66000, FY2022: 46000}}
+    evidence: [P19, P103]
+    is_estimate: true
+  - code: ECO.FIN.PAT_ATTRIBUTABLE
+    name: PAT attributable to shareholders (after thermal impact)
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 21000, FY2022: 24000}}
+    evidence: [P103]
+    is_estimate: true
+    notes: "2023 before thermal impact: PKR 34 bn."
+  - code: ECO.FIN.PAT_STANDALONE
+    name: Standalone PAT (Engro Corporation)
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP-HQ: {FY2023: 18000, FY2022: 21000}}
+    evidence: [P103]
+    is_estimate: true
+    notes: "EPS PKR 32.26; 17% decrease mainly due to Super Tax on dividends."
+  - code: ECO.FIN.THERMAL_IMPAIRMENT
+    name: Accounting impact of thermal-asset remeasurement (IAS 36)
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 30000}}
+    evidence: [P103]
+    is_estimate: true
+    notes: "Owners' share PKR 13 bn."
+  - code: ECO.FIN.TOTAL_ASSETS
+    name: Total assets
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 802496, FY2022: 749416}}
+    evidence: [P97]
+  - code: ECO.FIN.TOTAL_EQUITY
+    name: Total equity
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 223133, FY2022: 240584}}
+    evidence: [P97]
+  - code: ECO.FIN.CAPEX
+    name: Capital expenditure (consolidated)
+    topic: investment
+    subtopic: capex
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    is_kpi: true
+    frameworks: [WEF.PROSPERITY.FINANCIAL_INVESTMENT, SDG.9]
+    values: {ECORP: {FY2023: 31366, FY2022: 40730}}
+    evidence: [P97, P108]
+  - code: ECO.FIN.DEPRECIATION
+    name: Total depreciation charge
+    topic: investment
+    subtopic: capex
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.FINANCIAL_INVESTMENT]
+    values: {ECORP: {FY2023: 18500, FY2022: 14600}}
+    evidence: [P108]
+    is_estimate: true
+    notes: "Reported as Rs 18.5 bn / 14.6 bn."
+  - code: ECO.FIN.NET_INVESTMENT
+    name: Net investment (CapEx − depreciation)
+    topic: investment
+    subtopic: capex
+    unit: PKR mn
+    data_type: currency
+    kind: derived
+    aggregation: none
+    formula: "nz({ECO.FIN.CAPEX}) - nz({ECO.FIN.DEPRECIATION})"
+    inputs: [ECO.FIN.CAPEX, ECO.FIN.DEPRECIATION]
+    frameworks: [WEF.PROSPERITY.FINANCIAL_INVESTMENT]
+    evidence_required: false
+  - code: ECO.FIN.CASH_FROM_OPERATIONS
+    name: Cash flow from operations
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 106963, FY2022: 76881}}
+    evidence: [P97]
+  - code: ECO.FIN.MARKET_CAP
+    name: Market capitalisation
+    topic: economic_performance
+    subtopic: financials
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 158257, FY2022: 150961}}
+    evidence: [P97]
+  - code: ECO.FIN.DIVIDEND_PAID
+    name: Dividend paid
+    topic: investment
+    subtopic: buyback
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.FINANCIAL_INVESTMENT]
+    values: {ECORP: {FY2023: 42414, FY2022: 37042}}
+    evidence: [P97, P104, P109]
+  - code: ECO.FIN.REVENUE_FERTILIZER
+    name: Revenue — Fertilizer segment
+    topic: economic_performance
+    subtopic: segments
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 223705}}
+    evidence: [P101]
+  - code: ECO.FIN.REVENUE_POLYMER
+    name: Revenue — Polymer segment
+    topic: economic_performance
+    subtopic: segments
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 81270}}
+    evidence: [P101]
+  - code: ECO.FIN.REVENUE_TERMINAL
+    name: Revenue — Terminal segment
+    topic: economic_performance
+    subtopic: segments
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 21310}}
+    evidence: [P101]
+  - code: ECO.FIN.REVENUE_POWER_MINING
+    name: Revenue — Power and mining segment
+    topic: economic_performance
+    subtopic: segments
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 122522}}
+    evidence: [P101]
+  - code: ECO.FIN.REVENUE_TELECOM
+    name: Revenue — Connectivity and telecom segment
+    topic: economic_performance
+    subtopic: segments
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 13230}}
+    evidence: [P101]
+  - code: ECO.FIN.REVENUE_OTHERS
+    name: Revenue — Others
+    topic: economic_performance
+    subtopic: segments
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 20452}}
+    evidence: [P101]
+  - code: ECO.FIN.REVENUE_SEGMENT_CHECK
+    name: Segment revenue sum (check vs consolidated revenue)
+    topic: economic_performance
+    subtopic: segments
+    unit: PKR mn
+    data_type: currency
+    kind: derived
+    aggregation: none
+    formula: "nz({ECO.FIN.REVENUE_FERTILIZER}) + nz({ECO.FIN.REVENUE_POLYMER}) + nz({ECO.FIN.REVENUE_TERMINAL}) + nz({ECO.FIN.REVENUE_POWER_MINING}) + nz({ECO.FIN.REVENUE_TELECOM}) + nz({ECO.FIN.REVENUE_OTHERS})"
+    inputs: [ECO.FIN.REVENUE_FERTILIZER, ECO.FIN.REVENUE_POLYMER, ECO.FIN.REVENUE_TERMINAL, ECO.FIN.REVENUE_POWER_MINING, ECO.FIN.REVENUE_TELECOM, ECO.FIN.REVENUE_OTHERS]
+    evidence_required: false
+    description: 223,705 + 81,270 + 21,310 + 122,522 + 13,230 + 20,452 = 482,489 ✔.
+  # ------------------------------------------------------------------ ECONOMIC VALUE GENERATED & DISTRIBUTED
+  - code: ECO.EVGD.TOTAL_REVENUE_INCL_TAX
+    name: Total revenue inclusive of sales tax and other income
+    topic: wealth_distribution
+    subtopic: generated
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION]
+    values: {ECORP: {FY2023: 554877, FY2022: 409914}}
+    evidence: [P103]
+  - code: ECO.EVGD.BOUGHT_IN
+    name: Bought-in material and services
+    topic: wealth_distribution
+    subtopic: generated
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION]
+    values: {ECORP: {FY2023: 319082, FY2022: 246176}}
+    evidence: [P103]
+  - code: ECO.EVGD.WEALTH_GENERATED
+    name: Wealth generated (economic value added)
+    topic: wealth_distribution
+    subtopic: generated
+    unit: PKR mn
+    data_type: currency
+    kind: derived
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    formula: "nz({ECO.EVGD.TOTAL_REVENUE_INCL_TAX}) - nz({ECO.EVGD.BOUGHT_IN})"
+    inputs: [ECO.EVGD.TOTAL_REVENUE_INCL_TAX, ECO.EVGD.BOUGHT_IN]
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, GRI.201-1, SDG.8]
+    materiality: economic_performance
+    validation: {tolerance_pct: 0.1}
+    source_type: reported
+    values: {ECORP: {FY2023: 235795, FY2022: 163738}}
+    evidence: [P101, P103]
+  - code: ECO.EVGD.EMPLOYEES
+    name: Distributed to employees — salaries, benefits and other costs
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, GRI.201-1]
+    values: {ECORP: {FY2023: 16888, FY2022: 14137}}
+    evidence: [P101, P104]
+  - code: ECO.EVGD.GOVERNMENT
+    name: Distributed to government — taxes, duties and development surcharge
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, GRI.201-1]
+    values: {ECORP: {FY2023: 83012, FY2022: 62566}}
+    evidence: [P101, P104]
+  - code: ECO.EVGD.SOCIETY
+    name: Distributed to society — donations (education, health, environment, disaster)
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, GRI.201-1]
+    values: {ECORP: {FY2023: 1454, FY2022: 801}}
+    evidence: [P101, P104]
+  - code: ECO.EVGD.DIVIDENDS
+    name: Distributed to providers of capital — dividends to shareholders
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, GRI.201-1]
+    values: {ECORP: {FY2023: 42414, FY2022: 37042}}
+    evidence: [P104]
+  - code: ECO.EVGD.INTEREST
+    name: Distributed to providers of capital — mark-up / interest on borrowings
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, GRI.201-1]
+    values: {ECORP: {FY2023: 44538, FY2022: 28744}}
+    evidence: [P104]
+  - code: ECO.EVGD.RETAINED
+    name: Retained for reinvestment and growth (depreciation, amortisation, thermal adjustment, retained profit)
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, GRI.201-1]
+    values: {ECORP: {FY2023: 47489, FY2022: 20448}}
+    evidence: [P101, P104]
+    notes: "Pie chart (p.101) prints 47,488; statement (p.104) prints 47,489 — 1 PKR mn rounding difference flagged."
+  - code: ECO.EVGD.DISTRIBUTED_CHECK
+    name: Wealth distributed — sum of components (check vs wealth generated)
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: PKR mn
+    data_type: currency
+    kind: derived
+    aggregation: none
+    formula: "nz({ECO.EVGD.EMPLOYEES}) + nz({ECO.EVGD.GOVERNMENT}) + nz({ECO.EVGD.SOCIETY}) + nz({ECO.EVGD.DIVIDENDS}) + nz({ECO.EVGD.INTEREST}) + nz({ECO.EVGD.RETAINED})"
+    inputs: [ECO.EVGD.EMPLOYEES, ECO.EVGD.GOVERNMENT, ECO.EVGD.SOCIETY, ECO.EVGD.DIVIDENDS, ECO.EVGD.INTEREST, ECO.EVGD.RETAINED]
+    evidence_required: false
+    description: 16,888 + 83,012 + 1,454 + 42,414 + 44,538 + 47,489 = 235,795 ✔.
+  - code: ECO.EVGD.EMPLOYEES_PCT
+    name: Share distributed to employees
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({ECO.EVGD.EMPLOYEES}, {ECO.EVGD.WEALTH_GENERATED})"
+    inputs: [ECO.EVGD.EMPLOYEES, ECO.EVGD.WEALTH_GENERATED]
+    validation: {tolerance_pct: 1}
+    source_type: reported
+    values: {ECORP: {FY2023: 7.16, FY2022: 8.60}}
+    evidence: [P104]
+  - code: ECO.EVGD.GOVERNMENT_PCT
+    name: Share distributed to government
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({ECO.EVGD.GOVERNMENT}, {ECO.EVGD.WEALTH_GENERATED})"
+    inputs: [ECO.EVGD.GOVERNMENT, ECO.EVGD.WEALTH_GENERATED]
+    validation: {tolerance_pct: 1}
+    source_type: reported
+    values: {ECORP: {FY2023: 35.21, FY2022: 38.20}}
+    evidence: [P104]
+  - code: ECO.EVGD.SOCIETY_PCT
+    name: Share distributed to society
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    is_kpi: true
+    formula: "pct({ECO.EVGD.SOCIETY}, {ECO.EVGD.WEALTH_GENERATED})"
+    inputs: [ECO.EVGD.SOCIETY, ECO.EVGD.WEALTH_GENERATED]
+    validation: {tolerance_pct: 2}
+    source_type: reported
+    values: {ECORP: {FY2023: 0.62, FY2022: 0.50}}
+    evidence: [P104]
+  - code: ECO.EVGD.DIVIDENDS_PCT
+    name: Share distributed as dividends
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({ECO.EVGD.DIVIDENDS}, {ECO.EVGD.WEALTH_GENERATED})"
+    inputs: [ECO.EVGD.DIVIDENDS, ECO.EVGD.WEALTH_GENERATED]
+    validation: {tolerance_pct: 1}
+    source_type: reported
+    values: {ECORP: {FY2023: 17.99, FY2022: 22.60}}
+    evidence: [P104]
+  - code: ECO.EVGD.INTEREST_PCT
+    name: Share distributed as interest
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({ECO.EVGD.INTEREST}, {ECO.EVGD.WEALTH_GENERATED})"
+    inputs: [ECO.EVGD.INTEREST, ECO.EVGD.WEALTH_GENERATED]
+    validation: {tolerance_pct: 1}
+    source_type: reported
+    values: {ECORP: {FY2023: 18.89, FY2022: 17.60}}
+    evidence: [P104]
+  - code: ECO.EVGD.RETAINED_PCT
+    name: Share retained for reinvestment
+    topic: wealth_distribution
+    subtopic: distributed
+    unit: "%"
+    data_type: percentage
+    kind: derived
+    aggregation: none
+    formula: "pct({ECO.EVGD.RETAINED}, {ECO.EVGD.WEALTH_GENERATED})"
+    inputs: [ECO.EVGD.RETAINED, ECO.EVGD.WEALTH_GENERATED]
+    validation: {tolerance_pct: 1}
+    source_type: reported
+    values: {ECORP: {FY2023: 20.14, FY2022: 12.50}}
+    evidence: [P104]
+  - code: ECO.GOVT.FINANCIAL_ASSISTANCE
+    name: Financial assistance received from government
+    topic: wealth_distribution
+    subtopic: generated
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.ECONOMIC_CONTRIBUTION, GRI.201-4]
+    description: Cross-referenced to note 25 (Government Grants) of the consolidated financial statements FY2023 — value not in the sustainability report. Data unavailable in this system until the annual-report figure is ingested.
+  # ------------------------------------------------------------------ TAX
+  - code: ECO.TAX.CORPORATE_INCOME_TAX
+    name: Corporate income tax paid
+    topic: tax
+    subtopic: taxes
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.TAX]
+    materiality: economic_performance
+    values: {ECORP: {FY2023: 37685, FY2022: 27083}}
+    evidence: [P109]
+  - code: ECO.TAX.SALES_TAX
+    name: Sales tax paid
+    topic: tax
+    subtopic: taxes
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.TAX]
+    values: {ECORP: {FY2023: 40015, FY2022: 28920}}
+    evidence: [P109]
+  - code: ECO.TAX.OTHER
+    name: Other taxes paid
+    topic: tax
+    subtopic: taxes
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.TAX]
+    values: {ECORP: {FY2023: 5313, FY2022: 6563}}
+    evidence: [P109]
+  - code: ECO.TAX.TOTAL
+    name: Total tax paid
+    topic: tax
+    subtopic: taxes
+    unit: PKR mn
+    data_type: currency
+    kind: derived
+    aggregation: none
+    direction: neutral
+    is_kpi: true
+    formula: "nz({ECO.TAX.CORPORATE_INCOME_TAX}) + nz({ECO.TAX.SALES_TAX}) + nz({ECO.TAX.OTHER})"
+    inputs: [ECO.TAX.CORPORATE_INCOME_TAX, ECO.TAX.SALES_TAX, ECO.TAX.OTHER]
+    frameworks: [WEF.PROSPERITY.TAX]
+    materiality: economic_performance
+    evidence_required: false
+    description: 37,685 + 40,015 + 5,313 = 83,013 vs "To Government" 83,012 in the wealth statement (1 PKR mn rounding).
+  - code: ECO.TAX.TOTAL_USD_MN
+    name: Taxes contributed to the national exchequer (USD)
+    topic: tax
+    subtopic: taxes
+    unit: USD mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 297}}
+    evidence: [P99, P100]
+  - code: ECO.TAX.POLICY_STATEMENT
+    name: Tax approach (narrative)
+    topic: tax
+    subtopic: policy
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [GRI.207-1]
+    text_values: {ECORP: {FY2023: "Tax approach guided by a Board-approved Tax Policy focused on a high level of tax compliance in all jurisdictions of operation."}}
+    evidence: [P109]
+  # ------------------------------------------------------------------ INVESTMENT & CAPITAL RETURN
+  - code: ECO.INVEST.BUYBACK_SHARES_MN
+    name: Shares repurchased (buyback programme, Feb–Jul 2023)
+    topic: investment
+    subtopic: buyback
+    unit: mn shares
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 39.5}}
+    evidence: [P108]
+  - code: ECO.INVEST.BUYBACK_PCT_CAPITAL
+    name: Buyback as share of issued and paid-up capital
+    topic: investment
+    subtopic: buyback
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 6.86}}
+    evidence: [P108]
+  - code: ECO.INVEST.BUYBACK_VALUE_PKR_MN
+    name: Buyback total value
+    topic: investment
+    subtopic: buyback
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.FINANCIAL_INVESTMENT]
+    values: {ECORP: {FY2023: 11629}}
+    evidence: [P108]
+  - code: ECO.INVEST.BUYBACK_AVG_PRICE_PKR
+    name: Buyback average purchase price per share
+    topic: investment
+    subtopic: buyback
+    unit: PKR
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 293.6}}
+    evidence: [P108]
+    notes: "Dividend-adjusted price PKR 253.6."
+  - code: ECO.INVEST.CAPITAL_RETURNED
+    name: Capital returned to shareholders (dividends + buyback)
+    topic: investment
+    subtopic: buyback
+    unit: PKR mn
+    data_type: currency
+    kind: derived
+    aggregation: none
+    formula: "nz({ECO.FIN.DIVIDEND_PAID}) + nz({ECO.INVEST.BUYBACK_VALUE_PKR_MN})"
+    inputs: [ECO.FIN.DIVIDEND_PAID, ECO.INVEST.BUYBACK_VALUE_PKR_MN]
+    frameworks: [WEF.PROSPERITY.FINANCIAL_INVESTMENT]
+    evidence_required: false
+  - code: ECO.INVEST.PEF_PROJECT_USD_MN
+    name: Gas Pressure Enhancement Facility project outlay (EFERT, Mari field)
+    topic: investment
+    subtopic: projects
+    unit: USD mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EFERT: {FY2023: 100}}
+    evidence: [P108]
+    is_estimate: true
+  - code: ECO.INVEST.H2O2_CAPACITY_KT
+    name: Hydrogen peroxide plant capacity (EPCL, commissioning 2H 2024)
+    topic: investment
+    subtopic: projects
+    unit: KT / year
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 28}}
+    evidence: [P108]
+    is_estimate: true
+  - code: ECO.INVEST.EEAP_EQUITY_INJECTION
+    name: Equity injection into Engro Eximp Agriproducts
+    topic: investment
+    subtopic: projects
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EEAP: {FY2023: 2500}}
+    evidence: [P107]
+  - code: ECO.INVEST.STRATEGY
+    name: Investment strategy and capital return narrative
+    topic: investment
+    subtopic: projects
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.FINANCIAL_INVESTMENT]
+    text_values: {ECORP: {FY2023: "Proposed divestment of thermal energy assets (EPQL, EPTL, SECMC via EEL) through a sale of shares to Liberty Mills and parties in concert; telecom infrastructure vertical (Enfrashare) expansion; Gas Pressure Enhancement Facility (USD ~100 mn); Hydrogen Peroxide facility (~28 KTPA, 2H 2024); share buyback of 39.5 mn shares (6.86%) for PKR 11,629 mn concluded 25 July 2023; dividends of PKR 42 bn."}}
+    evidence: [P103, P107, P108, P109]
+  - code: ECO.INNOVATION.RD_EXPENSE
+    name: Research and development expenses
+    topic: innovation
+    subtopic: rd
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PROSPERITY.RD]
+    description: Cross-referenced to note 40 of the consolidated financial statements FY2023 — not disclosed in the sustainability report. Data unavailable.
+  # ------------------------------------------------------------------ BUSINESS UNIT PERFORMANCE
+  - code: ECO.BUSINESS.EFERT_UREA_SALES_KT
+    name: Urea sales volume
+    topic: business_performance
+    subtopic: fertilizer
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    frameworks: [SDG.2]
+    values: {EFERT: {FY2023: 2327, FY2022: 1935}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EFERT_UREA_PRODUCTION_KT
+    name: Urea production volume (record)
+    topic: business_performance
+    subtopic: fertilizer
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    frameworks: [SASB.RT-CH-000.A]
+    values: {EFERT: {FY2023: 2320}}
+    evidence: [P19]
+    is_estimate: true
+    notes: "Reported as '2.32 million tons'."
+  - code: ECO.BUSINESS.EFERT_UREA_MARKET_SHARE_PCT
+    name: Urea market share
+    topic: business_performance
+    subtopic: fertilizer
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EFERT: {FY2023: 35, FY2022: 29}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EFERT_PHOSPHATES_SALES_KT
+    name: Phosphates sales volume
+    topic: business_performance
+    subtopic: fertilizer
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EFERT: {FY2023: 365, FY2022: 333}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EFERT_REVENUE
+    name: Fertilizer business revenue
+    topic: business_performance
+    subtopic: fertilizer
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EFERT: {FY2023: 224000, FY2022: 157000}}
+    evidence: [P105]
+    is_estimate: true
+    notes: "Reported in billions (PKR 224 bn / 157 bn); segment figure 223,705 on p.101."
+  - code: ECO.BUSINESS.EFERT_PAT
+    name: Fertilizer business profit after tax
+    topic: business_performance
+    subtopic: fertilizer
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EFERT: {FY2023: 26000, FY2022: 16000}}
+    evidence: [P19, P105]
+    is_estimate: true
+  - code: ECO.BUSINESS.EFERT_IMPORT_SUBSTITUTION_USD_MN
+    name: Import substitution through local urea manufacturing
+    topic: business_performance
+    subtopic: fertilizer
+    unit: USD mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EFERT: {FY2023: 835}}
+    evidence: [P19, P99, P105]
+    notes: "35% of the industry's USD 2.3 bn foreign-exchange saving; urea offered at ~40% discount to international prices."
+  - code: ECO.BUSINESS.EPCL_MARKET_SHARE_PCT
+    name: PVC domestic market share
+    topic: business_performance
+    subtopic: polymer
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 89}}
+    evidence: [P20, P105]
+  - code: ECO.BUSINESS.EPCL_REVENUE
+    name: Polymer business revenue
+    topic: business_performance
+    subtopic: polymer
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 81000, FY2022: 82000}}
+    evidence: [P105]
+    is_estimate: true
+  - code: ECO.BUSINESS.EPCL_PAT
+    name: Polymer business profit after tax
+    topic: business_performance
+    subtopic: polymer
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 9000, FY2022: 12000}}
+    evidence: [P105]
+    is_estimate: true
+  - code: ECO.BUSINESS.EPCL_DOMESTIC_SALES_KT
+    name: PVC domestic sales volume
+    topic: business_performance
+    subtopic: polymer
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 199, FY2022: 231}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EPCL_EXPORTS_KT
+    name: Export volume (PVC and caustic soda)
+    topic: business_performance
+    subtopic: polymer
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 44}}
+    evidence: [P20, P105]
+    notes: "Includes 22 KT caustic soda exports."
+  - code: ECO.BUSINESS.EPCL_CAUSTIC_EXPORTS_KT
+    name: Caustic soda export volume
+    topic: business_performance
+    subtopic: polymer
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 22}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EPCL_FX_EARNED_USD_MN
+    name: Foreign exchange generated from exports
+    topic: business_performance
+    subtopic: polymer
+    unit: USD mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 26}}
+    evidence: [P20, P105]
+  - code: ECO.BUSINESS.EPCL_IMPORT_SUBSTITUTION_USD_MN
+    name: Import substitution through local PVC & VCM production
+    topic: business_performance
+    subtopic: polymer
+    unit: USD mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EPCL: {FY2023: 92.2}}
+    evidence: [P99, P105]
+  - code: ECO.BUSINESS.EPCL_VCM_PRODUCTION_KT
+    name: VCM production (record annual)
+    topic: business_performance
+    subtopic: polymer
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    frameworks: [SASB.RT-CH-000.A]
+    values: {EPCL: {FY2023: 224}}
+    evidence: [P16]
+  - code: ECO.BUSINESS.EPCL_DAYS_WITHOUT_BLACKOUT
+    name: Days without blackout / unplanned VCM shutdown
+    topic: business_performance
+    subtopic: polymer
+    unit: days
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {EPCL: {FY2023: 1000}}
+    evidence: [P16]
+    is_estimate: true
+  - code: ECO.BUSINESS.ENFRA_TOWERS
+    name: Telecom tower sites operationalised
+    topic: business_performance
+    subtopic: telecom
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [SDG.9]
+    values: {ENFRA: {FY2023: 3952}}
+    evidence: [P20, P99, P105]
+  - code: ECO.BUSINESS.ENFRA_TENANCY_RATIO
+    name: Tenancy ratio
+    topic: business_performance
+    subtopic: telecom
+    unit: x
+    data_type: ratio
+    kind: raw
+    aggregation: none
+    values: {ENFRA: {FY2023: 1.21}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.ENFRA_ITC_MARKET_SHARE_PCT
+    name: Market share — independent tower company segment
+    topic: business_performance
+    subtopic: telecom
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {ENFRA: {FY2023: 56}}
+    evidence: [P20]
+  - code: ECO.BUSINESS.ENFRA_COLOCATION_SHARE_PCT
+    name: Share of total colocations market
+    topic: business_performance
+    subtopic: telecom
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {ENFRA: {FY2023: 30}}
+    evidence: [P20, P105]
+  - code: ECO.BUSINESS.ENFRA_TOWER_MARKET_SHARE_PCT
+    name: Share of overall tower market
+    topic: business_performance
+    subtopic: telecom
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {ENFRA: {FY2023: 9}}
+    evidence: [P20]
+  - code: ECO.BUSINESS.EEL_GRID_GWH
+    name: Energy contributed to the national grid
+    topic: business_performance
+    subtopic: energy
+    unit: GWh
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    frameworks: [SDG.7]
+    values: {EEL: {FY2023: 4481}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EEL_MINE_CAPACITY_MTPA
+    name: Thar coal mine capacity
+    topic: business_performance
+    subtopic: energy
+    unit: MTPA
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {SECMC: {FY2023: 7.6}}
+    evidence: [P105]
+    notes: "Phase III to 11.4 MTPA committed; Government of Sindh approval to expand to 16.4 MTPA."
+  - code: ECO.BUSINESS.EPTL_AVAILABILITY_PCT
+    name: Plant availability — Engro Powergen Thar
+    topic: business_performance
+    subtopic: energy
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EPTL: {FY2023: 82}}
+    evidence: [P105]
+    notes: "Lower availability due to first major Type A maintenance."
+  - code: ECO.BUSINESS.EPTL_DISPATCH_GWH
+    name: Electricity dispatched to grid — Engro Powergen Thar
+    topic: business_performance
+    subtopic: energy
+    unit: GWh
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EPTL: {FY2023: 3611, FY2022: 3690}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EPQL_AVAILABILITY_PCT
+    name: Plant availability — Qadirpur power plant
+    topic: business_performance
+    subtopic: energy
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EPQL: {FY2023: 100}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EPQL_DISPATCH_GWH
+    name: Net electrical output dispatched — Qadirpur
+    topic: business_performance
+    subtopic: energy
+    unit: GWh
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EPQL: {FY2023: 870}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EPQL_LOAD_FACTOR_PCT
+    name: Load factor — Qadirpur
+    topic: business_performance
+    subtopic: energy
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EPQL: {FY2023: 46}}
+    evidence: [P105]
+  - code: ECO.BUSINESS.EPQL_PAT
+    name: Profit after tax — Qadirpur
+    topic: business_performance
+    subtopic: energy
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EPQL: {FY2023: 2500, FY2022: 1500}}
+    evidence: [P105]
+    is_estimate: true
+  - code: ECO.BUSINESS.EEL_LIVES_ILLUMINATED_MN
+    name: Lives illuminated through power generation
+    topic: business_performance
+    subtopic: energy
+    unit: mn people
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EEL: {FY2023: 9}}
+    evidence: [P99]
+    is_estimate: true
+    notes: "Calculated by the company using an average of 6.4 people per household (mb-research.de)."
+  - code: ECO.BUSINESS.EVTL_CHEMICAL_THROUGHPUT_KT
+    name: Chemical throughput — Engro Vopak Terminal
+    topic: business_performance
+    subtopic: terminals
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EVTL: {FY2023: 951, FY2022: 1331}}
+    evidence: [P107]
+  - code: ECO.BUSINESS.EVTL_LPG_IMPORT_GROWTH_PCT
+    name: Growth in LPG marine imports handled
+    topic: business_performance
+    subtopic: terminals
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EVTL: {FY2023: 63}}
+    evidence: [P107, P20]
+    notes: "p.107 states 63%; the President's message (p.20) states 64% — inconsistency flagged."
+  - code: ECO.BUSINESS.EVTL_OFFGRID_HOUSEHOLDS_PCT
+    name: Off-grid households served via marine LPG supply
+    topic: business_performance
+    subtopic: terminals
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EVTL: {FY2023: 5}}
+    evidence: [P99, P100]
+  - code: ECO.BUSINESS.EETL_VESSELS
+    name: LNG vessels handled
+    topic: business_performance
+    subtopic: terminals
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {EETL: {FY2023: 73}}
+    evidence: [P107]
+  - code: ECO.BUSINESS.EETL_RLNG_BCF
+    name: Re-gasified LNG delivered to SSGC network
+    topic: business_performance
+    subtopic: terminals
+    unit: bcf
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EETL: {FY2023: 215}}
+    evidence: [P107]
+  - code: ECO.BUSINESS.EETL_GAS_SUPPLY_SHARE_PCT
+    name: Share of Pakistan's total gas supply
+    topic: business_performance
+    subtopic: terminals
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EETL: {FY2023: 15}}
+    evidence: [P99, P107]
+    is_estimate: true
+    notes: "Reported as 13–15% (upper bound stored; p.99 says 'around 15%')."
+  - code: ECO.BUSINESS.EETL_AVAILABILITY_PCT
+    name: Terminal availability factor
+    topic: business_performance
+    subtopic: terminals
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {EETL: {FY2023: 97.1}}
+    evidence: [P107]
+  - code: ECO.BUSINESS.FCEPL_REVENUE
+    name: FrieslandCampina Engro revenue (associate)
+    topic: business_performance
+    subtopic: foods
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {FCEPL: {FY2023: 100000}}
+    evidence: [P20, P107]
+    is_estimate: true
+    notes: "Record topline of PKR 100 bn, +36%."
+  - code: ECO.BUSINESS.FCEPL_REVENUE_GROWTH_PCT
+    name: FrieslandCampina Engro revenue growth
+    topic: business_performance
+    subtopic: foods
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {FCEPL: {FY2023: 36}}
+    evidence: [P107]
+  - code: ECO.BUSINESS.FCEPL_PAT
+    name: FrieslandCampina Engro profit after tax
+    topic: business_performance
+    subtopic: foods
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {FCEPL: {FY2023: 1500, FY2022: 2500}}
+    evidence: [P107]
+    is_estimate: true
+  - code: ECO.BUSINESS.FCEPL_MILK_PAYMENT_GROWTH_PCT
+    name: Increase in milk payments to farmers
+    topic: business_performance
+    subtopic: foods
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    values: {FCEPL: {FY2023: 32}}
+    evidence: [P99, P100]
+  - code: ECO.BUSINESS.EEAP_REVENUE_USD_MN
+    name: Engro Eximp Agriproducts revenue (exports)
+    topic: business_performance
+    subtopic: trading
+    unit: USD mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EEAP: {FY2023: 9.4}}
+    evidence: [P99, P107]
+  - code: ECO.BUSINESS.EEAP_RICE_EXPORTS_KT
+    name: Rice export volume
+    topic: business_performance
+    subtopic: trading
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EEAP: {FY2023: 6.9, FY2022: 37}}
+    evidence: [P107]
+  - code: ECO.BUSINESS.EEAP_DOMESTIC_SALES_KT
+    name: Rice domestic sales volume
+    topic: business_performance
+    subtopic: trading
+    unit: KT
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {EEAP: {FY2023: 6.1}}
+    evidence: [P107]
+  - code: ECO.BUSINESS.EEFZE_TURNOVER_USD_MN
+    name: Engro Eximp FZE turnover
+    topic: business_performance
+    subtopic: trading
+    unit: USD mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EEFZE: {FY2023: 400}}
+    evidence: [P20, P107]
+    is_estimate: true
+  - code: ECO.BUSINESS.EEFZE_COUNTRIES
+    name: Countries traded with — Engro Eximp FZE
+    topic: business_performance
+    subtopic: trading
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {EEFZE: {FY2023: 40}}
+    evidence: [P18, P107]
+    is_estimate: true
+  - code: ECO.BUSINESS.EEFZE_PRODUCTS
+    name: Product categories traded — Engro Eximp FZE
+    topic: business_performance
+    subtopic: trading
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {EEFZE: {FY2023: 30}}
+    evidence: [P18, P107]
+    is_estimate: true
+  - code: ECO.BUSINESS.GROUP_EXPORTS_USD_MN
+    name: Exports achieved for Engro subsidiaries via FZE
+    topic: business_performance
+    subtopic: trading
+    unit: USD mn
+    data_type: currency
+    kind: raw
+    aggregation: none
+    values: {EEFZE: {FY2023: 35}}
+    evidence: [P99, P100]
+    is_estimate: true
+  # ------------------------------------------------------------------ CREDIT RATINGS
+  - code: ECO.RATING.LONG_TERM
+    name: Long-term credit rating
+    topic: credit_ratings
+    subtopic: ratings
+    data_type: text
+    kind: narrative
+    aggregation: none
+    text_values:
+      ECORP: {FY2023: "AA+ (PACRA)"}
+      EFERT: {FY2023: "AA (PACRA)"}
+      EPCL: {FY2023: "AA (PACRA)"}
+      EEAP: {FY2023: "A- (PACRA)"}
+      ENFRA: {FY2023: "A- (VIS)"}
+      EPTL: {FY2023: "AA- (PACRA)"}
+      EETL: {FY2023: "AA- (PACRA)"}
+    evidence: [P111]
+  - code: ECO.RATING.SHORT_TERM
+    name: Short-term credit rating
+    topic: credit_ratings
+    subtopic: ratings
+    data_type: text
+    kind: narrative
+    aggregation: none
+    text_values:
+      ECORP: {FY2023: "A1+ (PACRA)"}
+      EFERT: {FY2023: "A1+ (PACRA)"}
+      EPCL: {FY2023: "A1+ (PACRA)"}
+      EEAP: {FY2023: "A2 (PACRA)"}
+      ENFRA: {FY2023: "A2 (VIS)"}
+      EPTL: {FY2023: "A1 (PACRA)"}
+      EETL: {FY2023: "A1 (PACRA)"}
+    evidence: [P111]

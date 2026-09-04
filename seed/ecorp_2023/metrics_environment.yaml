@@ -1,0 +1,1182 @@
+# Environment metrics — every quantitative and qualitative disclosure in the "planet" section (report pp.79–94)
+# plus climate items from pp.111 and SDG sections (pp.134–141).
+#
+# Value format: values: {ENTITY: {PERIOD: value}}; evidence: [P80] = printed page 80 of the report.
+# `kind: derived` metrics carry a formula evaluated by the deterministic metric engine. Where the report also
+# prints the derived number, it is stored as a *reported* value so the engine can check consistency.
+defaults:
+  evidence_required: true
+  assurance: limited          # WEF core metrics are covered by ISAE 3000 limited assurance (p.02)
+  status: final
+metrics:
+  # ------------------------------------------------------------------ ENERGY
+  - code: ENV.ENERGY.TOTAL
+    name: Total energy consumption
+    topic: energy
+    subtopic: consumption
+    unit: GJ
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PLANET.GHG_EMISSIONS, GRI.302-1, ESRS.E1-5, SASB.RT-CH-130a.1, SDG.7]
+    materiality: energy_emissions
+    validation: {min: 0, max_yoy_change_pct: 100}
+    description: Total energy consumed within the organisation (natural gas as feedstock/fuel, purchased grid electricity, other fuels), in gigajoules.
+    method: Measured and monitored at each company and plant site; group primary sources are natural gas and purchased electricity (p.79).
+    values:
+      EEL: {FY2023: 53797488, FY2022: 51638577}
+      EFERT: {FY2023: 31355427, FY2022: 28417783}
+      EVTL: {FY2023: 8186, FY2022: 8262}
+      EETL: {FY2023: 1367, FY2022: 2543}
+      EPCL: {FY2023: 6451776, FY2022: 6593151}
+      EEAP: {FY2023: 55616, FY2022: 79938}
+      ECORP-HQ: {FY2023: 1073, FY2022: 1939}
+      ENFRA: {FY2023: 777520, FY2022: 442360}
+    evidence: [P80]
+    notes: "Group total 92,448,453 GJ (2023) and 87,184,554 GJ (2022) as printed; the consolidation engine reproduces the totals from entity values."
+  - code: ENV.ENERGY.TOTAL_REPORTED
+    name: Total energy consumption (group total as printed)
+    topic: energy
+    subtopic: consumption
+    unit: GJ
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    direction: lower_is_better
+    frameworks: [GRI.302-1]
+    values: {ECORP: {FY2023: 92448453, FY2022: 87184554}}
+    evidence: [P80]
+    description: Printed group total, retained to cross-check the consolidated sum of entity values.
+  - code: ENV.ENERGY.INTENSITY_REVENUE
+    name: Energy intensity per revenue
+    topic: energy
+    subtopic: efficiency
+    unit: GJ / PKR mn
+    data_type: ratio
+    kind: intensity
+    aggregation: none
+    direction: lower_is_better
+    is_kpi: true
+    formula: "safe_div({ENV.ENERGY.TOTAL}, {ECO.FIN.REVENUE})"
+    inputs: [ENV.ENERGY.TOTAL, ECO.FIN.REVENUE]
+    frameworks: [GRI.302-3, ESRS.E1-5]
+    evidence_required: false
+    description: Total energy consumption divided by consolidated revenue.
+  - code: ENV.ENERGY.YOY_CHANGE_PCT
+    name: Energy consumption year-over-year change
+    topic: energy
+    subtopic: consumption
+    unit: "%"
+    data_type: percentage
+    kind: yoy
+    aggregation: none
+    direction: lower_is_better
+    formula: "yoy({ENV.ENERGY.TOTAL}, {ENV.ENERGY.TOTAL@prev})"
+    inputs: [ENV.ENERGY.TOTAL]
+    evidence_required: false
+    validation: {min: -100, max: 1000}
+  - code: ENV.ENERGY.RENEWABLE_CAPACITY_KW
+    name: Installed renewable (solar) generation capacity
+    topic: energy
+    subtopic: renewable
+    unit: kW
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    is_kpi: true
+    frameworks: [UNGC.P9, SDG.7]
+    assurance: not_assured
+    values:
+      SECMC: {FY2023: 5000}
+      EPTL: {FY2023: 30}
+      EEAP: {FY2023: 1000}
+      EVTL_EETL: {FY2023: 158}
+    evidence: [P83]
+    description: Solar capacity installed at operating sites (SECMC 5 MW auxiliary load; EPTL 30 kW admin building; EEAP 1 MW; EVTL & EETL 158 kW).
+    notes: "EFERT warehouse solarization is recorded separately (count of warehouses) because capacity is stated as '7.2 kW per day per warehouse'."
+  - code: ENV.ENERGY.RENEWABLE_SHARE_PCT
+    name: Share of renewable energy in total energy consumption
+    topic: energy
+    subtopic: renewable
+    unit: "%"
+    data_type: percentage
+    kind: percentage
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [ESRS.E1-5, SASB.RT-CH-130a.1]
+    formula: "pct({ENV.ENERGY.RENEWABLE_CONSUMPTION}, {ENV.ENERGY.TOTAL})"
+    inputs: [ENV.ENERGY.RENEWABLE_CONSUMPTION, ENV.ENERGY.TOTAL]
+    description: Renewable energy consumption ÷ total energy consumption × 100. Renewable consumption in GJ is not disclosed at group level for 2023 — Data unavailable.
+  - code: ENV.ENERGY.RENEWABLE_CONSUMPTION
+    name: Renewable energy consumption
+    topic: energy
+    subtopic: renewable
+    unit: GJ
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    description: Energy consumed from renewable sources. Not disclosed in the 2023 report (gap).
+  - code: ENV.ENERGY.RENEWABLE_SHARE_ELECTRICITY_PCT
+    name: Share of site electricity supplied by on-site solar
+    topic: energy
+    subtopic: renewable
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: avg
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EEAP: {FY2023: 12}, EVTL_EETL: {FY2023: 20}}
+    evidence: [P83]
+    is_estimate: true
+    notes: "EEAP reported as '12–15% of total electricity requirement' (lower bound stored); terminals '~20% of plant load'."
+  - code: ENV.ENERGY.SOLARIZED_TOWERS_PCT
+    name: Telecom towers solarized
+    topic: energy
+    subtopic: renewable
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    assurance: not_assured
+    values: {ENFRA: {FY2023: 50}}
+    evidence: [P83]
+    is_estimate: true
+    notes: "Reported as '~50% of Enfra's telecommunications towers'."
+  - code: ENV.ENERGY.SOLARIZED_WAREHOUSES
+    name: Field warehouses powered by solar
+    topic: energy
+    subtopic: renewable
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EFERT: {FY2023: 80}}
+    evidence: [P83]
+    notes: "'Over 80 warehouses' at 7.2 kW per day per warehouse."
+  - code: ENV.ENERGY.SAVINGS_MWH
+    name: Annual energy saving from Zero-Gap electrolyser modification
+    topic: energy
+    subtopic: efficiency
+    unit: MWh
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [GRI.302-4]
+    assurance: not_assured
+    values: {EPCL: {FY2023: 1.8}}
+    evidence: [P82, P16]
+    notes: "Reported as '1.8 MWh' (p.82) and '1.8 MW of energy conserved' (p.16) — unit inconsistency flagged for review."
+  - code: ENV.ENERGY.EFFICIENCY_REDUCTION_PCT
+    name: Reduction in overall energy consumption from efficiency projects
+    topic: energy
+    subtopic: efficiency
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [GRI.302-4, UNGC.P9]
+    assurance: not_assured
+    values: {EPCL: {FY2023: 6}}
+    evidence: [P82]
+    description: 3 of the electrolysers replaced with Zero-Gap technology → 6% reduction in overall energy consumption.
+  - code: ENV.ENERGY.EFFICIENCY_INITIATIVES
+    name: Energy efficiency initiatives (narrative)
+    topic: energy
+    subtopic: efficiency
+    data_type: text
+    kind: narrative
+    aggregation: none
+    evidence_required: true
+    assurance: not_assured
+    text_values:
+      EFERT: {FY2023: "Plant-1 furnace optimization; AM-II HP purges reduction; NH3 converter optimization; AM-3 HTSC temperature optimization; steam optimizations at URUT-III & Ammonia-III; feed gas enrichment (CO2 reduction); Plant-II flare system; LTR primary reformer burner and turbine exhaust duct replacement; technical paper accepted at Nitrogen+Syngas 2023."}
+      EPCL: {FY2023: "HRSG and Tornado gas turbine insulation rectification; Zero-Gap electrolysers (3 replaced); Oxy Vent Recycle (OVR) and High Temperature Direct Chlorination (HTDC) investments; cooling tower pump load optimization."}
+      EPQL: {FY2023: "Uses low-BTU high-sulphur permeate gas from Qadirpur field (previously flared) for electricity generation."}
+    evidence: [P81, P82]
+  # ------------------------------------------------------------------ GHG
+  - code: ENV.GHG.SCOPE1
+    name: Scope 1 GHG emissions
+    topic: ghg_emissions
+    subtopic: scope1
+    unit: tCO2e
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PLANET.GHG_EMISSIONS, GRI.305-1, IFRS.S2.29a, ESRS.E1-6, SASB.RT-CH-110a.1, SDG.13]
+    materiality: energy_emissions
+    validation: {min: 0, max_yoy_change_pct: 50}
+    description: Direct emissions from stationary, process and mobile combustion (excluding employee commute in company vehicles) plus fugitive emissions for SECMC (CH4, mining) and EFERT (CO2, urea production). Gases covered — CO2, CH4, N2O.
+    method: GHG Protocol Scope 1; calculations based on current data collection systems (p.81).
+    values:
+      EEL: {FY2023: 5075867, FY2022: 4783758}
+      EFERT: {FY2023: 1897534, FY2022: 1730120}
+      EVTL: {FY2023: 265, FY2022: 379}
+      EETL: {FY2023: 35, FY2022: 93}
+      EPCL: {FY2023: 324557, FY2022: 332587}
+      EEAP: {FY2023: 2171, FY2022: 3137}
+      ENFRA: {FY2023: 26809, FY2022: 21340}
+    evidence: [P81]
+    notes: "ECORP (holding) Scope 1 is reported as '-' (nil); group total printed 7,327,238 (2023) / 6,871,414 (2022)."
+  - code: ENV.GHG.SCOPE2
+    name: Scope 2 GHG emissions (location-based)
+    topic: ghg_emissions
+    subtopic: scope2
+    unit: tCO2e
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PLANET.GHG_EMISSIONS, GRI.305-2, IFRS.S2.29a, ESRS.E1-6, SDG.13]
+    materiality: energy_emissions
+    validation: {min: 0, max_yoy_change_pct: 250}
+    description: Indirect emissions from purchased grid electricity.
+    values:
+      EEL: {FY2023: 1224, FY2022: 5211}
+      EFERT: {FY2023: 2508, FY2022: 3590}
+      EVTL: {FY2023: 441, FY2022: 425}
+      EETL: {FY2023: 155, FY2022: 154}
+      EPCL: {FY2023: 124, FY2022: 136}
+      EEAP: {FY2023: 601, FY2022: 1707}
+      ECORP-HQ: {FY2023: 184, FY2022: 332}
+      ENFRA: {FY2023: 63763, FY2022: 21962}
+    evidence: [P81]
+    notes: "ENFRA Scope 2 rose 190% (21,962 → 63,763) with tower expansion — flagged by the YoY consistency check for review."
+  - code: ENV.GHG.SCOPE1_2_TOTAL
+    name: Total GHG emissions (Scope 1 + Scope 2)
+    topic: ghg_emissions
+    subtopic: scope1
+    unit: tCO2e
+    data_type: decimal
+    kind: derived
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    formula: "nz({ENV.GHG.SCOPE1}) + nz({ENV.GHG.SCOPE2})"
+    inputs: [ENV.GHG.SCOPE1, ENV.GHG.SCOPE2]
+    frameworks: [WEF.PLANET.GHG_EMISSIONS, ESRS.E1-6, UNGC.P8, SDG.13]
+    materiality: energy_emissions
+    values:
+      EEL: {FY2023: 5077091, FY2022: 4788969}
+      EFERT: {FY2023: 1900042, FY2022: 1733710}
+      EVTL: {FY2023: 706, FY2022: 804}
+      EETL: {FY2023: 190, FY2022: 247}
+      EPCL: {FY2023: 324681, FY2022: 332723}
+      EEAP: {FY2023: 2772, FY2022: 4844}
+      ECORP-HQ: {FY2023: 184, FY2022: 332}
+      ENFRA: {FY2023: 90572, FY2022: 43302}
+    source_type: reported
+    evidence: [P81]
+    notes: "Group total printed ≈7.4 million tCO2e (7,396,238) for 2023 and 6.9 million (6,904,932) for 2022."
+  - code: ENV.GHG.TOTAL_REPORTED
+    name: Total GHG emissions (group total as printed)
+    topic: ghg_emissions
+    subtopic: scope1
+    unit: tCO2e
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    direction: lower_is_better
+    values: {ECORP: {FY2023: 7396238, FY2022: 6904932}}
+    evidence: [P81]
+    description: Printed group total retained for cross-checking the consolidated sum (Scope 1 total 7,327,238 + Scope 2 total 69,000).
+  - code: ENV.GHG.OTHER
+    name: Other GHG emissions (outside Scope 1/2 tables)
+    topic: ghg_emissions
+    subtopic: scope1
+    unit: tCO2e
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    values: {EEAP: {FY2023: 2385, FY2022: 2911}}
+    evidence: [P81]
+    description: '"Other emissions" column reported only for EEAP (biomass boiler using rice husk).'
+  - code: ENV.GHG.SCOPE3
+    name: Scope 3 GHG emissions
+    topic: ghg_emissions
+    subtopic: scope3
+    unit: tCO2e
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PLANET.GHG_EMISSIONS, GRI.305-3, IFRS.S2.29a, ESRS.E1-6]
+    materiality: energy_emissions
+    description: Material upstream and downstream value-chain emissions. Not reported in 2023 — the report states effects beyond business operations are excluded due to non-availability of verifiable data (p.01). Data unavailable.
+  - code: ENV.GHG.INTENSITY_REVENUE
+    name: GHG emissions intensity per revenue
+    topic: ghg_emissions
+    subtopic: intensity
+    unit: tCO2e / PKR mn
+    data_type: ratio
+    kind: intensity
+    aggregation: none
+    direction: lower_is_better
+    is_kpi: true
+    formula: "safe_div({ENV.GHG.SCOPE1_2_TOTAL}, {ECO.FIN.REVENUE})"
+    inputs: [ENV.GHG.SCOPE1_2_TOTAL, ECO.FIN.REVENUE]
+    frameworks: [GRI.305-4, ESRS.E1-6]
+    evidence_required: false
+  - code: ENV.GHG.INTENSITY_ENERGY
+    name: GHG emissions per unit of energy consumed
+    topic: ghg_emissions
+    subtopic: intensity
+    unit: tCO2e / GJ
+    data_type: ratio
+    kind: intensity
+    aggregation: none
+    direction: lower_is_better
+    formula: "safe_div({ENV.GHG.SCOPE1_2_TOTAL}, {ENV.ENERGY.TOTAL})"
+    inputs: [ENV.GHG.SCOPE1_2_TOTAL, ENV.ENERGY.TOTAL]
+    evidence_required: false
+  - code: ENV.GHG.YOY_CHANGE_PCT
+    name: Total GHG emissions year-over-year change
+    topic: ghg_emissions
+    subtopic: reduction
+    unit: "%"
+    data_type: percentage
+    kind: yoy
+    aggregation: none
+    direction: lower_is_better
+    is_kpi: true
+    formula: "yoy({ENV.GHG.SCOPE1_2_TOTAL}, {ENV.GHG.SCOPE1_2_TOTAL@prev})"
+    inputs: [ENV.GHG.SCOPE1_2_TOTAL]
+    frameworks: [GRI.305-5, SDG.13]
+    evidence_required: false
+    validation: {min: -100, max: 1000}
+  - code: ENV.GHG.SCOPE2_SHARE_PCT
+    name: Scope 2 share of total emissions
+    topic: ghg_emissions
+    subtopic: scope2
+    unit: "%"
+    data_type: percentage
+    kind: percentage
+    aggregation: none
+    formula: "pct({ENV.GHG.SCOPE2}, {ENV.GHG.SCOPE1_2_TOTAL})"
+    inputs: [ENV.GHG.SCOPE2, ENV.GHG.SCOPE1_2_TOTAL]
+    evidence_required: false
+  - code: ENV.GHG.CO2_REDUCTION_INITIATIVE_TPA
+    name: Annual CO2 reduction from efficiency initiatives
+    topic: ghg_emissions
+    subtopic: reduction
+    unit: tCO2 / year
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [GRI.305-5, UNGC.P9, SASB.RT-CH-110a.2]
+    assurance: not_assured
+    values: {EPCL: {FY2023: 9000}}
+    evidence: [P82]
+    description: 9,000 tonnes per annum CO2 reduction from Zero-Gap electrolyser replacement.
+  - code: ENV.GHG.CARBON_STORED_NATURE
+    name: Carbon stored in nature-based solutions (Thar Million Trees)
+    topic: ghg_emissions
+    subtopic: reduction
+    unit: t C
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [ESRS.E1-7, SDG.13]
+    assurance: not_assured
+    values: {SECMC: {FY2023: 319000}}
+    evidence: [P83, P139]
+    description: IUCN Carbon Stock Assessment — approx. 319,000 tonnes of carbon stored in 24 species planted over 5 years in Tharparkar.
+    notes: "Cumulative stock, not an annual removal; unit is tonnes of carbon (not CO2e)."
+  - code: ENV.GHG.GASES_COVERED
+    name: Greenhouse gases included in the inventory
+    topic: ghg_emissions
+    subtopic: methodology
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [GRI.305-1, IFRS.S2.29a]
+    text_values: {ECORP: {FY2023: "CO2, CH4 and N2O captured out of the seven Kyoto gases; SF6, PFCs, HFCs and NF3 not yet captured."}}
+    evidence: [P81]
+  - code: ENV.GHG.METHODOLOGY
+    name: GHG measurement approach and boundary
+    topic: ghg_emissions
+    subtopic: methodology
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [IFRS.S2.29a]
+    text_values: {ECORP: {FY2023: "Sources include stationary, process and mobile combustion (excluding employee commute in company-owned vehicles); fugitive emissions included only for SECMC (CH4, mining) and EFERT (CO2, urea production). Calculations based on current data collection systems; additional data capture planned."}}
+    evidence: [P81]
+  # ------------------------------------------------------------------ CLIMATE
+  - code: ENV.CLIMATE.TCFD_ALIGNMENT
+    name: TCFD implementation status
+    topic: climate
+    subtopic: tcfd
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [WEF.PLANET.TCFD]
+    text_values: {ECORP: {FY2023: "Preliminary assessment of climate-related risks and opportunities classified as physical or transition risk, guided by TCFD. Financial implications and costs of actions not yet available; alignment with IFRS climate standards intended 'in due course'."}}
+    evidence: [P111]
+    notes: "Partial — no timeline (≤3 years) for full TCFD implementation disclosed."
+  - code: ENV.CLIMATE.PARIS_TARGET_SET
+    name: Paris-aligned GHG reduction target set or committed
+    topic: climate
+    subtopic: targets
+    data_type: boolean
+    kind: raw
+    aggregation: none
+    frameworks: [WEF.PLANET.TCFD, IFRS.S1.METRICS, IFRS.S2.33, ESRS.E1-4]
+    values: {ECORP: {FY2023: 0}}
+    evidence: [P111]
+    description: 0 = no Paris-aligned (well-below 2°C / net-zero before 2050) target disclosed in the 2023 report.
+  - code: ENV.CLIMATE.GHG_TARGET
+    name: Quantitative GHG reduction target
+    topic: climate
+    subtopic: targets
+    unit: "%"
+    data_type: percentage
+    kind: target
+    aggregation: none
+    frameworks: [IFRS.S2.33, ESRS.E1-4, SASB.RT-CH-110a.2]
+    description: No quantitative GHG target disclosed — Data unavailable / target not set.
+  - code: ENV.CLIMATE.FINANCIAL_EFFECTS
+    name: Financial effects of climate-related risks and opportunities
+    topic: climate
+    subtopic: risk
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: sum
+    frameworks: [IFRS.S2.STRATEGY.FINANCIAL]
+    description: Report states the financial implications are not available and will be worked on in future (p.111). Data unavailable.
+  - code: ENV.CLIMATE.SCENARIO_ANALYSIS
+    name: Climate scenario analysis / resilience assessment
+    topic: climate
+    subtopic: risk
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [IFRS.S2.STRATEGY.RESILIENCE]
+    description: Not disclosed in 2023 — narrative gap.
+  - code: ENV.CLIMATE.TRANSITION_PLAN
+    name: Climate transition plan
+    topic: climate
+    subtopic: transition
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [ESRS.E1-1]
+    description: Not disclosed in 2023 — narrative gap.
+  - code: ENV.CLIMATE.TRANSITION_RISK_EXPOSURE
+    name: Assets/activities vulnerable to climate transition risks
+    topic: climate
+    subtopic: risk
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    frameworks: [IFRS.S2.29b]
+    description: Not quantified in 2023 (thermal asset divestment and remeasurement of PKR 30 bn are financial-statement items, not a climate-risk quantification). Data unavailable.
+  - code: ENV.CLIMATE.PHYSICAL_RISK_EXPOSURE
+    name: Assets/activities vulnerable to climate physical risks
+    topic: climate
+    subtopic: risk
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    frameworks: [IFRS.S2.29c]
+    description: Not quantified in 2023. Data unavailable.
+  - code: ENV.CLIMATE.CAPITAL_DEPLOYMENT
+    name: Capital deployed towards climate-related risks and opportunities
+    topic: climate
+    subtopic: transition
+    unit: PKR mn
+    data_type: currency
+    kind: raw
+    aggregation: sum
+    frameworks: [IFRS.S2.29e]
+    description: Not quantified in 2023. Data unavailable.
+  - code: ENV.CLIMATE.INTERNAL_CARBON_PRICE
+    name: Internal carbon price
+    topic: climate
+    subtopic: transition
+    unit: PKR / tCO2e
+    data_type: currency
+    kind: raw
+    aggregation: none
+    frameworks: [IFRS.S2.29f]
+    description: Not disclosed. Data unavailable.
+  # ------------------------------------------------------------------ WATER
+  - code: ENV.WATER.WITHDRAWN
+    name: Water withdrawn
+    topic: water
+    subtopic: withdrawal
+    unit: ML
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PLANET.WATER, GRI.303-3, ESRS.E3-4, SASB.RT-CH-140a.1, SDG.6, UNGC.P8]
+    materiality: water
+    validation: {min: 0, max_yoy_change_pct: 50}
+    description: Megalitres of water withdrawn for operations where water is material.
+    values:
+      EEL: {FY2023: 33494, FY2022: 34769}
+      EFERT: {FY2023: 17494, FY2022: 15737}
+      EVTL: {FY2023: 17, FY2022: 19}
+      EETL: {FY2023: 9, FY2022: 8}
+      EPCL: {FY2023: 5168, FY2022: 4709}
+      EEAP: {FY2023: 36, FY2022: 43}
+    evidence: [P91]
+    notes: "Group total printed 56,218 ML (2023) / 55,284 ML (2022)."
+  - code: ENV.WATER.CONSUMED
+    name: Water consumed
+    topic: water
+    subtopic: consumption
+    unit: ML
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PLANET.WATER, GRI.303-5, ESRS.E3-4, SASB.RT-CH-140a.1, SDG.6]
+    materiality: water
+    validation: {min: 0, max_yoy_change_pct: 50}
+    values:
+      EEL: {FY2023: 11946, FY2022: 12174}
+      EFERT: {FY2023: 12523, FY2022: 11510}
+      EVTL: {FY2023: 17, FY2022: 19}
+      EETL: {FY2023: 9, FY2022: 8}
+      EPCL: {FY2023: 4262, FY2022: 3774}
+      EEAP: {FY2023: 18, FY2022: 22}
+    evidence: [P91]
+    notes: "Printed total 28,776 ML (2023); sum of entity values = 28,775 (rounding difference of 1 ML flagged by consistency check)."
+  - code: ENV.WATER.DISCHARGED
+    name: Water discharged
+    topic: water
+    subtopic: discharge
+    unit: ML
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: neutral
+    is_kpi: true
+    frameworks: [GRI.303-4, ESRS.E3-4, SDG.6]
+    materiality: water
+    validation: {min: 0, max_yoy_change_pct: 50}
+    values:
+      EEL: {FY2023: 21548, FY2022: 22595}
+      EFERT: {FY2023: 4971, FY2022: 4227}
+      EPCL: {FY2023: 906, FY2022: 934}
+      EEAP: {FY2023: 18, FY2022: 21}
+    evidence: [P91]
+    notes: "EVTL and EETL discharge reported as '-'. Printed total 27,442 ML (2023); entity sum 27,443."
+  - code: ENV.WATER.TOTALS_REPORTED
+    name: Water withdrawn — group total as printed
+    topic: water
+    subtopic: withdrawal
+    unit: ML
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 56218, FY2022: 55284}}
+    evidence: [P91]
+  - code: ENV.WATER.BALANCE_CHECK
+    name: Water balance residual (withdrawn − consumed − discharged)
+    topic: water
+    subtopic: withdrawal
+    unit: ML
+    data_type: decimal
+    kind: derived
+    aggregation: sum
+    direction: neutral
+    formula: "nz({ENV.WATER.WITHDRAWN}) - nz({ENV.WATER.CONSUMED}) - nz({ENV.WATER.DISCHARGED})"
+    inputs: [ENV.WATER.WITHDRAWN, ENV.WATER.CONSUMED, ENV.WATER.DISCHARGED]
+    evidence_required: false
+    validation: {min: -50, max: 50}
+    description: Consistency metric — should be ≈0 when the water balance closes. Non-zero residuals are raised as data-quality findings.
+  - code: ENV.WATER.WITHDRAWN_STRESSED_PCT
+    name: Share of water withdrawn in high / extremely high water-stress areas
+    topic: water
+    subtopic: stress
+    unit: "%"
+    data_type: percentage
+    kind: percentage
+    aggregation: none
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PLANET.WATER, GRI.303-3, SASB.RT-CH-140a.1]
+    materiality: water
+    description: Percentage of withdrawal from sites in high/extremely high baseline water stress (WRI Aqueduct). Sites identified — EFERT Daharki, EPQL, EEAP — but the percentage is not disclosed and EPQL is not reported separately from EEL. Data unavailable.
+  - code: ENV.WATER.CONSUMED_STRESSED_PCT
+    name: Share of water consumed in high / extremely high water-stress areas
+    topic: water
+    subtopic: stress
+    unit: "%"
+    data_type: percentage
+    kind: percentage
+    aggregation: none
+    direction: lower_is_better
+    frameworks: [WEF.PLANET.WATER, GRI.303-5, ESRS.E3-4]
+    materiality: water
+    description: Not disclosed in 2023. Data unavailable.
+  - code: ENV.WATER.SITES_WATER_STRESSED
+    name: Sites in water-stressed areas (WRI Aqueduct)
+    topic: water
+    subtopic: stress
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 3}}
+    text_values: {ECORP: {FY2023: "EFERT (Daharki), EPQL, EEAP"}}
+    evidence: [P91]
+  - code: ENV.WATER.SAVINGS_TAPS_L
+    name: Potable water saved by tap retrofitting
+    topic: water
+    subtopic: conservation
+    unit: L / year
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EPCL: {FY2023: 1000000}}
+    evidence: [P93]
+  - code: ENV.WATER.SAVINGS_COOLING_TPD
+    name: Cooling water consumption reduction (partial-load optimisation)
+    topic: water
+    subtopic: conservation
+    unit: t / day
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EPQL: {FY2023: 900}}
+    evidence: [P93]
+    is_estimate: true
+    notes: "Reported as '~900 T/Day'."
+  - code: ENV.WATER.ETP_CAPACITY_M3H
+    name: Effluent treatment plant reuse capacity
+    topic: water
+    subtopic: conservation
+    unit: m3 / h
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EPCL: {FY2023: 100}}
+    evidence: [P92]
+    description: Dual-train CFS/ACF/UF/RO effluent treatment converting 100 m³/hr of wastewater into reusable raw water.
+  - code: ENV.WATER.CONSERVATION_INITIATIVES
+    name: Water conservation initiatives (narrative)
+    topic: water
+    subtopic: conservation
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values:
+      EFERT: {FY2023: "Closed-circulation cooling towers with chemical treatment; wastewater reuse for horticulture; effluent treatment facility for residential colonies; LTR projects (cooling water network revamp, heat exchanger cleaning, power steam coil replacement)."}
+      EPCL: {FY2023: "ETP reuse (100 m³/hr); closed-circulation cooling towers; cooling tower fan optimisation; steam trap leakage rectification; water tap retrofitting (1 million L/yr)."}
+      EPQL: {FY2023: "Cooling water system optimisation (~900 t/day); sensor taps; 'Save Water, Save Life' awareness campaign."}
+    evidence: [P91, P92, P93]
+  # ------------------------------------------------------------------ WASTE
+  - code: ENV.WASTE.HAZARDOUS
+    name: Hazardous waste generated
+    topic: waste
+    subtopic: hazardous
+    unit: t
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [GRI.306-3, ESRS.E5-5, SASB.RT-CH-150a.1, SDG.12]
+    materiality: waste
+    validation: {min: 0, max_yoy_change_pct: 50}
+    values:
+      EEL: {FY2023: 431606, FY2022: 358438}
+      EFERT: {FY2023: 257, FY2022: 227}
+      EPCL: {FY2023: 5210, FY2022: 4907}
+      EEAP: {FY2023: 0, FY2022: 0}
+    evidence: [P93]
+    notes: "EVTL/EETL reported '-'. Printed total 437,073 t (2023) / 363,572 t (2022). EEL volume is dominated by mining (SECMC)."
+  - code: ENV.WASTE.NON_HAZARDOUS
+    name: Non-hazardous waste generated
+    topic: waste
+    subtopic: non_hazardous
+    unit: t
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [GRI.306-3, ESRS.E5-5, SDG.12]
+    materiality: waste
+    validation: {min: 0, max_yoy_change_pct: 100}
+    values:
+      EEL: {FY2023: 197, FY2022: 267}
+      EFERT: {FY2023: 1694, FY2022: 2007}
+      EVTL: {FY2023: 18, FY2022: 47}
+      EETL: {FY2023: 12, FY2022: 20}
+      EPCL: {FY2023: 651, FY2022: 373}
+      EEAP: {FY2023: 8, FY2022: 156}
+    evidence: [P93]
+    notes: "Printed total 2,580 t (2023) / 2,870 t (2022)."
+  - code: ENV.WASTE.TOTAL
+    name: Total waste generated
+    topic: waste
+    subtopic: hazardous
+    unit: t
+    data_type: decimal
+    kind: derived
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    formula: "nz({ENV.WASTE.HAZARDOUS}) + nz({ENV.WASTE.NON_HAZARDOUS})"
+    inputs: [ENV.WASTE.HAZARDOUS, ENV.WASTE.NON_HAZARDOUS]
+    frameworks: [GRI.306-3, ESRS.E5-5, UNGC.P8, SDG.12]
+    materiality: waste
+    validation: {tolerance_pct: 0.05}
+    source_type: reported
+    values:
+      EEL: {FY2023: 431804, FY2022: 358706}
+      EFERT: {FY2023: 1949, FY2022: 2234}
+      EVTL: {FY2023: 18, FY2022: 47}
+      EETL: {FY2023: 12, FY2022: 20}
+      EPCL: {FY2023: 5861, FY2022: 5280}
+      EEAP: {FY2023: 8, FY2022: 157}
+    evidence: [P94]
+    notes: "Internal inconsistency in the source: EFERT 257 + 1,694 = 1,951 but printed total is 1,949; EEAP 2022 0 + 156 = 156 vs printed 157; group 437,073 + 2,580 = 439,653 vs printed 439,652. The recalculation check surfaces these as data-quality findings rather than silently correcting them."
+  - code: ENV.WASTE.TOTAL_REPORTED
+    name: Total waste — group total as printed
+    topic: waste
+    subtopic: hazardous
+    unit: t
+    data_type: decimal
+    kind: raw
+    aggregation: none
+    values: {ECORP: {FY2023: 439652, FY2022: 366443}}
+    evidence: [P94]
+  - code: ENV.WASTE.HAZARDOUS_SHARE_PCT
+    name: Hazardous share of total waste
+    topic: waste
+    subtopic: hazardous
+    unit: "%"
+    data_type: percentage
+    kind: percentage
+    aggregation: none
+    formula: "pct({ENV.WASTE.HAZARDOUS}, {ENV.WASTE.TOTAL})"
+    inputs: [ENV.WASTE.HAZARDOUS, ENV.WASTE.TOTAL]
+    evidence_required: false
+  - code: ENV.WASTE.DIVERTED_PCT
+    name: Waste diverted from disposal (recycled / recovered)
+    topic: waste
+    subtopic: circularity
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [ESRS.E5-5, SASB.RT-CH-150a.1]
+    description: Recycling/recovery rates are not quantified in the 2023 report (waste is disposed of/recycled via approved contractors). Data unavailable.
+  - code: ENV.WASTE.PLASTIC_BAGS_ELIMINATED_PCT
+    name: Non-biodegradable bag elimination at owned facilities ("Beyond Plastic" Phase I)
+    topic: waste
+    subtopic: plastics
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [SDG.12]
+    assurance: not_assured
+    values: {EEL: {FY2023: 100}}
+    evidence: [P137]
+  - code: ENV.WASTE.PLASTIC_BOTTLES_REDUCTION_PCT
+    name: Reduction in plastic water bottle consumption at owned facilities
+    topic: waste
+    subtopic: plastics
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    assurance: not_assured
+    values: {EEL: {FY2023: 70}}
+    evidence: [P137]
+  - code: ENV.WASTE.MANAGEMENT_APPROACH
+    name: Waste management approach (narrative)
+    topic: waste
+    subtopic: hazardous
+    data_type: text
+    kind: narrative
+    aggregation: none
+    text_values: {ECORP: {FY2023: "Disposal handled by contractors approved by regulatory authorities; waste disposed of / recycled per environmental regulatory guidelines. EFERT converts colony organic waste into compost; EPCL supports circular-plastics research (Circular Plastics Institute with KSBL, USD 85,000 international funding)."}}
+    evidence: [P93, P137, P139]
+  # ------------------------------------------------------------------ BIODIVERSITY & LAND USE
+  - code: ENV.BIODIVERSITY.SITES_NEAR_PROTECTED
+    name: Sites in or adjacent to protected areas / Key Biodiversity Areas
+    topic: biodiversity
+    subtopic: protected_areas
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    is_kpi: true
+    frameworks: [WEF.PLANET.LAND_USE, GRI.304-1, ESRS.E4-5]
+    values: {ECORP: {FY2023: 0}}
+    evidence: [P84]
+    description: "Manufacturing facilities are not adjacent to any officially protected or Key Biodiversity Areas (p.84)."
+  - code: ENV.BIODIVERSITY.AREA_NEAR_PROTECTED_HA
+    name: Area of sites in or adjacent to protected areas / KBAs
+    topic: biodiversity
+    subtopic: protected_areas
+    unit: ha
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: lower_is_better
+    frameworks: [WEF.PLANET.LAND_USE, GRI.304-1, ESRS.E4-5]
+    values: {ECORP: {FY2023: 0}}
+    evidence: [P84]
+  - code: ENV.BIODIVERSITY.TREES_PLANTED
+    name: Trees planted (programme totals)
+    topic: biodiversity
+    subtopic: afforestation
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [GRI.304-3, UNGC.P8, SDG.15]
+    assurance: not_assured
+    values: {SECMC: {FY2023: 1000000}, EFERT: {FY2023: 2900}, EVTL_EETL: {FY2023: 3500}}
+    evidence: [P83, P85, P138]
+    notes: "SECMC Thar Million Trees is a cumulative 5-year programme total; EFERT 2,900 saplings at 17 schools/colleges (2023 drive, 'thousands' more not quantified); terminals 3,500+ saplings of 30 species on 1,000+ m² urban forest."
+  - code: ENV.BIODIVERSITY.MANGROVE_HA
+    name: Mangrove area planted and maintained (Port Qasim)
+    topic: biodiversity
+    subtopic: marine
+    unit: ha
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [GRI.304-3, SDG.14]
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 500}}
+    evidence: [P83, P89, P139]
+    notes: "500 ha planted 2015–2016 plus 150 ha replanted 2018–2021 under maintenance at Wango Creek and Tor Island (Rhizophora)."
+  - code: ENV.BIODIVERSITY.MANGROVE_REPLANTED_HA
+    name: Mangrove area replanted 2018–2021
+    topic: biodiversity
+    subtopic: marine
+    unit: ha
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 150}}
+    evidence: [P89]
+  - code: ENV.BIODIVERSITY.MANGROVE_SAPLINGS_PLEDGED
+    name: Mangrove saplings pledged ("Plant a Tree, Plant a Hope")
+    topic: biodiversity
+    subtopic: marine
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EFERT: {FY2023: 1000}}
+    evidence: [P83, P138]
+  - code: ENV.BIODIVERSITY.AFFORESTATION_HA
+    name: Afforestation & ecosystem restoration area (WWF partnership)
+    topic: biodiversity
+    subtopic: afforestation
+    unit: ha
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [GRI.304-3, ESRS.E4-5, SDG.15]
+    assurance: not_assured
+    values: {EPCL: {FY2023: 650}}
+    evidence: [P83, P86, P139]
+    notes: "'650+ hectares (1,612 acres)' across Pakistan incl. Jhelum district (Punjab Urial habitat); 84 farmer agreements."
+  - code: ENV.BIODIVERSITY.AFFORESTATION_FARMERS
+    name: Farmers under formal afforestation agreements
+    topic: biodiversity
+    subtopic: afforestation
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EPCL: {FY2023: 84}}
+    evidence: [P86]
+  - code: ENV.BIODIVERSITY.URBAN_FOREST_M2
+    name: Urban forest area within terminal premises
+    topic: biodiversity
+    subtopic: afforestation
+    unit: m2
+    data_type: decimal
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EVTL_EETL: {FY2023: 1000}}
+    evidence: [P83]
+  - code: ENV.BIODIVERSITY.TREE_SPECIES_TMT
+    name: Tree and shrub species planted (Thar Million Trees)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {SECMC: {FY2023: 24}}
+    evidence: [P83, P85]
+  - code: ENV.BIODIVERSITY.BIRD_SPECIES_TMT
+    name: Bird species confirmed at Thar Million Trees sites (IUCN)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {SECMC: {FY2023: 22}}
+    evidence: [P85, P139]
+    notes: "22 species from 14 families incl. Tawny Eagle (vulnerable) and Egyptian Vulture (endangered)."
+  - code: ENV.BIODIVERSITY.VULTURE_NEST_TREES
+    name: Trees with vulture nests under community protection
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    direction: higher_is_better
+    frameworks: [SDG.15]
+    assurance: not_assured
+    values: {TF: {FY2023: 350}}
+    evidence: [P87, P139]
+  - code: ENV.BIODIVERSITY.SPECIES_PLANTS_DOCUMENTED
+    name: Plant species documented (Thar baseline ecological study)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 149}}
+    evidence: [P87, P140]
+  - code: ENV.BIODIVERSITY.SPECIES_BIRDS_DOCUMENTED
+    name: Bird species documented (Thar baseline ecological study)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    frameworks: [SDG.15]
+    assurance: not_assured
+    values: {TF: {FY2023: 187}}
+    evidence: [P87, P140]
+  - code: ENV.BIODIVERSITY.SPECIES_MAMMALS_DOCUMENTED
+    name: Wild mammal species documented (Thar baseline study)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 26}}
+    evidence: [P87]
+  - code: ENV.BIODIVERSITY.SPECIES_AMPHIBIANS_DOCUMENTED
+    name: Amphibian species documented (Thar baseline study)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 3}}
+    evidence: [P87]
+  - code: ENV.BIODIVERSITY.SPECIES_REPTILES_DOCUMENTED
+    name: Reptile species documented (Thar baseline study)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 20}}
+    evidence: [P87]
+  - code: ENV.BIODIVERSITY.SPECIES_INVERTEBRATES_DOCUMENTED
+    name: Invertebrate species documented (Thar baseline study)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    values: {TF: {FY2023: 106}}
+    evidence: [P87]
+  - code: ENV.BIODIVERSITY.DOLPHIN_POPULATION
+    name: Indus River dolphin population (WWF conservation partnership)
+    topic: biodiversity
+    subtopic: species
+    unit: individuals
+    data_type: integer
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [SDG.14]
+    assurance: not_assured
+    values: {EF: {FY2023: 2000}}
+    evidence: [P84, P141]
+    is_estimate: true
+    notes: "Reported as 'under 2,000 individuals' / 'about 2,000' (last survey 2017, increasing trend). Endangered on IUCN Red List."
+  - code: ENV.BIODIVERSITY.ECO_CLUBS
+    name: School eco-clubs established (Indus dolphin programme)
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 20}}
+    evidence: [P85]
+  - code: ENV.BIODIVERSITY.DOLPHIN_MONITORING_VISITS
+    name: Dolphin monitoring visits to canals and seasonal lakes
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 40}}
+    evidence: [P85]
+  - code: ENV.BIODIVERSITY.DOLPHINS_MONITORED_CANALS
+    name: Dolphins spotted and monitored in irrigation canals
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 5}}
+    evidence: [P85]
+  - code: ENV.BIODIVERSITY.ECO_GUIDES_TRAINED
+    name: Boatmen trained as eco-tour guides
+    topic: biodiversity
+    subtopic: species
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {EF: {FY2023: 12}}
+    evidence: [P85]
+  - code: ENV.BIODIVERSITY.FISH_SEEDLINGS_RELEASED
+    name: Fish seedlings released in Gorano reservoir
+    topic: biodiversity
+    subtopic: marine
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: sum
+    assurance: not_assured
+    values: {TF: {FY2023: 100000}}
+    evidence: [P87]
+    notes: "IUCN declared Gorano a 'New Habitat for Migratory Birds'."
+  - code: ENV.BIODIVERSITY.PROGRAMMES
+    name: Biodiversity conservation programmes (narrative)
+    topic: biodiversity
+    subtopic: species
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values:
+      EF: {FY2023: "Indus River Dolphin conservation with WWF-Pakistan (5-year); River Health Assessment Report Card with University of Maryland; World Water Week panel; Global Declaration on River Dolphins (Oct 2023); Key Biodiversity Area workshop (Aug 2023); pingers for sustainable fishing."}
+      TF: {FY2023: "Partnerships for Biodiversity Conservation in Thar (IUCN, since 2018); baseline flora & fauna study; 'Ecological Treasures of Thar' documentary; Gorano lake fish breeding."}
+      EVTL_EETL: {FY2023: "Sustainable Fisheries Entrepreneurship Program Phase III (WWF, 2022–2024) in Rehri and Ibrahim Hyderi; mangrove restoration with IUCN since 2015."}
+    evidence: [P84, P85, P86, P87, P88, P89]
+  # ------------------------------------------------------------------ ENVIRONMENTAL MANAGEMENT
+  - code: ENV.MGMT.EMS_DESCRIPTION
+    name: Environmental management system and monitoring (narrative)
+    topic: environmental_management
+    subtopic: systems
+    data_type: text
+    kind: narrative
+    aggregation: none
+    frameworks: [UNGC.P7]
+    text_values: {ECORP: {FY2023: "Decentralised stewardship at group-company level with central data collection; established EMS with technical standards, audit/inspection programme and second-party audits producing Corrective Action Reports; air pollution monitoring, qualitative risk assessment, aspect-impact assessments, dispersion modelling, waste management, water footprint assessment, real-time emissions and effluent monitoring; VelocityEHS ESG module for ongoing environmental parameter monitoring."}}
+    evidence: [P79, P114]
+  - code: ENV.MGMT.HSE_L1_STANDARDS
+    name: Corporate HSE Level-1 standards published
+    topic: environmental_management
+    subtopic: standards
+    unit: count
+    data_type: integer
+    kind: raw
+    aggregation: none
+    direction: higher_is_better
+    frameworks: [SDG.12]
+    assurance: not_assured
+    values: {ECORP: {FY2023: 73}}
+    evidence: [P135]
+    description: 73 Corporate HSE L1 standards aligned with international standards published in 2023 for the first time.
+  - code: ENV.MGMT.CERTIFICATIONS
+    name: Environmental / energy certifications (narrative)
+    topic: environmental_management
+    subtopic: certifications
+    data_type: text
+    kind: narrative
+    aggregation: none
+    assurance: not_assured
+    text_values:
+      EPTL: {FY2023: "ISO 50001 Energy Management certification; 5-S System certification; 92% NEPRA Annual HSE rating."}
+      EFERT: {FY2023: "IFA Protect & Sustain certification; ISO/IEC 17025 lab accreditation (Zarkhez); ENVEN flare system (only such facility in Pakistan); noise panel at ENCOP-3; geo-membrane lining of evaporation ponds; Environmental Management Plan for hazardous materials."}
+      EPQL: {FY2023: "Top-10 IPP in Power Regulator Merit Order Ranking 2023."}
+    evidence: [P15, P16, P136, P137]
+  - code: ENV.MGMT.EFERT_MAX_LOAD_PCT
+    name: EFERT base plant maximum operating load achieved after LTR
+    topic: environmental_management
+    subtopic: systems
+    unit: "%"
+    data_type: percentage
+    kind: raw
+    aggregation: none
+    assurance: not_assured
+    validation: {min: 0, max: 200}
+    values: {EFERT: {FY2023: 144}}
+    evidence: [P136]

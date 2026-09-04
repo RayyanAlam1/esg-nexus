@@ -1,0 +1,36 @@
+# ESG taxonomy. Administrators can add topics/subtopics via the API; these are the defaults.
+topics:
+  # Environment
+  - {code: energy, pillar: environment, name: Energy, subtopics: [consumption, efficiency, renewable]}
+  - {code: ghg_emissions, pillar: environment, name: GHG Emissions, subtopics: [scope1, scope2, scope3, intensity, reduction, methodology]}
+  - {code: climate, pillar: environment, name: Climate Strategy & Risk, subtopics: [targets, tcfd, risk, transition]}
+  - {code: water, pillar: environment, name: Water, subtopics: [withdrawal, consumption, discharge, stress, conservation]}
+  - {code: waste, pillar: environment, name: Waste & Circular Economy, subtopics: [hazardous, non_hazardous, plastics, circularity]}
+  - {code: biodiversity, pillar: environment, name: Biodiversity & Land Use, subtopics: [protected_areas, afforestation, species, marine]}
+  - {code: environmental_management, pillar: environment, name: Environmental Management, subtopics: [systems, certifications, standards]}
+  # Social
+  - {code: workforce, pillar: social, name: Workforce, subtopics: [headcount, hiring, turnover]}
+  - {code: diversity_inclusion, pillar: social, name: Diversity, Equity & Inclusion, subtopics: [gender, age, disability, leadership, policies]}
+  - {code: talent_development, pillar: social, name: Talent Development & Engagement, subtopics: [training, learning, engagement, succession]}
+  - {code: compensation, pillar: social, name: Compensation & Wage Level, subtopics: [wage_level, pay_equality]}
+  - {code: labor_practices, pillar: social, name: Labour Practices & Human Rights, subtopics: [child_forced_labor, collective_bargaining, grievance]}
+  - {code: health_safety, pillar: social, name: Occupational Health & Safety, subtopics: [injuries, hours, rates, process_safety, training, health]}
+  - {code: wellbeing, pillar: social, name: Employee Wellbeing, subtopics: [wellbeing, fitness]}
+  - {code: community_investment, pillar: social, name: Community Investment, subtopics: [education, health, livelihoods, water, infrastructure, environment]}
+  # Governance
+  - {code: board, pillar: governance, name: Board Composition & Oversight, subtopics: [composition, diversity, meetings, committees]}
+  - {code: ethics_compliance, pillar: governance, name: Ethics & Compliance, subtopics: [anti_corruption, training, whistleblowing, policies]}
+  - {code: risk_management, pillar: governance, name: Risk Management, subtopics: [erm, climate_risk]}
+  - {code: stakeholder_engagement, pillar: governance, name: Stakeholder Engagement & Materiality, subtopics: [engagement, materiality]}
+  - {code: cybersecurity, pillar: governance, name: Cybersecurity & Information Security, subtopics: [governance, operations, awareness]}
+  - {code: digitalization, pillar: governance, name: Digitalization, subtopics: [projects, ai]}
+  - {code: reporting_assurance, pillar: governance, name: Reporting & Assurance, subtopics: [frameworks, assurance, boundary]}
+  - {code: memberships, pillar: governance, name: Memberships & Partnerships, subtopics: [associations, partners]}
+  # Prosperity
+  - {code: economic_performance, pillar: prosperity, name: Economic Performance, subtopics: [financials, segments, growth]}
+  - {code: wealth_distribution, pillar: prosperity, name: Economic Value Generated & Distributed, subtopics: [generated, distributed]}
+  - {code: tax, pillar: prosperity, name: Tax Contribution, subtopics: [taxes, policy]}
+  - {code: investment, pillar: prosperity, name: Financial Investment Contribution, subtopics: [capex, buyback, projects]}
+  - {code: business_performance, pillar: prosperity, name: Business Unit Performance, subtopics: [fertilizer, polymer, energy, terminals, telecom, foods, trading]}
+  - {code: innovation, pillar: prosperity, name: Innovation & R&D, subtopics: [rd]}
+  - {code: credit_ratings, pillar: prosperity, name: Credit Ratings, subtopics: [ratings]}

@@ -1,0 +1,88 @@
+# Evidence repository seed.
+# Report pages referenced by metrics (P<printed page>) are generated automatically by the loader from
+# report_pages.json (printed page → PDF page mapping, excerpt = extracted page text). This file adds the
+# non-page evidence items: the assurance statement, external policies and system-of-record sources.
+source_document:
+  code: RPT-ECORP-SR-2023
+  title: Engro Corporation Limited — Sustainability Report 2023
+  file_name: ECORP-Sustainability-Report-01-07-24.pdf
+  sha256: c0a5e3eba9e133d3c99421dbfbcd7319b25e27f1253a5b8dbaee4b46a213f918
+  pdf_pages: 80
+  printed_page_rule: "PDF page n (n ≥ 3) shows printed pages 2n−5 and 2n−4"
+  verification_status: verified   # document integrity verified by hash at seed time
+  confidence: 0.9
+  note: Numbers inside a published, ISAE 3000 limited-assured report are treated as verified reported values; chart-read values carry lower confidence (see metric notes).
+
+items:
+  - code: EV-ISAE3000-2023
+    title: Independent Limited Assurance Report (ISAE 3000) on selected WEF core metrics
+    kind: assurance_statement
+    source: External assurance provider (report pp.144–147)
+    document_ref: ECORP-Sustainability-Report-01-07-24.pdf
+    page_from: 75
+    page_to: 75
+    printed_page: "145-146"
+    evidence_date: 2024-07-01
+    verification_status: unverified
+    confidence: 0.6
+    excerpt: "The assurance report pages are image-only in the PDF; text could not be extracted. Scope stated on p.02: limited assurance conclusion under ISAE 3000 on selected metrics aligned with WEF Stakeholder Capitalism Pledge (Core) Metrics."
+    links: [GOV.ASSURANCE.EXTERNAL_ASSURANCE, ENV.GHG.SCOPE1, ENV.GHG.SCOPE2, ENV.ENERGY.TOTAL, ENV.WATER.WITHDRAWN, ENV.WATER.CONSUMED, SOC.OHS.TRIR_EMP, SOC.OHS.TRIR_CONTRACTOR, SOC.WORKFORCE.HIRES, SOC.WORKFORCE.TURNOVER, GOV.ETHICS.CORRUPTION_CASES_SUBSTANTIATED, ECO.EVGD.WEALTH_GENERATED, ECO.TAX.TOTAL]
+  - code: EV-POL-COC
+    title: Engro Code of Conduct (published on engro.com)
+    kind: policy
+    source: Engro Corporation website
+    document_ref: https://www.engro.com
+    verification_status: unverified
+    confidence: 0.5
+    excerpt: "Referenced on p.29–30: reviewed periodically and available on the website; applies to all employees and Board members."
+    links: [GOV.ETHICS.CODE_OF_CONDUCT, SOC.HUMAN_RIGHTS.POLICY_COMMITMENT]
+  - code: EV-POL-HSE
+    title: Engro HSE Policy (published on engro.com)
+    kind: policy
+    source: Engro Corporation website
+    document_ref: https://www.engro.com
+    verification_status: unverified
+    confidence: 0.5
+    excerpt: "Referenced on p.59: duty to work towards ZERO occupational injuries, process safety mishaps and environmental incidents."
+    links: [SOC.OHS.MANAGEMENT_SYSTEM_DESCRIPTION]
+  - code: EV-POL-TAX
+    title: Board-approved Tax Policy
+    kind: policy
+    source: Engro Corporation Board
+    verification_status: unverified
+    confidence: 0.4
+    excerpt: "Referenced on p.109; document not in repository — Evidence required."
+    links: [ECO.TAX.POLICY_STATEMENT]
+  - code: EV-POL-SPEAKOUT
+    title: Whistleblower Policy — "Speak Out"
+    kind: policy
+    source: Ethics & Compliance function
+    verification_status: unverified
+    confidence: 0.5
+    excerpt: "Referenced on p.29–31; Speak Out email published on website."
+    links: [GOV.ETHICS.WHISTLEBLOWER_MECHANISM]
+  - code: EV-AR-2023
+    title: Engro Corporation Annual Report 2023 (cross-referenced financial statements)
+    kind: financial_statement
+    source: Engro Corporation Limited
+    verification_status: unverified
+    confidence: 0.5
+    excerpt: "Cross-referenced for board profiles, risk management, note 25 (government grants) and note 40 (R&D). Not ingested — Evidence required for ECO.GOVT.FINANCIAL_ASSISTANCE and ECO.INNOVATION.RD_EXPENSE."
+    links: [ECO.GOVT.FINANCIAL_ASSISTANCE, ECO.INNOVATION.RD_EXPENSE, GOV.RISK.ERM_FRAMEWORK]
+  - code: EV-IUCN-CARBON-TMT
+    title: IUCN Carbon Stock Assessment — Thar Million Tree Project
+    kind: audit_document
+    source: IUCN Pakistan
+    verification_status: unverified
+    confidence: 0.5
+    excerpt: "Referenced on p.83 and p.139: ~319,000 tonnes of carbon stored in 24 species over 5 years. Study not in repository."
+    links: [ENV.GHG.CARBON_STORED_NATURE]
+  - code: EV-WRI-AQUEDUCT
+    title: WRI Aqueduct water risk atlas classification of sites
+    kind: environmental_record
+    source: World Resources Institute
+    document_ref: https://www.wri.org/aqueduct
+    verification_status: unverified
+    confidence: 0.5
+    excerpt: "Referenced on p.91: EFERT (Daharki), EPQL and EEAP classified as water-stressed."
+    links: [ENV.WATER.SITES_WATER_STRESSED, ENV.WATER.WITHDRAWN_STRESSED_PCT]
