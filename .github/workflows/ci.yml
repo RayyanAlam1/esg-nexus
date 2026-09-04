@@ -46,7 +46,7 @@ jobs:
           ESG_AUTO_SEED: "false"
       - name: Upload test artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: backend-test-results
           path: |
@@ -73,7 +73,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Upload build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: frontend-dist
           path: frontend/dist
