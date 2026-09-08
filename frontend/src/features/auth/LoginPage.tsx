@@ -3,6 +3,10 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/app/auth';
 import { ErrorBanner, Field, Input } from '@/components/ui';
 
+// Shown only in development builds: these are seeded reference-data accounts and must never
+// appear in a deployed environment.
+const SHOW_DEMO_ACCOUNTS = import.meta.env.DEV;
+
 const DEMO_ACCOUNTS: { email: string; password: string; role: string }[] = [
   { email: 'admin@esgnexus.local', password: 'Admin!2024', role: 'super_admin + org_admin' },
   { email: 'cso@ecorp.local', password: 'Exec!2024', role: 'executive' },
@@ -59,6 +63,7 @@ export function LoginPage() {
             </button>
           </form>
         </div>
+        {SHOW_DEMO_ACCOUNTS ? (
         <div className="p-6">
           <h2 className="text-sm font-semibold text-navy">Demo accounts</h2>
           <p className="text-xs text-gray-600 mb-3">Seeded tenant: Engro Corporation (ECORP), FY2022–FY2023. Click a row to sign in with that persona.</p>
@@ -82,6 +87,13 @@ export function LoginPage() {
           </table>
           <p className="text-xxs text-gray-400 mt-3">Backend expected at /api/v1 (proxied to http://localhost:8000 in development).</p>
         </div>
+        ) : (
+          <div className="p-6 flex items-center">
+            <p className="text-sm text-gray-600">
+              Sign in with the account provided by your organisation&apos;s ESG Nexus administrator. Contact them if you need access or a password reset.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -80,7 +80,10 @@ jobs:
           retention-days: 7
 
   docker:
-    name: Container images build
+    # Name the matrix explicitly. Without this GitHub derives the check name from every
+    # matrix value ("Container images build (backend, ., backend/Dockerfile)"), which is
+    # unstable and cannot sensibly be named as a required status check.
+    name: Container images build (${{ matrix.service }})
     runs-on: ubuntu-latest
     needs: [backend, frontend]
     strategy:

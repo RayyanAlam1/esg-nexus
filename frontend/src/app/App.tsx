@@ -43,12 +43,23 @@ import { OrganizationPage } from '@/features/admin/OrganizationPage';
 import { UsersPage } from '@/features/admin/UsersPage';
 import { RolesPage } from '@/features/admin/RolesPage';
 import { SystemPage } from '@/features/admin/SystemPage';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { AuthProvider, useAuth } from './auth';
 import { AppContextProvider } from './context';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { retry: 1, refetchOnWindowFocus: false, staleTime: 30_000 },
+    queries: {
+      // A 4xx will not become a 2xx on retry: surface it immediately instead of leaving the
+      // user on a loading skeleton while the request is repeated.
+      retry: (failureCount, error) => {
+        const status = (error as { status?: number } | null)?.status ?? 0;
+        if (status >= 400 && status < 500) return false;
+        return failureCount < 1;
+      },
+      refetchOnWindowFocus: false,
+      staleTime: 30_000,
+    },
   },
 });
 
@@ -78,66 +89,68 @@ function RequireCap({ cap }: { cap: string }) {
 
 export function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route element={<RequireAuth />}>
-              <Route index element={<DashboardPage />} />
-              <Route path="esg/overview" element={<EsgOverviewPage />} />
-              <Route path="esg/:pillar" element={<PillarPage />} />
-              <Route path="data/sources" element={<SourcesPage />} />
-              <Route path="data/datasets" element={<DatasetsPage />} />
-              <Route path="data/datasets/:id" element={<DatasetDetailPage />} />
-              <Route path="data/quality" element={<DataQualityPage />} />
-              <Route path="data/lineage" element={<LineagePage />} />
-              <Route path="metrics" element={<MetricLibraryPage />} />
-              <Route path="metrics/kpis" element={<KpiTrackingPage />} />
-              <Route path="metrics/calculations" element={<CalculationsPage />} />
-              <Route path="metrics/targets" element={<TargetsPage />} />
-              <Route path="metrics/:code" element={<MetricDetailPage />} />
-              <Route path="standards/frameworks" element={<FrameworksPage />} />
-              <Route path="standards/frameworks/:code" element={<RequirementsPage />} />
-              <Route path="standards/mapping" element={<MappingPage />} />
-              <Route path="standards/compliance" element={<CompliancePage />} />
-              <Route path="materiality" element={<MaterialityPage />} />
-              <Route path="materiality/matrix" element={<MatrixPage />} />
-              <Route path="evidence" element={<EvidencePage />} />
-              <Route path="evidence/gaps" element={<EvidenceGapsPage />} />
-              <Route path="evidence/:code" element={<EvidenceDetailPage />} />
-              <Route path="ai/agents" element={<AgentsPage />} />
-              <Route path="ai/runs" element={<RunsPage />} />
-              <Route path="ai/runs/:id" element={<RunDetailPage />} />
-              <Route path="ai/knowledge" element={<KnowledgePage />} />
-              <Route path="ai/rag" element={<RagPage />} />
-              <Route path="ai/evaluation" element={<EvaluationPage />} />
-              <Route element={<RequireCap cap="ai.run" />}>
-                <Route path="ai/copilot" element={<CopilotPage />} />
+    <ErrorBoundary label="The application">
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route element={<RequireAuth />}>
+                <Route index element={<DashboardPage />} />
+                <Route path="esg/overview" element={<EsgOverviewPage />} />
+                <Route path="esg/:pillar" element={<PillarPage />} />
+                <Route path="data/sources" element={<SourcesPage />} />
+                <Route path="data/datasets" element={<DatasetsPage />} />
+                <Route path="data/datasets/:id" element={<DatasetDetailPage />} />
+                <Route path="data/quality" element={<DataQualityPage />} />
+                <Route path="data/lineage" element={<LineagePage />} />
+                <Route path="metrics" element={<MetricLibraryPage />} />
+                <Route path="metrics/kpis" element={<KpiTrackingPage />} />
+                <Route path="metrics/calculations" element={<CalculationsPage />} />
+                <Route path="metrics/targets" element={<TargetsPage />} />
+                <Route path="metrics/:code" element={<MetricDetailPage />} />
+                <Route path="standards/frameworks" element={<FrameworksPage />} />
+                <Route path="standards/frameworks/:code" element={<RequirementsPage />} />
+                <Route path="standards/mapping" element={<MappingPage />} />
+                <Route path="standards/compliance" element={<CompliancePage />} />
+                <Route path="materiality" element={<MaterialityPage />} />
+                <Route path="materiality/matrix" element={<MatrixPage />} />
+                <Route path="evidence" element={<EvidencePage />} />
+                <Route path="evidence/gaps" element={<EvidenceGapsPage />} />
+                <Route path="evidence/:code" element={<EvidenceDetailPage />} />
+                <Route path="ai/agents" element={<AgentsPage />} />
+                <Route path="ai/runs" element={<RunsPage />} />
+                <Route path="ai/runs/:id" element={<RunDetailPage />} />
+                <Route path="ai/knowledge" element={<KnowledgePage />} />
+                <Route path="ai/rag" element={<RagPage />} />
+                <Route path="ai/evaluation" element={<EvaluationPage />} />
+                <Route element={<RequireCap cap="ai.run" />}>
+                  <Route path="ai/copilot" element={<CopilotPage />} />
+                </Route>
+                <Route path="governance/policies" element={<PoliciesPage />} />
+                <Route path="governance/rules" element={<RulesPage />} />
+                <Route path="governance/approvals" element={<ApprovalsPage />} />
+                <Route path="governance/issues" element={<IssuesPage />} />
+                <Route element={<RequireCap cap="audit.read" />}>
+                  <Route path="governance/audit" element={<AuditPage />} />
+                </Route>
+                <Route path="reports" element={<ReportsPage />} />
+                <Route element={<RequireCap cap="report.build" />}>
+                  <Route path="reports/builder" element={<ReportBuilderPage />} />
+                </Route>
+                <Route path="reports/:id/preview" element={<ReportPreviewPage />} />
+                <Route element={<RequireCap cap="admin" />}>
+                  <Route path="admin/organization" element={<OrganizationPage />} />
+                  <Route path="admin/users" element={<UsersPage />} />
+                  <Route path="admin/roles" element={<RolesPage />} />
+                  <Route path="admin/system" element={<SystemPage />} />
+                </Route>
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Route>
-              <Route path="governance/policies" element={<PoliciesPage />} />
-              <Route path="governance/rules" element={<RulesPage />} />
-              <Route path="governance/approvals" element={<ApprovalsPage />} />
-              <Route path="governance/issues" element={<IssuesPage />} />
-              <Route element={<RequireCap cap="audit.read" />}>
-                <Route path="governance/audit" element={<AuditPage />} />
-              </Route>
-              <Route path="reports" element={<ReportsPage />} />
-              <Route element={<RequireCap cap="report.build" />}>
-                <Route path="reports/builder" element={<ReportBuilderPage />} />
-              </Route>
-              <Route path="reports/:id/preview" element={<ReportPreviewPage />} />
-              <Route element={<RequireCap cap="admin" />}>
-                <Route path="admin/organization" element={<OrganizationPage />} />
-                <Route path="admin/users" element={<UsersPage />} />
-                <Route path="admin/roles" element={<RolesPage />} />
-                <Route path="admin/system" element={<SystemPage />} />
-              </Route>
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-    </QueryClientProvider>
+            </Routes>
+            </BrowserRouter>
+        </AuthProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }

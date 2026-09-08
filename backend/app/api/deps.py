@@ -85,7 +85,13 @@ def get_period(db: Session, org: Organization, code: str | None) -> ReportingPer
 
 def get_entity(db: Session, principal: Principal, org: Organization, code: str | None) -> Entity:
     stmt = select(Entity).where(Entity.organization_id == org.id)
-    stmt = stmt.where(Entity.code == code) if code else stmt.where(Entity.kind == "group")
+    if code:
+        stmt = stmt.where(Entity.code == code)
+    elif principal.entity_ids:
+        # A scoped principal defaults to an entity it may actually see, not the group.
+        stmt = stmt.where(Entity.id.in_(principal.entity_ids)).order_by(Entity.code)
+    else:
+        stmt = stmt.where(Entity.kind == "group")
     e = db.execute(stmt).scalars().first()
     if e is None:
         raise NotFoundError(f"Entity not found: {code}")

@@ -61,6 +61,7 @@ Evidence screenshots referenced below are in [`docs/phase0/`](phase0/).
 | Routes that hang for a scoped user | 7 (dashboard, ESG overview, four pillar pages, metric detail) |
 | Pages slower than 2.5 s on first load (warm SQLite, admin) | 5 (dashboard 3.7 s, ESG overview 3.3 s, social 4.9 s, environment 2.7 s, evaluation 2.9 s) |
 | Launch-blocking risks | 6 (§8) |
+| Findings withdrawn after closer reading | 1 (risk 17, §8) |
 
 ---
 
@@ -252,6 +253,8 @@ Documentation sources added: Atlassian `font.body` 14/20 and `font.metric` 28/32
 
 ## 8. Risk register ranked by launch impact
 
+One finding (17) was withdrawn on 2026-09-08 after reading the handler again during M0; it is kept in the table, struck through, rather than removed.
+
 Rating scale: **Launch-blocking** — cannot go to a paying multi-tenant customer · **Pilot-fix** — a single-tenant pilot is tolerable with mitigations, must be fixed before general availability · **Defer** — v2.
 
 | # | Risk | Where | Rating |
@@ -272,7 +275,7 @@ Rating scale: **Launch-blocking** — cannot go to a paying multi-tenant custome
 | 14 | No generic exception handler (500s escape the envelope and skip security headers), no error tracking, audit `ip` never populated, `x-request-id` accepted unvalidated | `core/errors.py`, `main.py` | Pilot-fix |
 | 15 | `POST /frameworks/reload` (any `esg_manager`) rewrites the global framework registry for all tenants; `POST /admin/reseed` re-creates the demo tenant in any deployment | `api/v1/frameworks.py:98`, `api/v1/admin.py:143` | Pilot-fix |
 | 16 | Report-version race: no unique constraint on `(report_id, version)`; concurrent generates duplicate version numbers | `models/reporting.py` | Pilot-fix |
-| 17 | Issue severity ordering is alphabetical, so MEDIUM sorts above CRITICAL on the executive dashboard | `api/v1/esg.py:106` | Pilot-fix (small) |
+| 17 | ~~Issue severity ordering is alphabetical~~ **Withdrawn 2026-09-08.** The SQL `ORDER BY` is alphabetical but the handler re-sorts by severity rank in Python immediately afterwards, before any slicing, so the displayed order is correct. Recorded here rather than deleted, because a withdrawn finding is part of an honest audit trail. | `api/v1/esg.py:106-111` | Not a defect |
 | 18 | No UI for catalogue authoring (§5): metric definitions, formulas, sources, entities, periods, policies, evidence files | frontend | Pilot-fix |
 | 19 | Vector search stub: BM25 works air-gapped and is honestly documented; index cache invalidates on chunk count only | `ai/rag/index.py` | Defer |
 | 20 | Mobile layout | frontend | Defer (desktop product) |

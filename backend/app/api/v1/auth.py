@@ -8,14 +8,17 @@ from app.api.deps import DB, User
 from app.core import audit
 from app.core.errors import UnauthorizedError
 from app.core.security import CAPABILITIES, create_token, decode_token, verify_password
+from app.models.identity import Tenant, UserRole
 from app.models.identity import User as UserModel
-from app.models.identity import UserRole
+from app.models.organization import Entity
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 class LoginIn(BaseModel):
     email: str
+    #: Tenant slug. Required only when the same address exists in more than one tenant.
+    tenant: str | None = None
 
     @field_validator("email")
     @classmethod
@@ -33,14 +36,37 @@ class RefreshIn(BaseModel):
 
 
 def _user_payload(db, user: UserModel) -> dict:
-    roles = sorted({r.role_name for r in db.execute(select(UserRole).where(UserRole.user_id == user.id)).scalars().all()})
+    assignments = db.execute(select(UserRole).where(UserRole.user_id == user.id)).scalars().all()
+    roles = sorted({r.role_name for r in assignments})
     caps = sorted(c for c, allowed in CAPABILITIES.items() if "*" in allowed or allowed & set(roles))
-    return {"id": user.id, "email": user.email, "full_name": user.full_name, "tenant_id": user.tenant_id, "roles": roles, "capabilities": caps, "title": user.title}
+    entity_ids = sorted({a.entity_id for a in assignments if a.entity_id})
+    entity_codes = [e.code for e in db.execute(select(Entity).where(Entity.id.in_(entity_ids)).order_by(Entity.code)).scalars().all()] if entity_ids else []
+    tenant = db.get(Tenant, user.tenant_id)
+    return {
+        "id": user.id,
+        "email": user.email,
+        "full_name": user.full_name,
+        "tenant_id": user.tenant_id,
+        "tenant_slug": tenant.slug if tenant else None,
+        "roles": roles,
+        "capabilities": caps,
+        "title": user.title,
+        # Empty means unrestricted; otherwise the user may only see these entities.
+        "entity_ids": entity_ids,
+        "entity_codes": entity_codes,
+    }
 
 
 @router.post("/login")
 def login(body: LoginIn, db: DB):
-    user = db.execute(select(UserModel).where(UserModel.email == body.email.lower())).scalars().first()
+    stmt = select(UserModel).where(UserModel.email == body.email.lower())
+    if body.tenant:
+        stmt = stmt.join(Tenant, Tenant.id == UserModel.tenant_id).where(Tenant.slug == body.tenant.strip().lower())
+    candidates = db.execute(stmt).scalars().all()
+    if len(candidates) > 1:
+        # The same address may exist in several tenants; never guess which one.
+        raise UnauthorizedError("This address exists in more than one tenant. Supply 'tenant' to sign in.")
+    user = candidates[0] if candidates else None
     if user is None or not user.is_active or not verify_password(body.password, user.password_hash):
         raise UnauthorizedError("Invalid credentials")
     payload = _user_payload(db, user)

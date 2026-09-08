@@ -95,7 +95,9 @@ def select_frameworks(body: SelectIn, principal: User, db: DB):
     return {"selected": body.framework_codes, "period": p.code}
 
 
-@router.post("/reload", dependencies=[Depends(require("framework.manage"))])
+# The framework registry is global reference data shared by every tenant, so reloading it is
+# restricted to platform administrators rather than any tenant's framework manager.
+@router.post("/reload", dependencies=[Depends(require("tenant.admin"))])
 def reload(principal: User, db: DB):
     codes = fw_engine.load_from_yaml(db, get_settings().frameworks_dir)
     audit.record(db, tenant_id=principal.tenant_id, user_id=principal.user_id, action="framework.reload", object_type="framework", new_value={"codes": codes})

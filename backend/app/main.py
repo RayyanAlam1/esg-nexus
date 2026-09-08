@@ -30,7 +30,7 @@ async def lifespan(app: FastAPI):
 
     if settings.environment in ("development", "test"):
         Base.metadata.create_all(engine)  # production uses `alembic upgrade head`
-    if settings.auto_seed:
+    if settings.seeding_enabled:
         from app.seed import seed_if_needed
 
         with SessionLocal() as db:

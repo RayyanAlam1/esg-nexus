@@ -21,9 +21,14 @@ export interface AuthUser {
   email: string;
   full_name: string;
   tenant_id: number;
+  tenant_slug?: string | null;
   roles: string[];
   capabilities: string[];
   title: string | null;
+  /** Entity ids the user is restricted to. Empty means the whole organisation. */
+  entity_ids?: number[];
+  /** Entity codes matching `entity_ids`, for filtering selectors without another request. */
+  entity_codes?: string[];
 }
 
 export interface LoginResponse {
