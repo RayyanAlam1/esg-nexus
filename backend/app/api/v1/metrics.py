@@ -232,7 +232,7 @@ def metric_detail(code: str, principal: User, db: DB, entity: str | None = None,
         for o in evaluate_rules(active_rules(db, principal.tenant_id, "metric_value"), ctx)
         if o.triggered
     ]
-    issues = db.execute(select(Issue).where(Issue.metric_code == m.code, Issue.status.in_(["open", "acknowledged"]))).scalars().all()
+    issues = db.execute(select(Issue).where(Issue.tenant_id == principal.tenant_id, Issue.metric_code == m.code, Issue.status.in_(["open", "acknowledged"]))).scalars().all()
     targets = db.execute(select(Target).where(Target.metric_id == m.id)).scalars().all()
     history = (
         db.execute(select(AuditLog).where(AuditLog.tenant_id == principal.tenant_id, AuditLog.object_id.like(f"{m.code}%")).order_by(AuditLog.created_at.desc()).limit(20))

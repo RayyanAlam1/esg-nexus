@@ -46,7 +46,9 @@ def kpi_card(db, principal, metric: MetricDefinition, entity: Entity, period: Re
 
     ev_count = len(evidence_codes(db, metric, entity, period, mv)) if cur is not None else 0
     qs = db.execute(select(QualityScore).where(QualityScore.metric_id == metric.id, QualityScore.entity_id == entity.id, QualityScore.period_id == period.id)).scalars().first()
-    issues = db.execute(select(func.count(Issue.id)).where(Issue.metric_code == metric.code, Issue.status.in_(["open", "acknowledged"]))).scalar()
+    issues = db.execute(
+        select(func.count(Issue.id)).where(Issue.tenant_id == principal.tenant_id, Issue.metric_code == metric.code, Issue.status.in_(["open", "acknowledged"]))
+    ).scalar()
     status = "no_target"
     if target and target.target_value is not None and cur is not None:
         if target.direction == "decrease":
