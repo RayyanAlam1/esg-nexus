@@ -14,6 +14,20 @@ import { PageHeader } from '@/components/ui';
 
 const STEPS = ['Period', 'Organization', 'Frameworks', 'Template', 'Required disclosures', 'Missing data & evidence', 'Create & generate'];
 
+/**
+ * Coerce an API field to display text. Validation details are strings, but a check added
+ * later could return structured data and must not be able to blank the page.
+ */
+function asText(value: unknown): string {
+  if (value === null || value === undefined) return '—';
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+  if (Array.isArray(value)) return value.map(asText).join('; ');
+  const o = value as Record<string, unknown>;
+  if (typeof o.message === 'string') return typeof o.rule === 'string' ? `${o.rule}: ${o.message}` : o.message;
+  return JSON.stringify(value);
+}
+
 export function ValidationChecks({ v }: { v: ValidationResult }) {
   return (
     <div className="space-y-2">
@@ -22,13 +36,13 @@ export function ValidationChecks({ v }: { v: ValidationResult }) {
         {v.checks.map((c) => (
           <li key={c.check} className="flex items-start gap-2 text-xs">
             <StatusBadge status={c.passed ? 'passed' : 'failed'} label={c.passed ? 'Pass' : 'Fail'} />
-            <span className="min-w-0"><span className="font-medium">{titleCase(c.check)}</span>{!c.passed && <SeverityBadge severity={c.severity} className="ml-1" />}<span className="block text-gray-600 break-words">{c.detail}</span></span>
+            <span className="min-w-0"><span className="font-medium">{titleCase(c.check)}</span>{!c.passed && <SeverityBadge severity={c.severity} className="ml-1" />}<span className="block text-gray-600 break-words">{asText(c.detail)}</span></span>
           </li>
         ))}
       </ul>
-      {v.reason.length > 0 && <div className="text-xs"><div className="label">Blocked reason</div><ul className="list-disc pl-5 text-[#8F2C22]">{v.reason.map((r, i) => <li key={i}>{r}</li>)}</ul></div>}
-      {v.required_action.length > 0 && <div className="text-xs"><div className="label">Required action</div><ul className="list-disc pl-5 font-medium">{v.required_action.map((r, i) => <li key={i}>{r}</li>)}</ul></div>}
-      {v.governance.length > 0 && <div className="text-xs"><div className="label">Governance outcomes</div><ul className="space-y-1">{v.governance.map((g, i) => <li key={i} className="flex items-start gap-2"><SeverityBadge severity={g.severity} /><span><span className="font-mono">{g.rule}</span> · {g.action}: {g.message}{g.required_action && <span className="block text-[#8F2C22]">→ {g.required_action}</span>}</span></li>)}</ul></div>}
+      {v.reason.length > 0 && <div className="text-xs"><div className="label">Blocked reason</div><ul className="list-disc pl-5 text-[#8F2C22]">{v.reason.map((r, i) => <li key={i}>{asText(r)}</li>)}</ul></div>}
+      {v.required_action.length > 0 && <div className="text-xs"><div className="label">Required action</div><ul className="list-disc pl-5 font-medium">{v.required_action.map((r, i) => <li key={i}>{asText(r)}</li>)}</ul></div>}
+      {v.governance.length > 0 && <div className="text-xs"><div className="label">Governance outcomes</div><ul className="space-y-1">{v.governance.map((g, i) => <li key={i} className="flex items-start gap-2"><SeverityBadge severity={g.severity} /><span><span className="font-mono">{g.rule}</span> · {g.action}: {asText(g.message)}{g.required_action && <span className="block text-[#8F2C22]">Required: {asText(g.required_action)}</span>}</span></li>)}</ul></div>}
     </div>
   );
 }
@@ -49,6 +63,16 @@ export function ReportBuilderPage() {
   const [report, setReport] = useState<ReportDetail | null>(null);
   const [validation, setValidation] = useState<ValidationResult | null>(null);
 
+  // The header period arrives asynchronously. Wait for it rather than guessing, otherwise the
+  // wizard opens on whichever period happens to be last (often one with no data) while the
+  // header shows another, and Next is disabled with nothing to explain why.
+  useEffect(() => {
+    if (!ctxPeriod) return;
+    if (period && periods.some((p) => p.code === period)) return;
+    setPeriod(ctxPeriod);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ctxPeriod, periods]);
+
   useEffect(() => {
     if (selected.data && frameworks.length === 0) {
       const codes = selected.data.frameworks.map((f) => f.framework_code);
@@ -63,6 +87,15 @@ export function ReportBuilderPage() {
 
   const toggleFw = (code: string) => setFrameworks((f) => (f.includes(code) ? f.filter((x) => x !== code) : [...f, code]));
   const canNext = [!!period, !!org, frameworks.length > 0, !!template, true, true, false][step];
+  const blockedReason = [
+    'Select a reporting period to continue.',
+    'The organisation is still loading.',
+    'Select at least one framework to disclose against.',
+    'Select a report template.',
+    '',
+    '',
+    '',
+  ][step];
   const tpl = templates.data?.find((t) => t.code === template);
 
   return (
@@ -207,7 +240,14 @@ export function ReportBuilderPage() {
 
       <div className="flex items-center justify-between">
         <button type="button" className="btn-secondary" onClick={() => setStep((s) => Math.max(0, s - 1))} disabled={step === 0 || !!report}><ChevronLeft size={14} /> Back</button>
-        {step < STEPS.length - 1 && <button type="button" className="btn-primary" onClick={() => setStep((s) => s + 1)} disabled={!canNext}>Next <ChevronRight size={14} /></button>}
+        {step < STEPS.length - 1 && (
+          <div className="flex items-center gap-2">
+            {!canNext && blockedReason && <span className="text-xs text-gray-500">{blockedReason}</span>}
+            <button type="button" className="btn-primary" onClick={() => setStep((s) => s + 1)} disabled={!canNext}>
+              Next <ChevronRight size={14} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
