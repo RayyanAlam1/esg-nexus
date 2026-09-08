@@ -189,7 +189,8 @@ async def upload_evidence(
     folder = settings.local_storage_dir / "evidence" / str(principal.tenant_id)
     folder.mkdir(parents=True, exist_ok=True)
     digest = hashlib.sha256(data).hexdigest()
-    suffix = Path(file.filename or "").suffix.lower()
+    original_name = Path(file.filename or "").name  # basename only: never a path, never displayed as one
+    suffix = Path(original_name).suffix.lower()
     if suffix and (len(suffix) > 12 or not suffix[1:].isalnum()):
         suffix = ""
     path = folder / f"{uuid4().hex}{suffix}"
@@ -200,7 +201,7 @@ async def upload_evidence(
         code=code,
         title=title,
         kind=kind,
-        document_ref=file.filename,
+        document_ref=original_name or None,
         file_hash=digest,
         storage_key=str(path),
         owner_id=principal.user_id,

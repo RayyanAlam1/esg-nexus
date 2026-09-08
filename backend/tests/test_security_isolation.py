@@ -235,6 +235,50 @@ def test_replacing_roles_preserves_the_users_entity_scope(client, tokens, db_ses
         db.commit()
 
 
+def test_replacing_roles_preserves_scope_for_a_multi_entity_user(client, tokens, db_session):
+    """A user scoped to several entities keeps every one of them: an empty scope means unrestricted."""
+    db = db_session
+    user = db.execute(select(User).where(User.email == "contributor@ecorp.local")).scalars().first()
+    assert user is not None
+    original = [(r.role_name, r.organization_id, r.entity_id) for r in db.execute(select(UserRole).where(UserRole.user_id == user.id)).scalars().all()]
+    org_id = original[0][1]
+    first_entity = next(eid for _, _, eid in original if eid)
+    second_entity = db.execute(select(Entity).where(Entity.id != first_entity, Entity.organization_id == org_id)).scalars().first()
+    assert second_entity is not None
+
+    try:
+        # Give the user a second scoped entity, then replace their roles.
+        db.add(UserRole(user_id=user.id, role_name="data_contributor", organization_id=org_id, entity_id=second_entity.id))
+        db.commit()
+        expected = sorted({first_entity, second_entity.id})
+
+        r = client.put(f"/api/v1/admin/users/{user.id}/roles", json={"roles": ["data_contributor"]}, headers=tokens["admin"])
+        assert r.status_code == 200, r.text
+        db.expire_all()
+        after = db.execute(select(UserRole).where(UserRole.user_id == user.id)).scalars().all()
+        assert sorted({a.entity_id for a in after}) == expected, "a multi-entity user must not be widened to the whole tenant"
+        assert all(a.entity_id is not None for a in after)
+    finally:
+        for row in db.execute(select(UserRole).where(UserRole.user_id == user.id)).scalars().all():
+            db.delete(row)
+        db.flush()
+        for role_name, organization_id, entity_id in original:
+            db.add(UserRole(user_id=user.id, role_name=role_name, organization_id=organization_id, entity_id=entity_id))
+        db.commit()
+
+
+def test_uploaded_document_reference_is_reduced_to_a_base_filename(client, tokens):
+    """The stored document reference is displayed to users, so it never keeps a caller-supplied path."""
+    r = client.post(
+        "/api/v1/evidence/upload",
+        files={"file": ("../../evil.pdf", b"%PDF-1.4 test", "application/pdf")},
+        data={"code": "EV-DOCREF-TEST", "title": "Document reference sanitisation", "kind": "pdf"},
+        headers=tokens["manager"],
+    )
+    assert r.status_code == 200, r.text
+    assert r.json()["document_ref"] == "evil.pdf"
+
+
 # --------------------------------------------------------------------------- 7. validation details
 def test_report_validation_details_are_always_strings(client, tokens):
     """Every validation detail and blocking reason is a string, so the preview page can render it."""
