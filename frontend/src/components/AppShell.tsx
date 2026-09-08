@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Bell, ChevronRight, LogOut, Menu, MessageSquare, User as UserIcon } from 'lucide-react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useNotifications } from '@/api/admin';
 import { useAuth } from '@/app/auth';
 import { useAppContext } from '@/app/context';
@@ -188,6 +189,7 @@ export function AppShell() {
   const [collapsed, setCollapsed] = useState(false);
   const [copilot, setCopilot] = useState(false);
   const { orgLoading } = useAppContext();
+  const { pathname } = useLocation();
   return (
     <div className="flex h-full">
       <Sidebar collapsed={collapsed} />
@@ -199,7 +201,9 @@ export function AppShell() {
               Loading organization context…
             </div>
           ) : (
-            <Outlet />
+            <ErrorBoundary resetKey={pathname} label="This page">
+              <Outlet />
+            </ErrorBoundary>
           )}
         </main>
       </div>
