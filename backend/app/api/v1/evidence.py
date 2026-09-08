@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import hashlib
 from datetime import date
+from pathlib import Path
+from uuid import uuid4
 
 from fastapi import APIRouter, Depends, File, Form, UploadFile
 from pydantic import BaseModel
@@ -182,10 +184,15 @@ async def upload_evidence(
         raise GuardrailError("File rejected", details=g.findings)
     data = await file.read()
     settings = get_settings()
-    folder = settings.local_storage_dir / "evidence"
+    # The storage key is generated server-side and partitioned per tenant: `code` and `filename`
+    # are client-controlled and must never reach the filesystem path.
+    folder = settings.local_storage_dir / "evidence" / str(principal.tenant_id)
     folder.mkdir(parents=True, exist_ok=True)
     digest = hashlib.sha256(data).hexdigest()
-    path = folder / f"{code}_{file.filename}"
+    suffix = Path(file.filename or "").suffix.lower()
+    if suffix and (len(suffix) > 12 or not suffix[1:].isalnum()):
+        suffix = ""
+    path = folder / f"{uuid4().hex}{suffix}"
     path.write_bytes(data)
     org = get_org(db, principal)
     ev = Evidence(
