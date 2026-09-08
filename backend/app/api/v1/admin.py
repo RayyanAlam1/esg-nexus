@@ -88,10 +88,13 @@ def set_roles(user_id: int, body: RolesIn, principal: User, db: DB):
         raise NotFoundError("User not found")
     old = sorted({r.role_name for r in u.roles})
     org = db.execute(select(Organization).where(Organization.tenant_id == principal.tenant_id)).scalars().first()
+    # Entity scope is an attribute of the user, not of a single role: preserve it across role changes.
+    scoped_entity_ids = sorted({r.entity_id for r in u.roles if r.entity_id})
     for r in list(u.roles):
         db.delete(r)
     for r in body.roles:
-        db.add(UserRole(user_id=u.id, role_name=r, organization_id=org.id if org else None))
+        for entity_id in scoped_entity_ids or [None]:
+            db.add(UserRole(user_id=u.id, role_name=r, organization_id=org.id if org else None, entity_id=entity_id))
     audit.record(db, tenant_id=principal.tenant_id, user_id=principal.user_id, action="user.roles", object_type="user", object_id=u.id, old_value=old, new_value=body.roles)
     db.commit()
     return {"user_id": u.id, "roles": body.roles}
