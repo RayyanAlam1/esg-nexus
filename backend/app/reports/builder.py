@@ -35,6 +35,14 @@ from app.services.governance_service import check_report
 RENDERERS = {"pdf": pdf_renderer.render, "docx": docx_renderer.render, "xlsx": xlsx_renderer.render, "csv": csv_renderer.render, "html": html_renderer.render}
 
 
+def _join(codes: list[str], limit: int = 8) -> str:
+    """Render a code list for a validation message: first `limit` entries, then a count."""
+    if not codes:
+        return "none"
+    head = ", ".join(codes[:limit])
+    return head if len(codes) <= limit else f"{head} and {len(codes) - limit} more"
+
+
 def _fmt(v: Any, unit: str | None = None) -> str:
     if v is None:
         return "Data unavailable"
@@ -305,7 +313,9 @@ class ReportBuilder:
         checks: list[dict] = []
 
         def add(name, passed, detail, severity="HIGH"):
-            checks.append({"check": name, "passed": bool(passed), "detail": detail, "severity": severity if not passed else "INFO"})
+            # `detail` is rendered as text by the API clients, so it is always coerced to a string
+            # here. Structured governance data stays in the separate `governance` list.
+            checks.append({"check": name, "passed": bool(passed), "detail": str(detail), "severity": severity if not passed else "INFO"})
 
         # 1 data validation — every section metric has a value or an explicit unavailable marker
         missing = []
@@ -314,13 +324,14 @@ class ReportBuilder:
                 m = self._metric(c)
                 if m and self._value(m, group, period)["value"] is None and m.kind != "narrative":
                     missing.append(c)
-        add("data_validation", len(missing) <= 3, f"{len(missing)} metric(s) without values: {', '.join(missing[:8])}", "MEDIUM")
+        add("data_validation", len(missing) <= 3, f"{len(missing)} metric(s) without values: {_join(missing)}" if missing else "every section metric has a value", "MEDIUM")
         # 2 metric validation — derived metrics recalculated ok
         bad = [c.metric_code for c in metric_engine.recalculate_all(self.db, self.principal.tenant_id, report.organization_id, period) if c.status == "error"]
         add("metric_validation", not bad, f"{len(bad)} calculation error(s)")
         # 3 framework validation
         aligns = {fw: fw_engine.coverage(self.db, self.principal.tenant_id, report.organization_id, period, fw)["alignment_pct"] for fw in report.framework_codes}
-        add("framework_validation", all(a >= 50 for a in aligns.values()), f"alignment: {aligns}", "MEDIUM")
+        aligns_text = ", ".join(f"{fw} {pct:.1f}%" for fw, pct in sorted(aligns.items())) or "no frameworks selected"
+        add("framework_validation", all(a >= 50 for a in aligns.values()), f"alignment: {aligns_text}", "MEDIUM")
         # 4 evidence validation
         no_ev = []
         for s in report.sections:
@@ -330,10 +341,10 @@ class ReportBuilder:
                     v = self._value(m, group, period)
                     if v["value"] is not None and not v["evidence"]:
                         no_ev.append(c)
-        add("evidence_validation", not no_ev, f"{len(no_ev)} valued metric(s) without evidence: {', '.join(no_ev[:8])}")
+        add("evidence_validation", not no_ev, f"{len(no_ev)} valued metric(s) without evidence: {_join(no_ev)}" if no_ev else "every valued metric has evidence")
         # 5 narrative validation — every ai/data section has content
         empty = [s.code for s in report.sections if s.narrative_source in ("ai", "data") and not (s.content_md or "").strip()]
-        add("narrative_validation", not empty, f"empty sections: {empty}")
+        add("narrative_validation", not empty, f"{len(empty)} section(s) without content: {_join(empty)}" if empty else "every narrative section has content")
         # 6 numerical consistency — narrative numbers must be governed
         from app.ai import guardrails
 
@@ -343,19 +354,28 @@ class ReportBuilder:
                 g = guardrails.check_output(s.content_md, allowed_numbers=self._allowed_numbers(s, group, period), sources=["x"], require_citations=False)
                 if g.unsupported_numbers:
                     inconsistent.append({"section": s.code, "numbers": g.unsupported_numbers[:5]})
-        add("numerical_consistency", not inconsistent, f"{inconsistent}" if inconsistent else "all narrative figures match governed metrics", "CRITICAL")
+        inconsistent_text = "; ".join(f"{i['section']}: {', '.join(str(n) for n in i['numbers'])}" for i in inconsistent[:5])
+        add(
+            "numerical_consistency",
+            not inconsistent,
+            f"{len(inconsistent)} section(s) contain figures that are not governed metrics — {inconsistent_text}"
+            if inconsistent
+            else "all narrative figures match governed metrics",
+            "CRITICAL",
+        )
         # 7 governance validation
         gov = check_report(self.db, self.principal.tenant_id, report)
-        add("governance_validation", not gov["blocked"], gov["blocking_reasons"] or "no blocking rules", "CRITICAL")
+        gov_text = "; ".join(f"{r['rule']}: {r['message']}" if isinstance(r, dict) else str(r) for r in gov["blocking_reasons"])
+        add("governance_validation", not gov["blocked"], gov_text or "no blocking rules", "CRITICAL")
         # 8 AI evaluation
         from app.models.ai import Evaluation
 
         evals = [self.db.get(Evaluation, s.evaluation_id) for s in report.sections if s.evaluation_id]
         low = [s.code for s, e in zip([s for s in report.sections if s.evaluation_id], evals, strict=False) if e and e.overall < 70]
-        add("ai_evaluation", not low, f"sections below 70: {low}" if low else f"{len(evals)} evaluated section(s) ≥ 70", "MEDIUM")
+        add("ai_evaluation", not low, f"{len(low)} section(s) scored below 70: {_join(low)}" if low else f"{len(evals)} evaluated section(s) ≥ 70", "MEDIUM")
         # 9 completeness — sections reviewed/approved
         unapproved = [s.code for s in report.sections if s.status not in ("approved", "published")]
-        add("report_completeness", not unapproved, f"{len(unapproved)} section(s) not approved: {unapproved[:10]}")
+        add("report_completeness", not unapproved, f"{len(unapproved)} section(s) not approved: {_join(unapproved)}" if unapproved else "every section is approved")
 
         critical_failed = [c for c in checks if not c["passed"] and c["severity"] == "CRITICAL"]
         blocked = bool(critical_failed)
